@@ -1,5 +1,9 @@
 package socialmedia;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+
 public class Account {
 
     // Instance Attributes
@@ -8,31 +12,17 @@ public class Account {
     public String Description;
 
     // Static Attributes
-    public ArrayList<Account> accountList = new ArrayList<>();
-
-    public int gen() {
-      //this bit for if this is the first run
-      Random r = new Random( System.currentTimeMillis() );
-      double randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
-      for (int n= 1; randomNumber == ; i++){
-        Random r = new Random( System.currentTimeMillis() );
-        randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000)); 
-      }
-      return randomNumber;
-
-  }
+    public Dictionary<String, String> accountDictionary = new Hashtable<String, String>(); //This dictionary allows us to find an AccountID from a handle.
 
 
     //Getter Methods
-    public int getAccountId(){
+    public int getAccountId() {
       return AccountId;
     }
 
     //Setter Methods
-    public int setAccountId() {
-      this.AccountId = AccountId;
+    public void setAccountId(int newAccountId) {
+      this.AccountId = newAccountId;
     }
-
-
 
 }
