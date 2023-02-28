@@ -30,14 +30,28 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 * @return the ID of the created account.
 	 */
 
-	int generateAccountId(){
-		Random randId = new Random();
-	}
+/*
+	 public int gen() {
+	      //this bit for if this is the first run
+	      Random r = new Random( System.currentTimeMillis() );
+	      double randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
+	      for (int n= 1; randomNumber == ; i++){
+	        Random r = new Random( System.currentTimeMillis() );
+	        randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
+	      }
+	      return randomNumber;
 
+	  }
+*/
 	int createAccount(String handle, String description) throws IllegalHandleException, InvalidHandleException; {
+
 		Account newAccount = new Account();
 		newAccount.Handle = handle;
 		newAccount.Description = description;
+		newAccount.accountId = gen();
+
+		accountDictionary.put(handle, accountId); //Adding the new account's Id and handle to our dictionary so we can find it later.
+
 		return newAccount.AccountId;
 
 	}
