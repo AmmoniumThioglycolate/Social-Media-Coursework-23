@@ -39,7 +39,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 		}
 
 		if (/*contains whitespace or is empty*/) {
-			 throw new InvalidHandleException("oh no invalid handle!!!"");
+			 throw new InvalidHandleException("oh no invalid handle!!!");
 		}
 
 		Account newAccount = new Account();
