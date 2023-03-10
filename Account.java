@@ -5,7 +5,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.ArrayList; // Importing the ArrayList class
 
-
+accountArrayList.get(i)).getHandle
     // Instance Attributes
     public String AccountId;
     public String Handle;
