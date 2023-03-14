@@ -48,7 +48,7 @@ public class Account {
     }
 
     public String getHandle() {
-      return handle;
+      return Handle;
     }
 
 
@@ -59,6 +59,9 @@ public class Account {
 
     public void setHandle(String newHandle) {
       this.Handle = newHandle;
+    }
+    public String getDescription(){
+      return Description;
     }
 
 }
