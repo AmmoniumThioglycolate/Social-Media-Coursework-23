@@ -50,7 +50,7 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 		newAccount.Description = description;
 		newAccount.accountId = gen();
 
-		accountDictionary.put(handle, accountId); //Adding the new account's Id and handle to our dictionary so we can find it later.
+		accountArrayList.add(newAccount); //Adding the new account to our accountArrayList so we can find/use it later.
 
 		return newAccount.AccountId;
 
