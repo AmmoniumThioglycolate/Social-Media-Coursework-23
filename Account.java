@@ -1,4 +1,6 @@
-public class Accounts
+package socialmedia;
+
+public class Account {
 
     // Instance Attributes
     public String AccountId;
