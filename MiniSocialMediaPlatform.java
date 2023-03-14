@@ -117,7 +117,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 					if (((accountArrayList.get(i)).getHandle()).equals(this.oldHandle)) {
 						return true;
 
-					} else if (((((accountArrayList.get(i)).getHandle()).equals(this.oldHandlehandle)) == false) && i == accountArrayList.size()){
+					} else if (((((accountArrayList.get(i)).getHandle()).equals(this.oldHandle)) == false) && i == accountArrayList.size()){
 						 throw new HandleNotRecognisedException();
 					}
 				}
@@ -161,7 +161,17 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 * @throws HandleNotRecognisedException if the handle does not match to any
 	 *                                      account in the system.
 	 */
-	String showAccount(String handle) throws HandleNotRecognisedException;
+	String showAccount(String handle) throws HandleNotRecognisedException {
+
+		for (int i = 0; i < accountArrayList.size(); i++) {
+			if (((accountArrayList.get(i)).getHandle()).equals(this.handle)) {
+				Output = String.format("ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s" ,(accountArrayList.get(i)).getAccountId,(accountArrayList.get(i)).getHandle,(accountArrayList.get(i)).getDescription);
+
+			} else if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
+				 throw new HandleNotRecognisedException();
+			}
+		}
+	}
 
 
 
@@ -184,15 +194,33 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *                                      100 characters.
 	 * @return the sequential ID of the created post.
 	 */
-	int createPost(String handle, String message) throws HandleNotRecognisedException, InvalidPostException; {
+	int createPost(String handle, String message) throws HandleNotRecognisedException, InvalidPostException {
 
-		Post newPost = new Post();
-		newPost.PostId = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-		newPost.Body = message;
+		for (int i = 0; i < accountArrayList.size(); i++) {
+			if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
+				 throw new HandleNotRecognisedException();
+			 }
+		}
 
-		return newPost.PostId;
+		switch (message.length()){
+			case 0:
+				throw new InvalidPostException;
+				break;
+			case message.length()>100 :
+			`throw new InvalidPostException;`
+				break;
+			default
+				Post newPost = new Post(handle, message);
+				postArrayList.add(newPost);
+				return newPost.postId;
 
 		}
+
+
+
+
+
+	}
 
 	/**
 	 * The method creates an endorsement post of an existing post, similar to a
@@ -219,7 +247,16 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *                                      fact, the endorsement must refers to A.
 	 */
 		int endorsePost(String handle, int id)
-			throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException;
+			throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException {
+
+				for (int i = 0; i < accountArrayList.size(); i++) {
+					if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
+						 throw new HandleNotRecognisedException();
+					 }
+				}
+
+
+			}
 
 	/**
 	 * The method creates a comment post referring to an existing post, similarly to
@@ -228,7 +265,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 * <p>
 	 * The state of this SocialMediaPlatform must be be unchanged if any exceptions
 	 * are thrown.
-	 * 
+	 *
 	 * @param handle  of the account commenting a post.
 	 * @param id      of the post being commented.
 	 * @param message the comment post message.
@@ -262,7 +299,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 * <p>
 	 * The state of this SocialMediaPlatform must be be unchanged if any exceptions
 	 * are thrown.
-	 * 
+	 *
 	 * @param id ID of post to be removed.
 	 * @throws PostIDNotRecognisedException if the ID does not match to any post in
 	 *                                      the system.
@@ -272,14 +309,14 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	/**
 	 * The method generates a formated string containing the details of a single
 	 * post. The format is as follows:
-	 * 
+	 *
 	 * <pre>
 	 * ID: [post ID]
 	 * Account: [account handle]
 	 * No. endorsements: [number of endorsements received by the post] | No. comments: [number of comments received by the post]
 	 * [post message]
 	 * </pre>
-	 * 
+	 *
 	 * @param id of the post to be shown.
 	 * @return a formatted string containing post's details.
 	 * @throws PostIDNotRecognisedException if the ID does not match to any post in
@@ -290,16 +327,16 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	/**
 	 * The method builds a StringBuilder showing the details of the current post and
 	 * all its children posts. The format is as follows (you can use tabs or spaces to represent indentation):
-	 * 
+	 *
 	 * <pre>
 	 * {@link #showIndividualPost(int) showIndividualPost(id)}
 	 * |
 	 * [for reply: replies to the post sorted by ID]
 	 * |  > {@link #showIndividualPost(int) showIndividualPost(reply)}
 	 * </pre>
-	 * 
+	 *
 	 * See an example:
-	 * 
+	 *
 	 * <pre>
 	 * ID: 1
 	 * Account: user1
@@ -315,16 +352,16 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *         Account: user1
 	 *         No. endorsements: 0 | No. comments: 1
 	 *         I can prove!
-	 *         |                                         
-	 *         | > ID: 6                                 
-	 *             Account: user2                        
-	 *             No. endorsements: 0 | No. comments: 0 
-	 *             prove it                    
+	 *         |
+	 *         | > ID: 6
+	 *             Account: user2
+	 *             No. endorsements: 0 | No. comments: 0
+	 *             prove it
 	 * | > ID: 4
 	 *     Account: user3
 	 *     No. endorsements: 4 | No. comments: 0
 	 *     Can't you do better than this?
-	 * 
+	 *
 	 * | > ID: 7
 	 *     Account: user5
 	 *     No. endorsements: 0 | No. comments: 1
@@ -335,22 +372,22 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *         No. endorsements: 0 | No. comments: 0
 	 *         This is the example!
 	 * </pre>
-	 * 
+	 *
 	 * Continuing with the example, if the method is called for post ID=5
 	 * ({@code showIndividualPost(5)}), the return would be:
-	 * 
+	 *
 	 * <pre>
 	 * ID: 5
 	 * Account: user1
 	 * No. endorsements: 0 | No. comments: 1
 	 * I can prove!
-	 * |                                         
-	 * | > ID: 6                                 
-	 *     Account: user2                        
-	 *     No. endorsements: 0 | No. comments: 0 
+	 * |
+	 * | > ID: 6
+	 *     Account: user2
+	 *     No. endorsements: 0 | No. comments: 0
 	 *     prove it
 	 * </pre>
-	 * 
+	 *
 	 * @param id of the post to be shown.
 	 * @return a formatted StringBuilder containing the details of the post and its
 	 *         children.
@@ -370,7 +407,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	/**
 	 * This method identifies and returns the post with the most number of
 	 * endorsements, a.k.a. the most popular post.
-	 * 
+	 *
 	 * @return the ID of the most popular post.
 	 */
 	int getMostEndorsedPost();
@@ -378,7 +415,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	/**
 	 * This method identifies and returns the account with the most number of
 	 * endorsements, a.k.a. the most popular account.
-	 * 
+	 *
 	 * @return the ID of the most popular account.
 	 */
 	int getMostEndorsedAccount();
