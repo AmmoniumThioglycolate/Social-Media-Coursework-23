@@ -56,6 +56,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 			newAccount.setAccountId(generateUniqueRandomNumber());
 
 			accountSet.add(newAccount);
+			return newAccount.getAccountId();
 
 }
 
@@ -165,7 +166,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 
 		for (int i = 0; i < accountArrayList.size(); i++) {
 			if (((accountArrayList.get(i)).getHandle()).equals(this.handle)) {
-				Output = String.format("ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s" ,(accountArrayList.get(i)).getAccountId,(accountArrayList.get(i)).getHandle,(accountArrayList.get(i)).getDescription);
+				Output = String.format("<pre> /n ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s /n </pre>" ,(accountArrayList.get(i)).getAccountId,(accountArrayList.get(i)).getHandle,(accountArrayList.get(i)).getDescription);
 
 			} else if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
 				 throw new HandleNotRecognisedException();
@@ -199,6 +200,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 		for (int i = 0; i < accountArrayList.size(); i++) {
 			if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
 				 throw new HandleNotRecognisedException();
+				 
 			 }
 		}
 
