@@ -15,4 +15,6 @@
 - we need try-catch to catch the exceptions! The try-catch is more for the exceptions we need to get to help our vodr tun
 
 #Notes from Surgeries (15 March 2023)
-- 
+- the test app you need to connect to the class path
+  - compile and put stuff in the bin folder
+  - 
