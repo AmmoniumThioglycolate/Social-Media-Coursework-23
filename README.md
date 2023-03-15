@@ -13,3 +13,6 @@
 - doesnt matter what the name of the object is. we don't even need a variable name. Only the handke needs to be unique. 
 - Variable names should start uncapitalised.
 - we need try-catch to catch the exceptions! The try-catch is more for the exceptions we need to get to help our vodr tun
+
+#Notes from Surgeries (15 March 2023)
+- 
