@@ -29,10 +29,22 @@ public class Post{
   public String getBody(){
     return body;
   }
+  public int getCommentNUmber(){
+    return numberOfComments;
+  }
+  public int getEndorsementNumber(){
+    return numberOfEndorsements;
+  }
 
   //Seter methods
   public void setPostId(int newPostId) {
     this.postId = newPostId;
+  }
+  public void setEndorsements(int endorsementNumber){
+    numberOfEndorsements =  ++endorsementNumber; 
+  }
+  public void setNumberOfComments(int commentNumber){
+    numberOfComments = ++commentNumber;
   }
 
 
@@ -57,4 +69,19 @@ public class Endorsement extends Post{
 
 
   }
+
+}
+
+public class Comments extends Posts{
+  super();
+  public int originalPostID;
+  public String commentMessage;
+  public String accountHandle;
+
+public comment(String handle, int id, String message){
+  accountHandle = this.handle;
+  commentMessage = this.message;
+  originalPostID = this.id;
+  postId = ++numberOfPosts;
+}
 }
