@@ -316,7 +316,32 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *                                      more than 100 characters.
 	 */
 	int commentPost(String handle, int id, String message) throws HandleNotRecognisedException,
-			PostIDNotRecognisedException, NotActionablePostException, InvalidPostException;
+			PostIDNotRecognisedException, NotActionablePostException, InvalidPostException; {
+
+				Comments newComment = new Comment(handle,id,message);
+				postArrayList.add(newComment)
+				for (int i = 0; i < postArrayList.size(); i++) {
+					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
+						(postArrayList.get(i)).setNumberOfComments((postArrayList.get(i)).getCommentNUmber());
+
+				return newComment.getPostId;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			}
 
 	/**
 	 * The method removes the post from the platform. When a post is removed, all
