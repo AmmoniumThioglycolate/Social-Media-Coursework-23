@@ -163,10 +163,11 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *                                      account in the system.
 	 */
 	String showAccount(String handle) throws HandleNotRecognisedException {
+		private String output;
 
 		for (int i = 0; i < accountArrayList.size(); i++) {
 			if (((accountArrayList.get(i)).getHandle()).equals(this.handle)) {
-				Output = String.format("<pre> /n ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s /n </pre>" ,(accountArrayList.get(i)).getAccountId,(accountArrayList.get(i)).getHandle,(accountArrayList.get(i)).getDescription);
+				output = String.format("<pre> /n ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s /n </pre>" ,(accountArrayList.get(i)).getAccountId,(accountArrayList.get(i)).getHandle,(accountArrayList.get(i)).getDescription);
 
 			} else if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
 				 throw new HandleNotRecognisedException();
@@ -200,7 +201,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 		for (int i = 0; i < accountArrayList.size(); i++) {
 			if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
 				 throw new HandleNotRecognisedException();
-				 
+
 			 }
 		}
 
@@ -250,15 +251,44 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 */
 		int endorsePost(String handle, int id)
 			throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException {
+				String formatedMessage;
 
 				for (int i = 0; i < accountArrayList.size(); i++) {
 					if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
 						 throw new HandleNotRecognisedException();
 					 }
 				}
+				for (int i = 0; i < postArrayList.size(); i++) {
+					if (((((postArrayList.get(i)).getPostId()).equals(this.id)) == false) && i == postArrayList.size()){
+						 throw new PostIDNotRecognisedException();
+					 } else if ((postArrayList.get(i).getPostId()).equals(this.id)){
+							if (postArrayList.get(i) instanceof Endorsement){
+								throw new NotActionablePostException();
+									}
+					 } 
+
+					 }
+				Post newPost = new Endorsedment(handle, id);
+				for (int i = 0; i < postArrayList.size(); i++) {
+					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
+						formattedMessage= String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBod(y));
+						newPost.endorsementMessage = formattedMessage;
+						postArrayList.add(newPost);
+						return newPost.getPostId();
+					}
 
 
+
+
+
+				}
 			}
+
+				
+
+
+
+		
 
 	/**
 	 * The method creates a comment post referring to an existing post, similarly to

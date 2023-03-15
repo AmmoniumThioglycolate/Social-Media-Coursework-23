@@ -23,6 +23,12 @@ public class Post{
   public int getPostId(){
     return postId;
   }
+  public String getAccountHandle(){
+    return handle;
+  }
+  public String getBody(){
+    return body;
+  }
 
   //Seter methods
   public void setPostId(int newPostId) {
@@ -38,4 +44,17 @@ public class Post{
   }
 
 
+}
+
+public class Endorsement extends Post{
+  super();
+  public int originalPostID;
+  public String endorsementMessage;
+  public Endorsedment(String handle,int id){
+    handle = this.handle;
+    originalPostID = this.id;
+    postId = ++numberOfPosts;
+
+
+  }
 }
