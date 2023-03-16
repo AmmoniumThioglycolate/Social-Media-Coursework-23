@@ -3,9 +3,9 @@ package socialmedia;
 public class Account {
 
     // Instance Attributes
-    public String AccountId;
-    public String Handle;
-    public String Description;
+    public String accountId;
+    public String handle;
+    public String description;
 
 
     //Static Attribute - An ArrayList to store the system's Accounts
@@ -44,24 +44,29 @@ public class Account {
 
     //Getter Methods
     public String getAccountId() {
-      return AccountId;
+      return accountId;
     }
 
     public String getHandle() {
-      return Handle;
+      return handle;
+    }
+
+    public String getDescription() {
+      return description;
     }
 
 
     //Setter Methods
     public void setAccountId(String newAccountId) {
-      this.AccountId = newAccountId;
+      this.accountId = newAccountId;
     }
 
     public void setHandle(String newHandle) {
-      this.Handle = newHandle;
+      this.handle = newHandle;
     }
-    public String getDescription(){
-      return Description;
+
+    public void setDescription(String newDescription) {
+      this.description = newDescription;
     }
 
 }
