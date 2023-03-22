@@ -39,26 +39,26 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 */
 	int createAccount(String handle) throws IllegalHandleException, InvalidHandleException; {
 
-		for (int i = 0; i < accountArrayList.size(); i++) {
-			if (((accountArrayList.get(i)).getHandle()).equals(this.handle)) {
-				throw new IllegalHandleException();
-			}
+		if (Account.doesHandleExist(handle) == true) {
+			throw new IllegalHandleException();
 		}
 
-		if (/*contains whitespace or is empty*/) {
-			 throw new InvalidHandleException("oh no invalid handle!!!");
+		if (Account.isHandleInvalid(handle) == true) {
+			 throw new InvalidHandleException();
 		}
 
 		Account newAccount = new Account();
-			//This method ignores a Description
-			newAccount.Description = null;
-			newAccount.Handle = setHandle(this.handle);
-			newAccount.setAccountId(generateUniqueRandomNumber());
+			
+		newAccount.setHandle(handle);
+		//This method doesn't parse a description, so we don't use our setter mehtod for an account's description.
+		
+		newAccount.setAccountId(generateUniqueRandomNumber());
 
-			accountSet.add(newAccount);
-			return newAccount.getAccountId();
+		accountArrayList.add(newAccount); //Adding the new Account to the system.
 
-}
+		return newAccount.getAccountId();
+
+	}
 
 	/**
 	 * The method removes the account with the corresponding ID from the platform.
@@ -114,26 +114,19 @@ public interface MiniSocialMediaPlatform extends Serializable {
 
 
 				//The following block checks if the old handle actually exists in the system. If it doesn't, we throw HandleNotRecognisedException.
-				for (int i = 0; i < accountArrayList.size(); i++) {
-					if (((accountArrayList.get(i)).getHandle()).equals(this.oldHandle)) {
-						return true;
-
-					} else if (((((accountArrayList.get(i)).getHandle()).equals(this.oldHandle)) == false) && i == accountArrayList.size()){
-						 throw new HandleNotRecognisedException();
-					}
+				if (Account.doesHandleExist(oldHandle) == false) {
+					throw new HandleNotRecognisedException();
 				}
 
 				//The following block checks if the new handle already exists in the system. If it does, we throw IllegalHandleException.
-				for (int i = 0; i < accountArrayList.size(); i++) {
-					if (((accountArrayList.get(i)).getHandle()).equals(this.newHandle)) {
-						throw new IllegalHandleException();
-					}
+				if (Account.doesHandleExist(newHandle) == true) {
+					throw new IllegalHandleException();
 				}
 
-				//The following block checks if the new handle is not empty and does not contain whitespace. If it fails this check, we throw InvalidHandleException.
-				if ((doesItContainWhiteSpaceOrIsEmpty(newHandle)) == true) {
-					throw new InvalidHandleException("wah wah invalid handle");
-				}
+				//The following block checks if the new handle is not empty and does not contain whitespace AND is no longer than 30 chars. If it fails this check, we throw InvalidHandleException.
+				if (Account.isHandleInvalid(newHandle) == true) {
+					throw new InvalidHandleException();
+			    }
 
 
 				for (int i = 0; i < accountArrayList.size(); i++) {
@@ -165,16 +158,17 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	String showAccount(String handle) throws HandleNotRecognisedException {
 		private String output;
 
+		if (Account.doesHandleExist(handle) == false) {
+			throw new HandleNotRecognisedException();
+		}
+
 		for (int i = 0; i < accountArrayList.size(); i++) {
 			if (((accountArrayList.get(i)).getHandle()).equals(this.handle)) {
-				output = String.format("<pre> /n ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s /n </pre>" ,(accountArrayList.get(i)).getAccountId,(accountArrayList.get(i)).getHandle,(accountArrayList.get(i)).getDescription);
-
-			} else if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
-				 throw new HandleNotRecognisedException();
-			}
+				output = String.format("pre> /n ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s /n </pre>" ,(accountArrayList.get(i)).getAccountId,(accountArrayList.get(i)).getHandle,(accountArrayList.get(i)).getDescription);
+			}	
 		}
+		return output;
 	}
-
 
 
 	// End Account-related methods ****************************************
@@ -198,11 +192,8 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 */
 	int createPost(String handle, String message) throws HandleNotRecognisedException, InvalidPostException {
 
-		for (int i = 0; i < accountArrayList.size(); i++) {
-			if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
-				 throw new HandleNotRecognisedException();
-
-			 }
+		if (Account.doesHandleExist(handle) == false) {
+			throw new HandleNotRecognisedException();
 		}
 
 		switch (message.length()){
@@ -218,10 +209,6 @@ public interface MiniSocialMediaPlatform extends Serializable {
 				return newPost.postId;
 
 		}
-
-
-
-
 
 	}
 
@@ -253,11 +240,10 @@ public interface MiniSocialMediaPlatform extends Serializable {
 			throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException {
 				String formatedMessage;
 
-				for (int i = 0; i < accountArrayList.size(); i++) {
-					if (((((accountArrayList.get(i)).getHandle()).equals(this.handle)) == false) && i == accountArrayList.size()){
-						 throw new HandleNotRecognisedException();
-					 }
+				if (Account.doesHandleExist(handle) == false) {
+					throw new HandleNotRecognisedException();
 				}
+
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((((postArrayList.get(i)).getPostId()).equals(this.id)) == false) && i == postArrayList.size()){
 						 throw new PostIDNotRecognisedException();
@@ -318,6 +304,11 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	int commentPost(String handle, int id, String message) throws HandleNotRecognisedException,
 			PostIDNotRecognisedException, NotActionablePostException, InvalidPostException; {
 
+				if (Account.doesHandleExist(handle) == false) {
+					throw new HandleNotRecognisedException();
+				}
+
+
 				Comments newComment = new Comment(handle,id,message);
 				postArrayList.add(newComment)
 				for (int i = 0; i < postArrayList.size(); i++) {
@@ -361,7 +352,25 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 * @throws PostIDNotRecognisedException if the ID does not match to any post in
 	 *                                      the system.
 	 */
-	void deletePost(int id) throws PostIDNotRecognisedException;
+	void deletePost(int id) throws PostIDNotRecognisedException {
+
+
+// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
+		for (int i = 0; i < postArrayList.size(); i++) {
+			if ((postArrayList.get(i) instanceof Endorsement) && (((postArrayList.get(i)).getOriginalPostId()).equals(id))) {
+				postArrayList.remove(i);
+			}
+		}
+
+
+
+		for (int i = 0; i < postArrayList.size(); i++) {
+			if (((postArrayList.get(i)).getPostId()).equals(id)) {
+				postArrayList.remove(i);
+			}
+		}
+
+	}
 
 	/**
 	 * The method generates a formated string containing the details of a single
@@ -515,3 +524,4 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	// End Management-related methods ****************************************
 
 }
+				
