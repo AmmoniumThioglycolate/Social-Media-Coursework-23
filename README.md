@@ -17,4 +17,18 @@
 # Notes from Surgeries (15 March 2023)
 - the test app you need to connect to the class path
   - compile and put stuff in the bin folder
-  - 
+
+# Notes from Surgeries (22 March 2023)
+- Comments can be commented on
+- unchecked and unsafe operations note can come up when compiled/
+- Any jdk version over 8 is fine for compilation.
+- comments and assertions 
+    - We need javadoc and inline comments
+    - We need to execute the javadoc comments
+    - the test app will not be evaluated, but it can be included
+    - we can add some assertions in the code
+    - the file passed in savePlatform( does not need to exist.
+    - we can put candidate number as author in the code
+    - we need to place the javadoc comments in our code. from the commandline we create       the javadoc.
+    - an account can endorse its own post.
+
