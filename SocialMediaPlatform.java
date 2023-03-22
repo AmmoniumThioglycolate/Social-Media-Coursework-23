@@ -30,29 +30,25 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 * @return the ID of the created account.
 	 */
 
-/*
-	 public int gen() {
-	      //this bit for if this is the first run
-	      Random r = new Random( System.currentTimeMillis() );
-	      double randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
-	      for (int n= 1; randomNumber == ; i++){
-	        Random r = new Random( System.currentTimeMillis() );
-	        randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
-	      }
-	      return randomNumber;
-
-	  }
-*/
 	int createAccount(String handle, String description) throws IllegalHandleException, InvalidHandleException; {
 
+		if (Account.doesHandleExist(handle) == true) {
+			throw new IllegalHandleException();
+		}
+
+		if (Account.isHandleInvalid(handle) == true) {
+			throw new InvalidHandleException();
+	   }
+
 		Account newAccount = new Account();
-		newAccount.Handle = handle;
-		newAccount.Description = description;
-		newAccount.accountId = gen();
+
+		newAccount.setHandle(handle);
+		newAccount.setDescription(description);
+		newAccount.setAccountId(generateUniqueRandomNumber());
 
 		accountArrayList.add(newAccount); //Adding the new account to our accountArrayList so we can find/use it later.
 
-		return newAccount.AccountId;
+		return newAccount.getAccountId();
 
 	}
 	/**
