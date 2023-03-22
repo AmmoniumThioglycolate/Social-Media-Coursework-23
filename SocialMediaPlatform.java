@@ -67,7 +67,14 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 * @throws HandleNotRecognisedException if the handle does not match to any
 	 *                                      account in the system.
 	 */
-	void removeAccount(String handle) throws HandleNotRecognisedException;
+	void removeAccount(String handle) throws HandleNotRecognisedException {
+
+		for (int i = 0; i < accountArrayList.size(), i++) {
+			if (((accountArrayList.get(i)).getHandle()).equals(handle)) {
+				accountArrayList.remove(accountArrayList.get(i));
+			}
+		}
+	}
 
 	/**
 	 * The method updates the description of the account with the respective handle.
@@ -80,8 +87,13 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 * @throws HandleNotRecognisedException if the handle does not match to any
 	 *                                      account in the system.
 	 */
-	void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException;
-
+	void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException {
+		for (int i = 0: i < accountArrayList.size(), i++) {
+			if (((accountArrayList.get(i)).getHandle()).equals(handle)) {
+				(accountArrayList.get(i)).setHandle(handle);
+				(accountArrayList.get(i)).setDescription(description);
+		}
+	}
 	// End Post-related methods ****************************************
 
 	// Analytics-related methods ****************************************
@@ -93,7 +105,9 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 *
 	 * @return the total number of accounts in the platform.
 	 */
-	int getNumberOfAccounts();
+	int getNumberOfAccounts() {
+		return accountArrayList.size();
+	}
 
 	/**
 	 * This method returns the current total number of original posts (i.e.,
@@ -103,7 +117,19 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 *
 	 * @return the total number of original posts in the platform.
 	 */
-	int getTotalOriginalPosts();
+	int getTotalOriginalPosts() {
+		int originalPostcount = 0;
+		for (int i = 0; i < postArrayList.size(); i++;) {
+			if (postArrayList.get(i) instance of Comment) { //Comments aren't original posts, so we disregard them here
+				originalPostcount ++0;
+			} else if (postArrayList.get(i) instance of Endorsement) { //Endorsement's are also no original posts, so we disregard them here
+				originalPostcount ++0;
+			} else {
+				originalPostcount +=1;
+			}
+		}
+		return originalPostcount;
+	}
 
 	/**
 	 * This method returns the current total number of endorsement posts present in
@@ -112,7 +138,15 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 *
 	 * @return the total number of endorsement posts in the platform.
 	 */
-	int getTotalEndorsmentPosts();
+	int getTotalEndorsmentPosts() {
+		int endorsementCount = 0;
+		for (int i = 0; i < postArrayList.size(); i++) {
+			if (postArrayList.get(i) instanceof Endorsement) {
+				endorsementCount ++1;
+			}
+		}
+		return endorsementCount;
+ }	}
 
 	/**
 	 * This method returns the current total number of comments posts present in the
@@ -121,7 +155,15 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 *
 	 * @return the total number of comments posts in the platform.
 	 */
-	int getTotalCommentPosts();
+	int getTotalCommentPosts() {
+		int commentCount = 0;
+		for (int i = 0; i < postArrayList.size(); i++) {
+			if (postArrayList.get(i) instanceof Comment) {
+				commentCount ++1;
+			}
+		}
+		return commentCount;
+	}
 
 	// End Management-related methods ****************************************
 
