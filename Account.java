@@ -1,5 +1,7 @@
 package socialmedia;
 
+import java.util.ArrayList;
+
 public class Account {
 
     // Instance Attributes
@@ -10,32 +12,52 @@ public class Account {
 
     //Static Attribute - An ArrayList to store the system's Accounts
     public static ArrayList<Account> accountArrayList = new ArrayList<Account>();
+    public static ArrayList<Integer> randomNumberArray = new ArrayList<Integer>();
 
 
     //Static Methods
     public static int generateUniqueRandomNumber() {
           //this bit for if this is the first run
           Random r = new Random( System.currentTimeMillis() );
-          double randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
+          Integer randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
+          randomNumberArray.add(randomNumber);
+
+
           /*
           for (int n= 1; randomNumber ==  ; i++){
             Random r = new Random( System.currentTimeMillis() );
             randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
           } */
-          return Integer.toString(randomNumber);
+          if (randomNumberArray.contains(randomNumber) == false){
+            return randomNumber;}
+      else{ generateUniqueRandomNumber();}}
 
-      }
+      public boolean doesHandleExist(String handle) {
+        for (int i = 0; i < accountArrayList.size(); i++){
+          if (((accountArrayList.get(i)).getHandle()).equals(this.handle)){
+            return true;
+          }
+        }
+        return false;
+      } 
 
 
-    public static boolean doesItContainWhiteSpaceOrIsEmpty(String handle) {
+    public boolean doesItContainWhiteSpaceOrIsEmpty(String handle) {
       for (int i = 0; i < handle.length(); i++) {
-        if ((handle.charAt(i)).equals(" ")) {
+        if ((handle.charAt(i)) == (" ")) {
           throw new InvalidHandleException("blah blah to be filled in later");
           return true;
         }
       }
       if (handle.equals("")) {
         throw new InvalidHandleException("blah blah to be filled in later");
+        return true;
+      }
+      return false;
+    }
+
+    public isHandleInvalid(String handle) {
+      if (doesItContainWhiteSpaceOrIsEmpty(handle) == true || handle.length() > 30) {
         return true;
       }
       return false;
