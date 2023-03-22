@@ -69,6 +69,10 @@ public class Endorsement extends Post{
 
 
   }
+  public int getOriginalPostId(){
+    return this.originalPostID;
+  }
+  
 
 }
 
