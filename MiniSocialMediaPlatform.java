@@ -76,13 +76,8 @@ public interface MiniSocialMediaPlatform extends Serializable {
 		boolean found = false;
 
 		//The following block checks if the id actually exists in the system. If it doesn't, we throw AccountIDNotRecognisedException.
-		for (int i = 0; i < accountArrayList.size(); i++) {
-			if (((accountArrayList.get(i)).getAccountId()).equals(this.id)) {
-				return true;
-
-			} else if (((((accountArrayList.get(i)).getAccountId()).equals(this.id)) == false) && i == accountArrayList.size()-1){
-				 throw new AccountIDNotRecognisedException();
-			}
+		if (Account.isAccountIdRecognised(id) == true) {
+			throw new AccountIDNotRecognisedException();
 		}
 
 		for (int i = 0; i < accountArrayList.size(); i++) {
