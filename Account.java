@@ -32,29 +32,38 @@ public class Account {
             return randomNumber;}
       else{ generateUniqueRandomNumber();}}
 
-      public boolean doesHandleExist(String handle) {
-        for (int i = 0; i < accountArrayList.size(); i++){
-          if (((accountArrayList.get(i)).getHandle()).equals(this.handle)){
-            return true;
-          }
+
+    public isAccountIdRecognised(String Id) {
+      for (int i = 0 ; i < accountArrayList.size(); i++) {
+        if (((accountArrayList.get(i)).getAccountId()).equals(this.Id)) {
+          return true;
         }
-        return false;
-      } 
+      }
+      return false;
+    }
+
+    public boolean doesHandleExist(String handle) {
+      for (int i = 0; i < accountArrayList.size(); i++){
+        if (((accountArrayList.get(i)).getHandle()).equals(this.handle)){
+          return true;
+        }
+      }
+      return false;
+    } 
 
 
     public boolean doesItContainWhiteSpaceOrIsEmpty(String handle) {
       for (int i = 0; i < handle.length(); i++) {
         if ((handle.charAt(i)) == (" ")) {
-          throw new InvalidHandleException("blah blah to be filled in later");
           return true;
         }
       }
       if (handle.equals("")) {
-        throw new InvalidHandleException("blah blah to be filled in later");
         return true;
       }
       return false;
     }
+
 
     public isHandleInvalid(String handle) {
       if (doesItContainWhiteSpaceOrIsEmpty(handle) == true || handle.length() > 30) {
