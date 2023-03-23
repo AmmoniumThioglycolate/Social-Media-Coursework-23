@@ -355,15 +355,16 @@ public interface MiniSocialMediaPlatform extends Serializable {
 			if ((postArrayList.get(i) instanceof Endorsement) && (((postArrayList.get(i)).getOriginalPostId()).equals(id))) {
 				postArrayList.remove(i);
 			}
-		}
-
-
-
-		for (int i = 0; i < postArrayList.size(); i++) {
 			if (((postArrayList.get(i)).getPostId()).equals(id)) {
+				(postArrayList.get(i)).setDescription("The original content was removed from the system and is no longer available.");
+				(postArrayList.get(i)).getHandle(null);
+				Post.numberOfPosts -= ;
+				postG
 				postArrayList.remove(i);
 			}
 		}
+
+		
 
 	}
 
