@@ -13,6 +13,38 @@ public class Post{
   public double numberOfComments;
 
 
+  public boolean isPostInvalid(String message) {
+    if (message = "") {
+      return true;
+    }
+    if (message.length() > 100) {
+      return true;
+    }
+    return false;
+  }
+
+
+  public boolean doesPostIdExist(String id) {
+    for (int i = 0; i < postArrayList.size(); i++) {
+      if (((postArrayList.get(i)).getPostId).equals(id)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  public boolean isAnEndorsement(String id) {
+    for (int i = 0; i < postArrayList.size(); i++) {
+      if (((postArrayList.get(i)).getPostId).equals(id)) {
+        if (postArrayList.get(i) instanceof Endorsement) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   //Static Attribute - An ArrayList to store the system's Posts
   private static int postsCreated = 0;
   public static ArrayList<Post> postArrayList = new ArrayList<Post>();

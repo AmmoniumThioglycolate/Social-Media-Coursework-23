@@ -191,6 +191,10 @@ public interface MiniSocialMediaPlatform extends Serializable {
 			throw new HandleNotRecognisedException();
 		}
 
+		if (Post.isPostInvalid(message) == true) {
+			throw new InvalidPostException();
+		}
+		
 		switch (message.length()){
 			case 0:
 				throw new InvalidPostException;
@@ -237,6 +241,14 @@ public interface MiniSocialMediaPlatform extends Serializable {
 
 				if (Account.doesHandleExist(handle) == false) {
 					throw new HandleNotRecognisedException();
+				}
+
+				if (Post.doesPostIdExist(id) == false) {
+					throw new PostIDNotRecognisedException();
+				}
+
+				if (Post.isAnEndorsement(id)) == true {
+					throw new NotActionablePostException();
 				}
 
 				for (int i = 0; i < postArrayList.size(); i++) {
@@ -303,6 +315,17 @@ public interface MiniSocialMediaPlatform extends Serializable {
 					throw new HandleNotRecognisedException();
 				}
 
+				if (Post.doesPostIdExist(id) == false) {
+					throw new PostIDNotRecognisedException();
+				}
+
+				if (Post.isAnEndorsement(id) == false) {
+					throw new NotActionablePostException();
+				}
+
+				if (Post.isPostInvalid(message) == true) {
+					throw new InvalidPostException();
+				}
 
 				Comments newComment = new Comment(handle,id,message);
 				postArrayList.add(newComment)
@@ -350,6 +373,10 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	void deletePost(int id) throws PostIDNotRecognisedException {
 
 
+		if (Post.doesPostIdExist(id) == false) {
+			throw new PostIDNotRecognisedException();
+		}
+
 // delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
 		for (int i = 0; i < postArrayList.size(); i++) {
 			if ((postArrayList.get(i) instanceof Endorsement) && (((postArrayList.get(i)).getOriginalPostId()).equals(id))) {
@@ -384,7 +411,12 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 * @throws PostIDNotRecognisedException if the ID does not match to any post in
 	 *                                      the system.
 	 */
-	String showIndividualPost(int id) throws PostIDNotRecognisedException;
+	String showIndividualPost(int id) throws PostIDNotRecognisedException {
+
+		if (Post.doesPostIdExist(id) == false) {
+			throw new PostIDNotRecognisedException();
+		}
+	}
 
 	/**
 	 * The method builds a StringBuilder showing the details of the current post and
@@ -460,7 +492,12 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *                                      since they are not endorsable nor
 	 *                                      commented.
 	 */
-	StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException;
+	StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException {
+
+		if (Post.doesPostIdExist(id) == false;) {
+			throw new PostIDNotRecognisedException();
+		}
+	}
 
 	// End Post-related methods ****************************************
 

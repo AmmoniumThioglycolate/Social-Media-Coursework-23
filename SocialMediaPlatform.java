@@ -65,6 +65,11 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 */
 	void removeAccount(String handle) throws HandleNotRecognisedException {
 
+		if (Account.doesHandleExist(handle) == false;) {
+			throw new HandleNotRecognisedException();
+		}
+
+
 		for (int i = 0; i < accountArrayList.size(), i++) {
 			if (((accountArrayList.get(i)).getHandle()).equals(handle)) {
 				accountArrayList.remove(accountArrayList.get(i));
@@ -84,6 +89,12 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 *                                      account in the system.
 	 */
 	void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException {
+		
+		if (Account.doesHandleExist(handle) == false) {
+			throw new HandleNotRecognisedException();
+		}
+		
+		
 		for (int i = 0: i < accountArrayList.size(), i++) {
 			if (((accountArrayList.get(i)).getHandle()).equals(handle)) {
 				(accountArrayList.get(i)).setHandle(handle);

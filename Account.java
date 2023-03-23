@@ -33,7 +33,7 @@ public class Account {
       else{ generateUniqueRandomNumber();}}
 
 
-    public isAccountIdRecognised(String Id) {
+    public boolean isAccountIdRecognised(String Id) {
       for (int i = 0 ; i < accountArrayList.size(); i++) {
         if (((accountArrayList.get(i)).getAccountId()).equals(this.Id)) {
           return true;
@@ -65,7 +65,7 @@ public class Account {
     }
 
 
-    public isHandleInvalid(String handle) {
+    public boolean isHandleInvalid(String handle) {
       if (doesItContainWhiteSpaceOrIsEmpty(handle) == true || handle.length() > 30) {
         return true;
       }
