@@ -359,7 +359,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 				(postArrayList.get(i)).setDescription("The original content was removed from the system and is no longer available.");
 				(postArrayList.get(i)).getHandle(null);
 				Post.numberOfPosts -= ;
-				postG
+				postGraveyard.add((postArrayList.get(i));
 				postArrayList.remove(i);
 			}
 		}
