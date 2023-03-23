@@ -32,3 +32,6 @@
     - we need to place the javadoc comments in our code. from the commandline we create       the javadoc.
  - an account can endorse its own post.
 
+
+# Things to be done
+- Add exceptions for post
