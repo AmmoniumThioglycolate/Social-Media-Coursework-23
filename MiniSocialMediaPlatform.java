@@ -2,6 +2,7 @@ package socialmedia;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Hashmap;
 
 /**package socialmedia;
 
@@ -267,6 +268,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 						formattedMessage= String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBod(y));
 						newPost.endorsementMessage = formattedMessage;
 						postArrayList.add(newPost);
+						(postArrayList.get(i)).setEndorsements((postArrayList.get(i)).getEndorsementNumber());
 						return newPost.getPostId();
 					}
 
@@ -504,10 +506,41 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *                                      commented.
 	 */
 	StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException {
+		int commentNumber = 0;
+		int indent = 1 ;
 
 		if (Post.doesPostIdExist(id) == false;) {
 			throw new PostIDNotRecognisedException();
 		}
+		StringBuilder outputOfPosts = new StringBuilder();
+		outputOfPosts.append(showIndividualPost(id));
+
+
+		for (int k = 0 ; k < postArrayList.size(); k++){
+			if (((postArrayList.get(k)).getPostId()) == this.id) {
+				commentNumber = (postArrayList.get(i)).getCommentNUmber;}
+			while (commentNumber > 0){
+				for (int k = 0 ; k < postArrayList.size(); k++){
+					if (((postArrayList.get(k)).getOriginalPostId()) == this.id) {
+						outputOfPosts.append((" ".repeat(indent)) + showIndividualPost(postArrayList.get(k).getPostId) );
+						commentNumber -=;} else if (commentNumber == 0) {break;}
+				}
+			}
+					
+					
+					
+					
+					
+		}
+
+
+
+
+
+		
+
+
+
 	}
 
 	// End Post-related methods ****************************************
@@ -520,7 +553,21 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *
 	 * @return the ID of the most popular post.
 	 */
-	int getMostEndorsedPost();
+	int getMostEndorsedPost(){
+		int index;
+		int max = ((postArrayList.get(0)).getEndorsementNumber());
+		for (int i = 0; i < postArrayList.size(); i++) {
+			if (postArrayList.get(i) instanceof Endorsedment) {
+				continue;
+			}
+			else if ((postArrayList.get(i)).getEndorsementNumber() > max ) {
+				index = i;
+				max = (postArrayList.get(i)).getEndorsementNumber();
+			}
+		}
+		return (postArrayList.get(index)).getPostId();
+
+	}
 
 	/**
 	 * This method identifies and returns the account with the most number of
@@ -528,7 +575,42 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *
 	 * @return the ID of the most popular account.
 	 */
-	int getMostEndorsedAccount();
+	int getMostEndorsedAccount() {
+		Hashmap<String, Integer> endorsementLeaderboard = new Hashmap<String, Integer>();
+
+		for (int i = 0; i < accountArrayList.size(); i++){
+			endorsementLeaderboard.put((accountArrayList.get(i)).getAccountHandle(),0);
+		}
+
+		for (int k = 0; k < postArrayList.size(); k++) {
+			if (postArrayList.get(i) instanceof Endorsedment) {
+				continue;
+			} else {
+				endorsementLeaderboard.put(postArrayList.get(i)).getHandle(), (endorsementLeaderboard.get((postArrayList.get(i)).getHandle()) + postArrayList.getEndorsementNumber )
+			}
+		}
+
+		String mostPopular = "";
+		int highest = 0;
+
+		for (String j : endorsementLeaderboard.keySet()) {
+			if ((endorsementLeaderboard.get(j)) > highest) {
+				mostPopular = j;
+				highest = endorsementLeaderboard.get(j);
+			}
+		}
+
+		//Loop through the account array list to get the id 
+		for (int i = 0; i < accountArrayList; i++){
+			if ((accountArrayList.get(i)).getAccountHandle() == mostPopular){
+				return accountArrayList.get(i).getAccountId();
+			}
+		}
+		
+
+
+
+	}
 
 	// End Analytics-related methods ****************************************
 
