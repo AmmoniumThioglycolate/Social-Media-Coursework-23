@@ -419,7 +419,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 		String postOutput;
 		for (int k = 0 ; k < postArrayList.size(); k++){
 			if (((postArrayList.get(k)).getPostId()) == this.id) {
-				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",(postArrayList.get(k)).getPostId(),(postArrayList.get(k)).getPostId(),(postArrayList.get(k)).getEndorsementNumber(),(postArrayList.get(k)).getCommentNUmber(),(postArrayList.get(k)).getDescription());
+				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",(postArrayList.get(k)).getPostId(),(postArrayList.get(k)).getAccountHandle(),(postArrayList.get(k)).getEndorsementNumber(),(postArrayList.get(k)).getCommentNUmber(),(postArrayList.get(k)).getDescription());
 				break;
 			}
 
