@@ -37,7 +37,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 * @return the ID of the created account.
 	 *
 	 */
-	int createAccount(String handle) throws IllegalHandleException, InvalidHandleException; {
+	int createAccount(String handle) throws IllegalHandleException, InvalidHandleException {
 
 		if (Account.doesHandleExist(handle) == true) {
 			throw new IllegalHandleException();
@@ -72,7 +72,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 * @throws AccountIDNotRecognisedException if the ID does not match to any
 	 *                                         account in the system.
 	 */
-	void removeAccount(int id) throws AccountIDNotRecognisedException; {
+	void removeAccount(int id) throws AccountIDNotRecognisedException {
 		boolean found = false;
 
 		//The following block checks if the id actually exists in the system. If it doesn't, we throw AccountIDNotRecognisedException.
@@ -416,6 +416,17 @@ public interface MiniSocialMediaPlatform extends Serializable {
 		if (Post.doesPostIdExist(id) == false) {
 			throw new PostIDNotRecognisedException();
 		}
+		String postOutput;
+		for (int k = 0 ; k < postArrayList.size(); k++){
+			if (((postArrayList.get(k)).getPostId()) == this.id) {
+				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",(postArrayList.get(k)).getPostId(),/*Add the code for accout handle here */(postArrayList.get(k)).getEndorsementNumber(),(postArrayList.get(k)).getCommentNUmber(),(postArrayList.get(k)).getDescription());
+				break;
+			}
+
+		}
+		return postOutput;
+
+	}
 	}
 
 	/**
