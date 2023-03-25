@@ -130,12 +130,12 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public void removeAccount(String handle) throws HandleNotRecognisedException {
 
-		if (Account.doesHandleExist(handle) == false;) {
+		if (Account.doesHandleExist(handle) == false) {
 			throw new HandleNotRecognisedException();
 		}
 
 
-		for (int i = 0; i < accountArrayList.size(), i++) {
+		for (int i = 0; i < accountArrayList.size(); i++) {
 			if (((accountArrayList.get(i)).getHandle()).equals(handle)) {
 				accountArrayList.remove(accountArrayList.get(i));
 			}
@@ -207,7 +207,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 		
 		
-		for (int i = 0: i < accountArrayList.size(), i++) {
+		for (int i = 0; i < accountArrayList.size(); i++) {
 			if (((accountArrayList.get(i)).getHandle()).equals(handle)) {
 				(accountArrayList.get(i)).setHandle(handle);
 				(accountArrayList.get(i)).setDescription(description);
@@ -234,7 +234,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public String showAccount(String handle) throws HandleNotRecognisedException {
-		private String output;
+		String output;
 
 		if (Account.doesHandleExist(handle) == false) {
 			throw new HandleNotRecognisedException();
@@ -344,7 +344,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					 } 
 
 					 }
-				Post newPost = new Endorsedment(handle, id);
+				Post newPost = new endorsedment(handle, id);
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
 						formattedMessage= String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBod(y));
@@ -413,7 +413,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new InvalidPostException();
 				}
 
-				Comments newComment = new Comment(handle,id,message);
+				Comments newComment = new comment(handle,id,message);
 				postArrayList.add(newComment)
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
