@@ -105,6 +105,34 @@ default static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
     postId = ++numberOfPosts;
   }
 
+  public class Endorsement extends Post{
+  public int originalPostID;
+  public String endorsementMessage;
+
+  public Endorsement(String handle,int id){
+    handle = this.handle;
+    originalPostID = this.id;
+    postId = ++numberOfPosts;
+  }
+  public int getOriginalPostId(){
+    return this.originalPostID;
+  }
+  
+
+}
+public class Comment extends Post{
+  public int originalPostID;
+  public String commentMessage;
+  public String accountHandle;
+
+public Comment(String handle, int id, String message){
+  accountHandle = handle;
+  commentMessage = message;
+  originalPostID = id;
+  postId = ++numberOfPosts;
+}
+}
+
 
 }
 
