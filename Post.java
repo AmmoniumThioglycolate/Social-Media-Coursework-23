@@ -100,8 +100,8 @@ default static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
 
   //Constructor
   public Post(String handle,String body){
-    body = this.body;
-    handle = this.handle;
+    this.body = body;
+    this.handle = handle;
     postId = ++numberOfPosts;
   }
 

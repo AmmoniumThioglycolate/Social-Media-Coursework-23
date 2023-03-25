@@ -4,9 +4,9 @@ public class Comment extends Post{
   public String accountHandle;
 
 public Comment(String handle, int id, String message){
-  accountHandle = this.handle;
-  commentMessage = this.message;
-  originalPostID = this.id;
+  accountHandle = handle;
+  commentMessage = message;
+  originalPostID = id;
   postId = ++numberOfPosts;
 }
 }
