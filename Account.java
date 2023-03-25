@@ -23,7 +23,7 @@ public class Account {
           Integer randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
           randomNumberArray.add(randomNumber);
           if (randomNumberArray.contains(randomNumber) == false){
-            return randomNumber;}
+            return randomNumber.intValue();}
       else{ generateUniqueRandomNumber();
       }
     }
