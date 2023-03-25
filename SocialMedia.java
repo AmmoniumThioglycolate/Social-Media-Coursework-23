@@ -589,7 +589,7 @@ public class SocialMedia implements SocialMediaPlatform {
     	buildObjectHierarchy(id, hierarchy, 0);
     	return hierarchy;
 
-		public static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
+		private static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
     		if (this.id == null) {
         	return;
                 }
