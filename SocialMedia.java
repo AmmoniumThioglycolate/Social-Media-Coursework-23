@@ -752,7 +752,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			if (postArrayList.get(i) instanceof Endorsedment) {
 				continue;
 			} else {
-				endorsementLeaderboard.put(postArrayList.get(i)).getHandle(), (endorsementLeaderboard.get((postArrayList.get(i)).getHandle()) + postArrayList.getEndorsementNumber );
+				endorsementLeaderboard.put((postArrayList.get(i)).getHandle(), (endorsementLeaderboard.get((postArrayList.get(i)).getHandle()) + postArrayList.getEndorsementNumber ));
 			}
 		}
 
