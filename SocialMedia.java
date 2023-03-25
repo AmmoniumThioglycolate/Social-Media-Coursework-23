@@ -344,7 +344,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					 } 
 
 					 }
-				Post newPost = new endorsedment(handle, id);
+				Post newPost = new Endorsedment(handle, id);
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
 						formattedMessage= String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBod(y));
@@ -413,7 +413,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new InvalidPostException();
 				}
 
-				Comments newComment = new comment(handle,id,message);
+				Comment newComment = new Comment(handle,id,message);
 				postArrayList.add(newComment)
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
