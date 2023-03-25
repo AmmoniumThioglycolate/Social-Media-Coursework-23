@@ -279,12 +279,12 @@ public class SocialMedia implements SocialMediaPlatform {
 		
 		switch (message.length()){
 			case 0:
-				throw new InvalidPostException;
+				throw new InvalidPostException();
 				break;
 			case message.length()>100 :
-			`throw new InvalidPostException;`
+				throw new InvalidPostException();
 				break;
-			default
+			default:
 				Post newPost = new Post(handle, message);
 				postArrayList.add(newPost);
 				return newPost.postId;
@@ -329,7 +329,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new PostIDNotRecognisedException();
 				}
 
-				if (Post.isAnEndorsement(id)) == true {
+				if (Post.isAnEndorsement(id)){
 					throw new NotActionablePostException();
 				}
 
@@ -413,29 +413,16 @@ public class SocialMedia implements SocialMediaPlatform {
 				}
 
 				Comment newComment = new Comment(handle,id,message);
-				postArrayList.add(newComment)
+				postArrayList.add(newComment);
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
 						(postArrayList.get(i)).setNumberOfComments((postArrayList.get(i)).getCommentNUmber());
 
 				return newComment.getPostId;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				} 
 			}
+		 }
 
 	/**
 	 * The method removes the post from the platform. When a post is removed, all
