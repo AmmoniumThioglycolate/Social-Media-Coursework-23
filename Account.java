@@ -21,16 +21,10 @@ public class Account {
           Random r = new Random( System.currentTimeMillis() );
           Integer randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
           randomNumberArray.add(randomNumber);
-
-
-          /*
-          for (int n= 1; randomNumber ==  ; i++){
-            Random r = new Random( System.currentTimeMillis() );
-            randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
-          } */
           if (randomNumberArray.contains(randomNumber) == false){
             return randomNumber;}
-      else{ generateUniqueRandomNumber();}}
+      else{ generateUniqueRandomNumber()}
+    }
 
 
     public boolean isAccountIdRecognised(String Id) {
