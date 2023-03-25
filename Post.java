@@ -47,16 +47,16 @@ public class Post{
   
   
  protected void buildObjectHierarchy(int id, StringBuilder sb, int level) {
-    		if (id == null) {
+    		if (id == 0) {
         	return;
                 }
     		for (int i = 0; i < level; i++) {
         	sb.append("  ");
 			}
-    		sb.append(showIndividualPost(this.id)).append("\n");
+    		sb.append(showIndividualPost(id)).append("\n");
 
     		for (Post post : postArrayList) {
-				if (post.getOriginalPostId() == this.id){
+				if (post.getOriginalPostId() == id){
         			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
     													}
 				}
