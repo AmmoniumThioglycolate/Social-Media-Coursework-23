@@ -632,7 +632,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 
 
-	}
+	
 
 	// End Post-related methods ****************************************
 

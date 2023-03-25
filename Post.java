@@ -135,4 +135,5 @@ public Comment(String handle, int id, String message){
   originalPostID = this.id;
   postId = ++numberOfPosts;
 }
+}
 
