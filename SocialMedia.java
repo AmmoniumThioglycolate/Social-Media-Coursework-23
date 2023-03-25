@@ -458,8 +458,8 @@ public class SocialMedia implements SocialMediaPlatform {
 			if (((postArrayList.get(i)).getPostId()).equals(id)) {
 				(postArrayList.get(i)).setDescription("The original content was removed from the system and is no longer available.");
 				(postArrayList.get(i)).getHandle(null);
-				Post.numberOfPosts -= ;
-				postGraveyard.add((postArrayList.get(i));
+				Post.numberOfPosts = Post.numberOfPosts - 1 ;
+				postGraveyard.add(postArrayList.get(i));
 				postArrayList.remove(i);
 			}
 		}
@@ -501,7 +501,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		return postOutput;
 
 	}
-	}
+	
 
 	/**
 	 * The method builds a StringBuilder showing the details of the current post and
@@ -578,10 +578,11 @@ public class SocialMedia implements SocialMediaPlatform {
 	 *                                      commented.
 	 */
 	@Override
-	public StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException {
+	public StringBuilder showPostChildrenDetails(int id) 
+		throws PostIDNotRecognisedException, NotActionablePostException {
 
 
-		if (Post.doesPostIdExist(id) == false;) {
+		if (Post.doesPostIdExist(id) == false) {
 			throw new PostIDNotRecognisedException();
 		}
 	    StringBuilder hierarchy = new StringBuilder();
