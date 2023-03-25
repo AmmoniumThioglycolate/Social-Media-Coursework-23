@@ -663,11 +663,11 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public int getTotalOriginalPosts() {
 		int originalPostcount = 0;
-		for (int i = 0; i < postArrayList.size(); i++;) {
-			if (postArrayList.get(i) instance of Comment) { //Comments aren't original posts, so we disregard them here
-				originalPostcount ++0;
-			} else if (postArrayList.get(i) instance of Endorsement) { //Endorsement's are also no original posts, so we disregard them here
-				originalPostcount ++0;
+		for (int i = 0; i < postArrayList.size(); i++) {
+			if (postArrayList.get(i) instanceof Comment) { //Comments aren't original posts, so we disregard them here
+				continue;
+			} else if (postArrayList.get(i) instanceof Endorsement) { //Endorsement's are also no original posts, so we disregard them here
+				continue;
 			} else {
 				originalPostcount +=1;
 			}
@@ -687,11 +687,11 @@ public class SocialMedia implements SocialMediaPlatform {
 		int endorsementCount = 0;
 		for (int i = 0; i < postArrayList.size(); i++) {
 			if (postArrayList.get(i) instanceof Endorsement) {
-				endorsementCount ++1;
+				endorsementCount++ ;
 			}
 		}
 		return endorsementCount;
- }	}
+ }	
 
 	/**
 	 * This method returns the current total number of comments posts present in the
