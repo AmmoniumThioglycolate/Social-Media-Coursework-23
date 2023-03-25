@@ -14,7 +14,7 @@ public class Post{
 
 
   public boolean isPostInvalid(String message) {
-    if (message = "") {
+    if (message == "") {
       return true;
     }
     if (message.length() > 100) {
@@ -26,7 +26,7 @@ public class Post{
 
   public boolean doesPostIdExist(String id) {
     for (int i = 0; i < postArrayList.size(); i++) {
-      if (((postArrayList.get(i)).getPostId).equals(id)) {
+      if (((postArrayList.get(i)).getPostId()).equals(id)) {
         return true;
       }
     }
@@ -36,7 +36,7 @@ public class Post{
 
   public boolean isAnEndorsement(String id) {
     for (int i = 0; i < postArrayList.size(); i++) {
-      if (((postArrayList.get(i)).getPostId).equals(id)) {
+      if (((postArrayList.get(i)).getPostId()).equals(id)) {
         if (postArrayList.get(i) instanceof Endorsement) {
           return true;
         }
@@ -46,7 +46,7 @@ public class Post{
   }
   
   
-default static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
+ static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
     		if (this.id == null) {
         	return;
                 }
