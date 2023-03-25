@@ -40,7 +40,7 @@ public class Account {
 
     public boolean doesHandleExist(String handle) {
       for (int i = 0; i < accountArrayList.size(); i++){
-        if (((accountArrayList.get(i)).getHandle()).equals(this.handle)){
+        if (((accountArrayList.get(i)).getHandle()).equals(handle)){
           return true;
         }
       }
@@ -50,7 +50,7 @@ public class Account {
 
     public boolean doesItContainWhiteSpaceOrIsEmpty(String handle) {
       for (int i = 0; i < handle.length(); i++) {
-        if ((handle.charAt(i)) == (" ")) {
+        if ((handle.charAt(i)) == (' ')) {
           return true;
         }
       }
