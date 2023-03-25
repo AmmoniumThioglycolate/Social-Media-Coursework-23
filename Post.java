@@ -92,15 +92,14 @@ public class Post{
 }
 
 public class Endorsement extends Post{
-  super();
+  super(handle,postId,numberOfPosts,message);
   public int originalPostID;
   public String endorsementMessage;
-  public Endorsedment(String handle,int id){
+
+  public endorsement(String handle,int id){
     handle = this.handle;
     originalPostID = this.id;
     postId = ++numberOfPosts;
-
-
   }
   public int getOriginalPostId(){
     return this.originalPostID;
@@ -109,13 +108,13 @@ public class Endorsement extends Post{
 
 }
 
-public class Comments extends Posts{
-  super();
+public class Comments extends Post{
+  super(postId,numberOfPosts,message);
   public int originalPostID;
   public String commentMessage;
   public String accountHandle;
 
-public Comment(String handle, int id, String message){
+public comment(String handle, int id, String message){
   accountHandle = this.handle;
   commentMessage = this.message;
   originalPostID = this.id;
