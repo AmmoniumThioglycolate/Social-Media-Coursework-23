@@ -213,7 +213,7 @@ public class SocialMedia implements SocialMediaPlatform {
 				(accountArrayList.get(i)).setDescription(description);
 		}
 	}
-
+	}
 
 	/**
 	 * The method creates a formatted string summarising the stats of the account
@@ -235,8 +235,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public String showAccount(String handle) throws HandleNotRecognisedException {
 		String output;
-
-		if (Account.doesHandleExist(handle) == false) {
+		if (Account.doesHandleExist(this.handle) == false) {
 			throw new HandleNotRecognisedException();
 		}
 
