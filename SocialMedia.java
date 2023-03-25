@@ -412,7 +412,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new InvalidPostException();
 				}
 
-				Comment newComment = new Comment(handle,id,message);
+				Post newComment = new Comment(handle,id,message);
 				postArrayList.add(newComment);
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
