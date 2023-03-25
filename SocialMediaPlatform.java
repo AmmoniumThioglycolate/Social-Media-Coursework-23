@@ -30,6 +30,7 @@ public interface SocialMediaPlatform extends MiniSocialMediaPlatform {
 	 * @return the ID of the created account.
 	 */
 
+	@Override
 	int createAccount(String handle, String description) throws IllegalHandleException, InvalidHandleException; {
 
 		if (Account.doesHandleExist(handle) == true) {
