@@ -20,10 +20,10 @@ public class Account {
     public static int generateUniqueRandomNumber() {
           //this bit for if this is the first run
           Random r = new Random( System.currentTimeMillis() );
-          Integer randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
+          int randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
           randomNumberArray.add(randomNumber);
           if (randomNumberArray.contains(randomNumber) == false){
-            return randomNumber.intValue();}
+            return randomNumber;}
       else{ generateUniqueRandomNumber();
       }
     }

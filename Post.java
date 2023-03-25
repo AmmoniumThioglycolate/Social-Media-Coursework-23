@@ -24,9 +24,9 @@ public class Post{
   }
 
 
-  public boolean doesPostIdExist(String id) {
+  public boolean doesPostIdExist(int id) {
     for (int i = 0; i < postArrayList.size(); i++) {
-      if (((postArrayList.get(i)).getPostId()) == id) {
+      if ((postArrayList.get(i)).getPostId() == id) {
         return true;
       }
     }
@@ -34,7 +34,7 @@ public class Post{
   }
 
 
-  public boolean isAnEndorsement(String id) {
+  public boolean isAnEndorsement(int id) {
     for (int i = 0; i < postArrayList.size(); i++) {
       if (((postArrayList.get(i)).getPostId()) == id) {
         if (postArrayList.get(i) instanceof Endorsement) {
