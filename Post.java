@@ -118,4 +118,19 @@ public Comment(String handle, int id, String message){
   originalPostID = this.id;
   postId = ++numberOfPosts;
 }
+
+default static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
+    		if (this.id == null) {
+        	return;
+                }
+    		for (int i = 0; i < level; i++) {
+        	sb.append("  ");
+			}
+    		sb.append(showIndividualPost(this.id)).append("\n");
+
+    		for (Post post : postArrayList) {
+				if (post.getOriginalPostId() == this.id){
+        			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
+    													}
+				}
 }
