@@ -92,7 +92,6 @@ public class Post{
 }
 
 public class Endorsement extends Post{
-  super(handle,postId,numberOfPosts,message);
   public int originalPostID;
   public String endorsementMessage;
 
@@ -109,7 +108,6 @@ public class Endorsement extends Post{
 }
 
 public class Comment extends Post{
-  super(postId,numberOfPosts,message);
   public int originalPostID;
   public String commentMessage;
   public String accountHandle;
