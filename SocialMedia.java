@@ -705,7 +705,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		int commentCount = 0;
 		for (int i = 0; i < postArrayList.size(); i++) {
 			if (postArrayList.get(i) instanceof Comment) {
-				commentCount ++1;
+				commentCount++ ;
 			}
 		}
 		return commentCount;
@@ -752,7 +752,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			if (postArrayList.get(i) instanceof Endorsedment) {
 				continue;
 			} else {
-				endorsementLeaderboard.put(postArrayList.get(i)).getHandle(), (endorsementLeaderboard.get((postArrayList.get(i)).getHandle()) + postArrayList.getEndorsementNumber )
+				endorsementLeaderboard.put(postArrayList.get(i)).getHandle(), (endorsementLeaderboard.get((postArrayList.get(i)).getHandle()) + postArrayList.getEndorsementNumber );
 			}
 		}
 
@@ -824,4 +824,4 @@ public class SocialMedia implements SocialMediaPlatform {
 
 	// End Management-related methods ****************************************
 
-}
+
