@@ -96,7 +96,7 @@ public class Endorsement extends Post{
   public int originalPostID;
   public String endorsementMessage;
 
-  public endorsement(String handle,int id){
+  public Endorsement(String handle,int id){
     handle = this.handle;
     originalPostID = this.id;
     postId = ++numberOfPosts;
@@ -108,13 +108,13 @@ public class Endorsement extends Post{
 
 }
 
-public class Comments extends Post{
+public class Comment extends Post{
   super(postId,numberOfPosts,message);
   public int originalPostID;
   public String commentMessage;
   public String accountHandle;
 
-public comment(String handle, int id, String message){
+public Comment(String handle, int id, String message){
   accountHandle = this.handle;
   commentMessage = this.message;
   originalPostID = this.id;
