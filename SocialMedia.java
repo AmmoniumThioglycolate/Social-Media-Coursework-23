@@ -599,7 +599,7 @@ public class SocialMedia implements SocialMediaPlatform {
     		sb.append(showIndividualPost(this.id)).append("\n");
 
     		for (Post post : postArrayList) {
-				if post.getOriginalPostId() == this.id{
+				if (post.getOriginalPostId() == this.id){
         			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
     													}
 				}
