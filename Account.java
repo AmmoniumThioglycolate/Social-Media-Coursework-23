@@ -23,7 +23,8 @@ public class Account {
           randomNumberArray.add(randomNumber);
           if (randomNumberArray.contains(randomNumber) == false){
             return randomNumber;}
-      else{ generateUniqueRandomNumber()}
+      else{ generateUniqueRandomNumber();
+      }
     }
 
 
