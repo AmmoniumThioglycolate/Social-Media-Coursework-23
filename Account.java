@@ -31,7 +31,7 @@ public class Account {
 
     public boolean isAccountIdRecognised(String Id) {
       for (int i = 0 ; i < accountArrayList.size(); i++) {
-        if (((accountArrayList.get(i)).getAccountId()).equals(this.Id)) {
+        if (((accountArrayList.get(i)).getAccountId()).equals(Id)) {
           return true;
         }
       }
