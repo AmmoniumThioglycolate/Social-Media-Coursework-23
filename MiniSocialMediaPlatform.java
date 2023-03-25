@@ -506,16 +506,46 @@ public interface MiniSocialMediaPlatform extends Serializable {
 	 *                                      commented.
 	 */
 	StringBuilder showPostChildrenDetails(int id) throws PostIDNotRecognisedException, NotActionablePostException {
-		int commentNumber = 0;
-		int indent = 1 ;
+
 
 		if (Post.doesPostIdExist(id) == false;) {
 			throw new PostIDNotRecognisedException();
 		}
+	    StringBuilder hierarchy = new StringBuilder();
+    	buildObjectHierarchy(id, hierarchy, 0);
+    	return hierarchy;
+
+		public static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
+    		if (this.id == null) {
+        	return;
+                }
+    		for (int i = 0; i < level; i++) {
+        	sb.append("  ");
+			}
+    		sb.append(showIndividualPost(this.id)).append("\n");
+
+    		for (Post post : postArrayList) {
+				if post.getOriginalPostId() == this.id{
+        			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
+    													}
+				}
+
+        /*
 		StringBuilder outputOfPosts = new StringBuilder();
-		outputOfPosts.append(showIndividualPost(id));
+		for (int k = 0 ; k < postArrayList.size(); k++){
+			if (((postArrayList.get(k)).getPostId()) == this.id) {
+				commentsLeftToShow = (postArrayList.get(i)).getCommentNUmber;
+				break;} */
+		
 
 
+	
+		
+
+		
+
+
+/*
 		for (int k = 0 ; k < postArrayList.size(); k++){
 			if (((postArrayList.get(k)).getPostId()) == this.id) {
 				commentNumber = (postArrayList.get(i)).getCommentNUmber;}
@@ -529,7 +559,7 @@ public interface MiniSocialMediaPlatform extends Serializable {
 					
 					
 					
-					
+				*/	
 					
 		}
 
