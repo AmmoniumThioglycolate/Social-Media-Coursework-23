@@ -586,7 +586,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			throw new PostIDNotRecognisedException();
 		}
 	    StringBuilder hierarchy = new StringBuilder();
-    	Post.buildObjectHierarchy(id, hierarchy, 0);
+    	buildObjectHierarchy(id, hierarchy, 0);
     	return hierarchy;
 
 
@@ -632,7 +632,7 @@ public class SocialMedia implements SocialMediaPlatform {
     		for (int i = 0; i < level; i++) {
         	sb.append("  ");
 			}
-    		sb.append(SocialMedia.showIndividualPost(id)).append("\n");
+    		sb.append(showIndividualPost(id)).append("\n");
 
     		for (Post post : Post.postArrayList) {
 				if (post.getOriginalPostId() == id){
