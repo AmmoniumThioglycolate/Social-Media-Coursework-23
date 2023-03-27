@@ -442,14 +442,14 @@ public class SocialMedia implements SocialMediaPlatform {
 
 // delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
 		for (int i = 0; i < Post.postArrayList.size(); i++) {
-			if ((Post.postArrayList.get(i) instanceof Endorsement) && (((Post.postArrayList.get(i)).getOriginalPostId()).equals(id))) {
-				postArrayList.remove(i);
+			if ((Post.postArrayList.get(i) instanceof Endorsement) && (((Post.postArrayList.get(i)).getOriginalPostId()) == id)) {
+				(Post.postArrayList).remove(i);
 			}
-			if ((((Post.postArrayList).get(i)).getPostId()).equals(id)) {
-				((Post.postArrayList).get(i)).setDescription("The original content was removed from the system and is no longer available.");
+			if ((((Post.postArrayList).get(i)).getPostId()) == id) {
+				((Post.postArrayList).get(i)).setBody("The original content was removed from the system and is no longer available.");
 				(Post.postArrayList.get(i)).setHandle(null);
 				Post.numberOfPosts = Post.numberOfPosts - 1 ;
-				postGraveyard.add((Post.postArrayList).get(i));
+				(Post.postGraveyard).add((Post.postArrayList).get(i));
 				(Post.postArrayList).remove(i);
 			}
 		}
@@ -482,8 +482,8 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 		String postOutput;
 		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
-			if ((((Post.postArrayList).get(k)).getPostId()) == this.id) {
-				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getDescription());
+			if ((((Post.postArrayList).get(k)).getPostId()) == id) {
+				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
 				break;
 			}
 
@@ -721,7 +721,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		int index;
 		int max = (((Post.postArrayList).get(0)).getEndorsementNumber());
 		for (int i = 0; i < (Post.postArrayList).size(); i++) {
-			if ((Post.postArrayList).get(i) instanceof Endorsedment) {
+			if ((Post.postArrayList).get(i) instanceof Endorsement) {
 				continue;
 			}
 			else if (((Post.postArrayList).get(i)).getEndorsementNumber() > max ) {

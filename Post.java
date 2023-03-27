@@ -13,6 +13,7 @@ public class Post{
   public int numberOfComments;
 
 
+
   public static boolean isPostInvalid(String message) {
     if (message == "") {
       return true;
@@ -90,11 +91,17 @@ public class Post{
   public void setPostId(int newPostId) {
     this.postId = newPostId;
   }
+  public void setHandle(String handle) {
+    this.handle = handle;
+  }
   public void setEndorsements(int endorsementNumber){
     numberOfEndorsements =  ++endorsementNumber; 
   }
   public void setNumberOfComments(int commentNumber){
     numberOfComments = ++commentNumber;
+  }
+    public void setBody(String body) {
+    this.body = body;
   }
 
 
