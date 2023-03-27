@@ -319,7 +319,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public int endorsePost(String handle, int id) throws HandleNotRecognisedException, PostIDNotRecognisedException, NotActionablePostException {
-				String formatedMessage;
+				String formattedMessage;
 
 				if (Account.doesHandleExist(handle) == false) {
 					throw new HandleNotRecognisedException();
@@ -346,7 +346,7 @@ public class SocialMedia implements SocialMediaPlatform {
 				Post newPost = new Endorsedment(handle, id);
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
-						formattedMessage= String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBod(y));
+						formattedMessage = String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBod(y));
 						newPost.endorsementMessage = formattedMessage;
 						postArrayList.add(newPost);
 						(postArrayList.get(i)).setEndorsements((postArrayList.get(i)).getEndorsementNumber());
@@ -451,16 +451,16 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 
 // delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
-		for (int i = 0; i < postArrayList.size(); i++) {
-			if ((postArrayList.get(i) instanceof Endorsement) && (((postArrayList.get(i)).getOriginalPostId()).equals(id))) {
+		for (int i = 0; i < Post.postArrayList.size(); i++) {
+			if ((Post.postArrayList.get(i) instanceof Endorsement) && (((Post.postArrayList.get(i)).getOriginalPostId()).equals(id))) {
 				postArrayList.remove(i);
 			}
-			if (((postArrayList.get(i)).getPostId()).equals(id)) {
-				(postArrayList.get(i)).setDescription("The original content was removed from the system and is no longer available.");
-				(postArrayList.get(i)).getHandle(null);
+			if (((Post.postArrayList.get(i)).getPostId()).equals(id)) {
+				(Post.postArrayList.get(i)).setDescription("The original content was removed from the system and is no longer available.");
+				(Post.postArrayList.get(i)).getHandle(null);
 				Post.numberOfPosts = Post.numberOfPosts - 1 ;
 				postGraveyard.add(postArrayList.get(i));
-				postArrayList.remove(i);
+				(Post.postArrayList).remove(i);
 			}
 		}
 
