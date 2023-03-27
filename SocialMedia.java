@@ -384,7 +384,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 	@Override
 	public int commentPost(String handle, int id, String message) throws HandleNotRecognisedException,
-			PostIDNotRecognisedException, NotActionablePostException, InvalidPostException; {
+			PostIDNotRecognisedException, NotActionablePostException, InvalidPostException {
 
 				if (Account.doesHandleExist(handle) == false) {
 					throw new HandleNotRecognisedException();
