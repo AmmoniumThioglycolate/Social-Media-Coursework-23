@@ -809,6 +809,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void erasePlatform(){
+
 		
 	}
 
@@ -822,6 +823,11 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void savePlatform(String filename) throws IOException{
+		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))){
+			out.writeObject(Post.postArrayList);
+			out.writeObject(Account.accountArrayList);
+			System.out.println("The platform has been saved");
+		}
 		
 	}
 
