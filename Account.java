@@ -29,9 +29,9 @@ public class Account {
     }
 
 
-    public static boolean isAccountIdRecognised(String Id) {
+    public static boolean isAccountIdRecognised(int Id) {
       for (int i = 0 ; i < accountArrayList.size(); i++) {
-        if (((accountArrayList.get(i)).getAccountId()).equals(Id)) {
+        if (((accountArrayList.get(i)).getAccountId()) == Id) {
           return true;
         }
       }
