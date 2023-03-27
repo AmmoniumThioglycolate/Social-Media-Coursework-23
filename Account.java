@@ -38,7 +38,7 @@ public class Account {
       return false;
     }
 
-    public boolean doesHandleExist(String handle) {
+    public static boolean doesHandleExist(String handle) {
       for (int i = 0; i < accountArrayList.size(); i++){
         if (((accountArrayList.get(i)).getHandle()).equals(handle)){
           return true;
