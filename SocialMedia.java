@@ -413,7 +413,7 @@ public class SocialMedia implements SocialMediaPlatform {
 				}
 
 				Comment newComment = new Comment(handle,id,message);n// no longer upcasting
-				postArrayList.add(newComment);
+				(Post.postArrayList).add(newComment);
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
 						(postArrayList.get(i)).setNumberOfComments((postArrayList.get(i)).getCommentNUmber());
