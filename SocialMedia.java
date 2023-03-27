@@ -624,7 +624,22 @@ public class SocialMedia implements SocialMediaPlatform {
 					
 		}
 
+ 	protected static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
+      
+    		if (id == 0) {
+        	return;
+                }
+    		for (int i = 0; i < level; i++) {
+        	sb.append("  ");
+			}
+    		sb.append(SocialMedia.showIndividualPost(id)).append("\n");
 
+    		for (Post post : Post.postArrayList) {
+				if (post.getOriginalPostId() == id){
+        			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
+    													}
+				}
+  }
 
 
 
