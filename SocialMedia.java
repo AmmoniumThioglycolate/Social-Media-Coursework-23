@@ -633,7 +633,7 @@ public class SocialMedia implements SocialMediaPlatform {
     		for (int i = 0; i < level; i++) {
         	sb.append("  ");
 			}
-    		sb.append(showIndividualPost(id)).append("\n");
+    		sb.append(newPost.showIndividualPost(id)).append("\n");
 
     		for (Post post : Post.postArrayList) {
 				if (post.getOriginalPostId() == id){
