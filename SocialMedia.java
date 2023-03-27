@@ -291,7 +291,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		}
 
-	}
+	
 
 	/**
 	 * The method creates an endorsement post of an existing post, similar to a
