@@ -124,6 +124,9 @@ public class Post{
   
 
 }
+
+
+}
 public class Comment extends Post{
   public int originalPostID;
   public String commentMessage;
@@ -137,8 +140,6 @@ public Comment(String handle, int id, String message){
 }
 }
 
-
-}
 
 
 
