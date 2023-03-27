@@ -11,6 +11,7 @@ public class Post{
   public String handle;
   public int numberOfEndorsements;
   public int numberOfComments;
+  public int originalPostID;
 
 
 
@@ -87,7 +88,7 @@ public class Post{
     return numberOfEndorsements;
   }
     public int getOriginalPostId(){
-    return this.originalPostID;
+    return originalPostID;
   }
 
   //Seter methods
@@ -125,7 +126,7 @@ public class Post{
 
 
   class Endorsement extends Post{
-  public int originalPostID;
+
   public String endorsementMessage;
 
   public Endorsement(String handle,int id){
@@ -140,7 +141,7 @@ public class Post{
   }
   }
  class Comment extends Post{
-  public int originalPostID;
+
   public String commentMessage;
 
 
