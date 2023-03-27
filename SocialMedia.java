@@ -455,9 +455,9 @@ public class SocialMedia implements SocialMediaPlatform {
 			if ((Post.postArrayList.get(i) instanceof Endorsement) && (((Post.postArrayList.get(i)).getOriginalPostId()).equals(id))) {
 				postArrayList.remove(i);
 			}
-			if (((Post.postArrayList.get(i)).getPostId()).equals(id)) {
-				(Post.postArrayList.get(i)).setDescription("The original content was removed from the system and is no longer available.");
-				(Post.postArrayList.get(i)).getHandle(null);
+			if ((((Post.postArrayList).get(i)).getPostId()).equals(id)) {
+				((Post.postArrayList).get(i)).setDescription("The original content was removed from the system and is no longer available.");
+				(Post.postArrayList.get(i)).setHandle(null);
 				Post.numberOfPosts = Post.numberOfPosts - 1 ;
 				postGraveyard.add(postArrayList.get(i));
 				(Post.postArrayList).remove(i);
