@@ -46,7 +46,7 @@ public class Post{
   }
   
   
- protected void buildObjectHierarchy(int id, StringBuilder sb, int level) {
+ /*protected void buildObjectHierarchy(int id, StringBuilder sb, int level) {
     		if (id == 0) {
         	return;
                 }
@@ -60,7 +60,7 @@ public class Post{
         			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
     													}
 				}
-}
+}*/
 
   //Static Attribute - An ArrayList to store the system's Posts
   private static int postsCreated = 0;

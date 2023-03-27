@@ -577,7 +577,16 @@ public class SocialMedia implements SocialMediaPlatform {
 	 *                                      since they are not endorsable nor
 	 *                                      commented.
 	 */
+
+
 	@Override
+	public StringBuilder showPostChildrenDetails(int id)
+			throws PostIDNotRecognisedException, NotActionablePostException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/*@Override
 	public StringBuilder showPostChildrenDetails(int id) 
 		throws PostIDNotRecognisedException, NotActionablePostException {
 
@@ -587,7 +596,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 	    StringBuilder hierarchy = new StringBuilder();
     	Post.buildObjectHierarchy(id, hierarchy, 0);
-    	return hierarchy;
+    	return hierarchy;*/
 
 
 
