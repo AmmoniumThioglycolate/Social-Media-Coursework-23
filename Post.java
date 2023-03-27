@@ -9,8 +9,8 @@ public class Post{
   public int postId;
   public String body;
   public String handle;
-  public double numberOfEndorsements;
-  public double numberOfComments;
+  public int numberOfEndorsements;
+  public int numberOfComments;
 
 
   public boolean isPostInvalid(String message) {
@@ -53,9 +53,9 @@ public class Post{
     		for (int i = 0; i < level; i++) {
         	sb.append("  ");
 			}
-    		sb.append(showIndividualPost(id)).append("\n");
+    		sb.append(SocialMedia.showIndividualPost(id)).append("\n");
 
-    		for (Post post : postArrayList) {
+    		for (Post post : Post.postArrayList) {
 				if (post.getOriginalPostId() == id){
         			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
     													}
@@ -110,8 +110,8 @@ public class Post{
   public String endorsementMessage;
 
   public Endorsement(String handle,int id){
-    handle = this.handle;
-    originalPostID = this.id;
+    handle = handle;
+    originalPostID = id;
     postId = ++numberOfPosts;
   }
   public int getOriginalPostId(){

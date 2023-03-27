@@ -24,8 +24,8 @@ public class Account {
           randomNumberArray.add(randomNumber);
           if (randomNumberArray.contains(randomNumber) == false){
             return randomNumber;}
-      else{ generateUniqueRandomNumber();
-      }
+            else{ generateUniqueRandomNumber();}
+          return 0;  //make an assertion later on that the generate return number is not a zero
     }
 
 
