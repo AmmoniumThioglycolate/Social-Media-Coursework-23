@@ -6,7 +6,7 @@ import java.util.Random;
 public class Account {
 
     // Instance Attributes
-    public String accountId;
+    public int accountId;
     public String handle;
     public String description;
 
@@ -84,7 +84,7 @@ public class Account {
 
 
     //Setter Methods
-    public void setAccountId(String newAccountId) {
+    public void setAccountId(int newAccountId) {
       this.accountId = newAccountId;
     }
 
