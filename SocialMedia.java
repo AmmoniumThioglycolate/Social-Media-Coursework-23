@@ -346,7 +346,7 @@ public class SocialMedia implements SocialMediaPlatform {
 				Endorsement newPost = new Endorsement(handle, id);
 				for (int i = 0; i < postArrayList.size(); i++) {
 					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
-						formattedMessage = String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBody()));
+						formattedMessage = String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBody());
 						newPost.endorsementMessage = formattedMessage;
 						postArrayList.add(newPost);
 						(postArrayList.get(i)).setEndorsements((postArrayList.get(i)).getEndorsementNumber());
