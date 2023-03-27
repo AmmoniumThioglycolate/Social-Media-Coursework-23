@@ -804,7 +804,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void erasePlatform(){
-		return null;
+		
 	}
 
 	/**
@@ -817,7 +817,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void savePlatform(String filename) throws IOException{
-		return null;
+		
 	}
 
 	/**
@@ -835,7 +835,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void loadPlatform(String filename) throws IOException, ClassNotFoundException{
-		return null;
+		
 	}
 
 	// End Management-related methods ****************************************
