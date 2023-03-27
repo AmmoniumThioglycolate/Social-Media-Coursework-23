@@ -13,7 +13,7 @@ public class Post{
   public int numberOfComments;
 
 
-  public boolean isPostInvalid(String message) {
+  public static boolean isPostInvalid(String message) {
     if (message == "") {
       return true;
     }
@@ -24,7 +24,7 @@ public class Post{
   }
 
 
-  public boolean doesPostIdExist(int id) {
+  public static boolean doesPostIdExist(int id) {
     for (int i = 0; i < postArrayList.size(); i++) {
       if ((postArrayList.get(i)).getPostId() == id) {
         return true;
@@ -34,7 +34,7 @@ public class Post{
   }
 
 
-  public boolean isAnEndorsement(int id) {
+  public static boolean isAnEndorsement(int id) {
     for (int i = 0; i < postArrayList.size(); i++) {
       if (((postArrayList.get(i)).getPostId()) == id) {
         if (postArrayList.get(i) instanceof Endorsement) {

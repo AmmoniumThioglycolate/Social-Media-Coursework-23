@@ -41,7 +41,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		newAccount.setDescription(description);
 		newAccount.setAccountId(Account.generateUniqueRandomNumber());
 
-		accountArrayList.add(newAccount); //Adding the new account to our accountArrayList so we can find/use it later.
+		(Account.accountArrayList).add(newAccount); //Adding the new account to our accountArrayList so we can find/use it later.
 
 		return newAccount.getAccountId();
 
@@ -76,9 +76,9 @@ public class SocialMedia implements SocialMediaPlatform {
 		newAccount.setHandle(handle);
 		//This method doesn't parse a description, so we don't use our setter mehtod for an account's description.
 		
-		newAccount.setAccountId(generateUniqueRandomNumber());
+		newAccount.setAccountId(Account.generateUniqueRandomNumber());
 
-		accountArrayList.add(newAccount); //Adding the new Account to the system.
+		(Account.accountArrayList).add(newAccount); //Adding the new Account to the system.
 
 		return newAccount.getAccountId();
 
@@ -104,9 +104,9 @@ public class SocialMedia implements SocialMediaPlatform {
 			throw new AccountIDNotRecognisedException();
 		}
 
-		for (int i = 0; i < accountArrayList.size(); i++) {
-			if (((accountArrayList.get(i)).getAccountId()).equals(this.id)) {
-				accountArrayList.remove(i); //Remove the account with the specified Id.
+		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
+			if ((((Account.accountArrayList).get(i)).getAccountId()) == id) {
+				(Account.accountArrayList).remove(i); //Remove the account with the specified Id.
 			}
 		}
 
@@ -135,9 +135,9 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 
 
-		for (int i = 0; i < accountArrayList.size(); i++) {
-			if (((accountArrayList.get(i)).getHandle()).equals(handle)) {
-				accountArrayList.remove(accountArrayList.get(i));
+		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
+			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
+				(Account.accountArrayList).remove((Account.accountArrayList).get(i));
 			}
 		}
 	}
@@ -178,9 +178,9 @@ public class SocialMedia implements SocialMediaPlatform {
 			    }
 
 
-				for (int i = 0; i < accountArrayList.size(); i++) {
-					if (((accountArrayList.get(i)).getHandle()).equals(this.oldHandle)) {
-						(accountArrayList.get(i)).setHandle(this.newHandle);
+				for (int i = 0; i < (Account.accountArrayList).size(); i++) {
+					if ((((Account.accountArrayList).get(i)).getHandle()).equals(oldHandle)) {
+						((Account.accountArrayList).get(i)).setHandle(newHandle);
 					}
 				}
 
@@ -207,10 +207,10 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 		
 		
-		for (int i = 0; i < accountArrayList.size(); i++) {
-			if (((accountArrayList.get(i)).getHandle()).equals(handle)) {
-				(accountArrayList.get(i)).setHandle(handle);
-				(accountArrayList.get(i)).setDescription(description);
+		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
+			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
+				((Account.accountArrayList).get(i)).setHandle(handle);
+				((Account.accountArrayList).get(i)).setDescription(description);
 		}
 	}
 	}
@@ -235,13 +235,13 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public String showAccount(String handle) throws HandleNotRecognisedException {
 		String output;
-		if (Account.doesHandleExist(this.handle) == false) {
+		if (Account.doesHandleExist(handle) == false) {
 			throw new HandleNotRecognisedException();
 		}
 
-		for (int i = 0; i < accountArrayList.size(); i++) {
-			if (((accountArrayList.get(i)).getHandle()).equals(this.handle)) {
-				output = String.format("pre> /n ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s /n </pre>" ,(accountArrayList.get(i)).getAccountId,(accountArrayList.get(i)).getHandle,(accountArrayList.get(i)).getDescription);
+		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
+			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
+				output = String.format("pre> /n ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s /n </pre>" ,((Account.accountArrayList).get(i)).getAccountId(),((Account.accountArrayList).get(i)).getHandle(),((Account.accountArrayList).get(i)).getDescription());
 			}	
 		}
 		return output;
@@ -276,18 +276,18 @@ public class SocialMedia implements SocialMediaPlatform {
 		if (Post.isPostInvalid(message) == true) {
 			throw new InvalidPostException();
 		}
+
+		if (message.length() == 0 || message.length()> 100)  {
+			throw new InvalidPostException();
+		} else {
+			Post newPost = new Post(handle, message);
+			(Post.postArrayList).add(newPost);
+			return newPost.getPostId();
+		}
+
 		
-		switch (message.length()){
-			case 0:
-				throw new InvalidPostException();
-				break;
-			case message.length()>100 :
-				throw new InvalidPostException();
-				break;
-			default:
-				Post newPost = new Post(handle, message);
-				postArrayList.add(newPost);
-				return newPost.postId;
+		
+				
 
 		}
 
