@@ -333,9 +333,9 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new NotActionablePostException();
 				}
 
-				Endorsement newPost = new Endorsement(handle, id);
+				Post newPost = new Endorsement(handle, id);
 				for (int i = 0; i < (Post.postArrayList).size(); i++) {
-					if ((((Post.postArrayList).get(i)).getPostId()).equals(this.id)){
+					if ((((Post.postArrayList).get(i)).getPostId()) == id){
 						formattedMessage = String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",(Post.postArrayList).get(i).getAccountHandle(), (Post.postArrayList).get(i).getBody());
 						newPost.endorsementMessage = formattedMessage;
 						(Post.postArrayList).add(newPost);
@@ -402,7 +402,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new InvalidPostException();
 				}
 
-				Comment newComment = new Comment(handle,id,message);n// no longer upcasting
+				Post newComment = new Comment(handle,id,message);// no longer upcasting
 				(Post.postArrayList).add(newComment);
 				for (int i = 0; i < (Post.postArrayList).size(); i++) {
 					if ((((Post.postArrayList).get(i)).getPostId()) == id){
