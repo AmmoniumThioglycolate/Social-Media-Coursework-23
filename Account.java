@@ -70,7 +70,7 @@ public class Account {
 
 
     //Getter Methods
-    public String getAccountId() {
+    public int getAccountId() {
       return accountId;
     }
 
