@@ -235,7 +235,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public String showAccount(String handle) throws HandleNotRecognisedException {
-		String output;
+		String output = "";
 		if (Account.doesHandleExist(handle) == false) {
 			throw new HandleNotRecognisedException();
 		}
@@ -349,6 +349,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 
 				}
+				return 0; // assert that it is returning not zero
 			}
 
 				
@@ -413,6 +414,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 				} 
 			}
+			return 0; // assert that it is returning not zero
 		 }
 
 	/**
@@ -481,7 +483,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		if (Post.doesPostIdExist(id) == false) {
 			throw new PostIDNotRecognisedException();
 		}
-		String postOutput;
+		String postOutput = "";
 		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
 			if ((((Post.postArrayList).get(k)).getPostId()) == id) {
 				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
@@ -624,7 +626,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					
 		}
 
- 	protected static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
+ 	protected static void buildObjectHierarchy(int id, StringBuilder sb, int level) throws PostIDNotRecognisedException {
 			SocialMedia newPost = new SocialMedia();
       
     		if (id == 0) {
@@ -633,7 +635,10 @@ public class SocialMedia implements SocialMediaPlatform {
     		for (int i = 0; i < level; i++) {
         	sb.append("  ");
 			}
-    		sb.append(newPost.showIndividualPost(id)).append("\n");
+			try {
+    		sb.append(newPost.showIndividualPost(id)).append("\n");}
+			catch PostIDNotRecognisedException{
+			}
 
     		for (Post post : Post.postArrayList) {
 				if (post.getOriginalPostId() == id){
@@ -735,7 +740,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public int getMostEndorsedPost(){
-		int index;
+		int index = 0;
 		int max = (((Post.postArrayList).get(0)).getEndorsementNumber());
 		for (int i = 0; i < (Post.postArrayList).size(); i++) {
 			if ((Post.postArrayList).get(i) instanceof Endorsement) {
@@ -788,7 +793,7 @@ public class SocialMedia implements SocialMediaPlatform {
 				return (Account.accountArrayList).get(i).getAccountId();
 			}
 		}
-		
+		return 0; // assert that it is returning not zero
 
 
 
