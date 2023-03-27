@@ -86,6 +86,9 @@ public class Post{
   public int getEndorsementNumber(){
     return numberOfEndorsements;
   }
+    public int getOriginalPostId(){
+    return this.originalPostID;
+  }
 
   //Seter methods
   public void setPostId(int newPostId) {
@@ -131,9 +134,7 @@ public class Post{
     this.originalPostID = id;
 
   }
-  public int getOriginalPostId(){
-    return this.originalPostID;
-  }
+
   public void setEndorsementMessage(String message){
     endorsementMessage = message;
   }
