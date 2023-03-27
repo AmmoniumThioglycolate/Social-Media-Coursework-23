@@ -6,7 +6,7 @@ public class Post{
 
 
   //Instance Attributes
-  public int postId;
+  public int postId  = ++numberOfPosts;
   public String body;
   public String handle;
   public int numberOfEndorsements;
@@ -60,7 +60,7 @@ public class Post{
         			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
     													}
 				}
-}*/
+  }*/
 
   //Static Attribute - An ArrayList to store the system's Posts
   private static int postsCreated = 0;
@@ -102,7 +102,7 @@ public class Post{
   public Post(String handle,String body){
     this.body = body;
     this.handle = handle;
-    postId = ++numberOfPosts;
+  
   }
 
   public class Endorsement extends Post{
@@ -110,9 +110,9 @@ public class Post{
   public String endorsementMessage;
 
   public Endorsement(String handle,int id){
-    handle = handle;
-    originalPostID = id;
-    postId = ++numberOfPosts;
+    this.handle = handle;
+    this.originalPostID = id;
+
   }
   public int getOriginalPostId(){
     return this.originalPostID;
@@ -129,7 +129,6 @@ public Comment(String handle, int id, String message){
   accountHandle = handle;
   commentMessage = message;
   originalPostID = id;
-  postId = ++numberOfPosts;
 }
 }
 
