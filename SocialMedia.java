@@ -333,7 +333,7 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new NotActionablePostException();
 				}
 
-				Post newPost = new Endorsement(handle, id);
+				Endorsement newPost = new Endorsement(handle, id);
 				for (int i = 0; i < (Post.postArrayList).size(); i++) {
 					if ((((Post.postArrayList).get(i)).getPostId()) == id){
 						formattedMessage = String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",(Post.postArrayList).get(i).getAccountHandle(), (Post.postArrayList).get(i).getBody());
