@@ -333,23 +333,13 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new NotActionablePostException();
 				}
 
-				for (int i = 0; i < postArrayList.size(); i++) {
-					if (((((postArrayList.get(i)).getPostId()).equals(this.id)) == false) && i == postArrayList.size()){
-						 throw new PostIDNotRecognisedException();
-					 } else if ((postArrayList.get(i).getPostId()).equals(this.id)){
-							if (postArrayList.get(i) instanceof Endorsement){
-								throw new NotActionablePostException();
-									}
-					 } 
-
-					 }
 				Endorsement newPost = new Endorsement(handle, id);
-				for (int i = 0; i < postArrayList.size(); i++) {
-					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
-						formattedMessage = String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",postArrayList.get(i).getAccountHandle(), postArrayList.get(i).getBody());
+				for (int i = 0; i < (Post.postArrayList).size(); i++) {
+					if ((((Post.postArrayList).get(i)).getPostId()).equals(this.id)){
+						formattedMessage = String.format("<p> /n <code> EP@ %s : %s </code> /n </p>",(Post.postArrayList).get(i).getAccountHandle(), (Post.postArrayList).get(i).getBody());
 						newPost.endorsementMessage = formattedMessage;
-						postArrayList.add(newPost);
-						(postArrayList.get(i)).setEndorsements((postArrayList.get(i)).getEndorsementNumber());
+						(Post.postArrayList).add(newPost);
+						((Post.postArrayList).get(i)).setEndorsements(((Post.postArrayList).get(i)).getEndorsementNumber());
 						return newPost.getPostId();
 					}
 
@@ -414,11 +404,11 @@ public class SocialMedia implements SocialMediaPlatform {
 
 				Comment newComment = new Comment(handle,id,message);n// no longer upcasting
 				(Post.postArrayList).add(newComment);
-				for (int i = 0; i < postArrayList.size(); i++) {
-					if (((postArrayList.get(i)).getPostId()).equals(this.id)){
-						(postArrayList.get(i)).setNumberOfComments((postArrayList.get(i)).getCommentNUmber());
+				for (int i = 0; i < (Post.postArrayList).size(); i++) {
+					if ((((Post.postArrayList).get(i)).getPostId()) == id){
+						((Post.postArrayList).get(i)).setNumberOfComments(((Post.postArrayList).get(i)).getCommentNUmber());
 
-				return newComment.getPostId;
+				return newComment.getPostId();
 
 				} 
 			}
@@ -459,7 +449,7 @@ public class SocialMedia implements SocialMediaPlatform {
 				((Post.postArrayList).get(i)).setDescription("The original content was removed from the system and is no longer available.");
 				(Post.postArrayList.get(i)).setHandle(null);
 				Post.numberOfPosts = Post.numberOfPosts - 1 ;
-				postGraveyard.add(postArrayList.get(i));
+				postGraveyard.add((Post.postArrayList).get(i));
 				(Post.postArrayList).remove(i);
 			}
 		}
@@ -491,9 +481,9 @@ public class SocialMedia implements SocialMediaPlatform {
 			throw new PostIDNotRecognisedException();
 		}
 		String postOutput;
-		for (int k = 0 ; k < postArrayList.size(); k++){
-			if (((postArrayList.get(k)).getPostId()) == this.id) {
-				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",(postArrayList.get(k)).getPostId(),(postArrayList.get(k)).getAccountHandle(),(postArrayList.get(k)).getEndorsementNumber(),(postArrayList.get(k)).getCommentNUmber(),(postArrayList.get(k)).getDescription());
+		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
+			if ((((Post.postArrayList).get(k)).getPostId()) == this.id) {
+				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getDescription());
 				break;
 			}
 
@@ -672,10 +662,10 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public int getTotalOriginalPosts() {
 		int originalPostcount = 0;
-		for (int i = 0; i < postArrayList.size(); i++) {
-			if (postArrayList.get(i) instanceof Comment) { //Comments aren't original posts, so we disregard them here
+		for (int i = 0; i < (Post.postArrayList).size(); i++) {
+			if ((Post.postArrayList).get(i) instanceof Comment) { //Comments aren't original posts, so we disregard them here
 				continue;
-			} else if (postArrayList.get(i) instanceof Endorsement) { //Endorsement's are also no original posts, so we disregard them here
+			} else if ((Post.postArrayList).get(i) instanceof Endorsement) { //Endorsement's are also no original posts, so we disregard them here
 				continue;
 			} else {
 				originalPostcount +=1;
@@ -694,8 +684,8 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public int getTotalEndorsmentPosts() {
 		int endorsementCount = 0;
-		for (int i = 0; i < postArrayList.size(); i++) {
-			if (postArrayList.get(i) instanceof Endorsement) {
+		for (int i = 0; i < (Post.postArrayList).size(); i++) {
+			if ((Post.postArrayList).get(i) instanceof Endorsement) {
 				endorsementCount++ ;
 			}
 		}
@@ -712,8 +702,8 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public int getTotalCommentPosts() {
 		int commentCount = 0;
-		for (int i = 0; i < postArrayList.size(); i++) {
-			if (postArrayList.get(i) instanceof Comment) {
+		for (int i = 0; i < (Post.postArrayList).size(); i++) {
+			if ((Post.postArrayList).get(i) instanceof Comment) {
 				commentCount++ ;
 			}
 		}
@@ -729,17 +719,17 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public int getMostEndorsedPost(){
 		int index;
-		int max = ((postArrayList.get(0)).getEndorsementNumber());
-		for (int i = 0; i < postArrayList.size(); i++) {
-			if (postArrayList.get(i) instanceof Endorsedment) {
+		int max = (((Post.postArrayList).get(0)).getEndorsementNumber());
+		for (int i = 0; i < (Post.postArrayList).size(); i++) {
+			if ((Post.postArrayList).get(i) instanceof Endorsedment) {
 				continue;
 			}
-			else if ((postArrayList.get(i)).getEndorsementNumber() > max ) {
+			else if (((Post.postArrayList).get(i)).getEndorsementNumber() > max ) {
 				index = i;
-				max = (postArrayList.get(i)).getEndorsementNumber();
+				max = ((Post.postArrayList).get(i)).getEndorsementNumber();
 			}
 		}
-		return (postArrayList.get(index)).getPostId();
+		return ((Post.postArrayList).get(index)).getPostId();
 
 	}
 
@@ -754,14 +744,14 @@ public class SocialMedia implements SocialMediaPlatform {
 		Hashmap<String, Integer> endorsementLeaderboard = new Hashmap<String, Integer>();
 
 		for (int i = 0; i < accountArrayList.size(); i++){
-			endorsementLeaderboard.put((accountArrayList.get(i)).getAccountHandle(),0);
+			endorsementLeaderboard.put(((Account.accountArrayList).get(i)).getAccountHandle(),0);
 		}
 
 		for (int k = 0; k < postArrayList.size(); k++) {
-			if (postArrayList.get(i) instanceof Endorsedment) {
+			if ((Post.postArrayList).get(i) instanceof Endorsedment) {
 				continue;
 			} else {
-				endorsementLeaderboard.put((postArrayList.get(i)).getHandle(), (endorsementLeaderboard.get((postArrayList.get(i)).getHandle()) + postArrayList.getEndorsementNumber ));
+				endorsementLeaderboard.put(((Post.postArrayList).get(i)).getHandle(), (endorsementLeaderboard.get(((Post.postArrayList).get(i)).getHandle()) + (Post.postArrayList).getEndorsementNumber() ));
 			}
 		}
 
@@ -776,9 +766,9 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 
 		//Loop through the account array list to get the id 
-		for (int i = 0; i < accountArrayList; i++){
-			if ((accountArrayList.get(i)).getAccountHandle() == mostPopular){
-				return accountArrayList.get(i).getAccountId();
+		for (int i = 0; i < (Account.accountArrayList).size(); i++){
+			if (((Account.accountArrayList).get(i)).getAccountHandle() == mostPopular){
+				return (Account.accountArrayList).get(i).getAccountId();
 			}
 		}
 		
