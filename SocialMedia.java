@@ -625,7 +625,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 
  	protected static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
-		SocialMedia newPost = new SocialMedia();
+			SocialMedia newPost = new SocialMedia();
       
     		if (id == 0) {
         	return;
@@ -803,7 +803,9 @@ public class SocialMedia implements SocialMediaPlatform {
 	 * internal counters.
 	 */
 	@Override
-	public void erasePlatform();
+	public void erasePlatform(){
+		return null;
+	}
 
 	/**
 	 * Method saves this SocialMediaPlatform's contents into a serialised file, with
@@ -814,7 +816,9 @@ public class SocialMedia implements SocialMediaPlatform {
 	 *                     store contents to the file
 	 */
 	@Override
-	public void savePlatform(String filename) throws IOException;
+	public void savePlatform(String filename) throws IOException{
+		return null;
+	}
 
 	/**
 	 * Method should load and replace this SocialMediaPlatform's contents with the
@@ -830,7 +834,9 @@ public class SocialMedia implements SocialMediaPlatform {
 	 *                                loading
 	 */
 	@Override
-	public void loadPlatform(String filename) throws IOException, ClassNotFoundException;
+	public void loadPlatform(String filename) throws IOException, ClassNotFoundException{
+		return null;
+	}
 
 	// End Management-related methods ****************************************
 
