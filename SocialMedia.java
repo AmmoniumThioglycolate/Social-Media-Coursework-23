@@ -810,7 +810,9 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void erasePlatform(){
-
+		(Account.accountArrayList).clear();
+		(Post.postArrayList).clear();
+		(Post.postGraveyard).clear();
 		
 	}
 
@@ -828,6 +830,8 @@ public class SocialMedia implements SocialMediaPlatform {
 			out.writeObject(Post.postArrayList);
 			out.writeObject(Account.accountArrayList);
 			System.out.println("The platform has been saved");
+		} catch (IOException e){
+			throw IOException();
 		}
 		
 	}
