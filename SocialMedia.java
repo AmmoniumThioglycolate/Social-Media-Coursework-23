@@ -569,15 +569,15 @@ public class SocialMedia implements SocialMediaPlatform {
 	 *                                      commented.
 	 */
 
-
+/*
 	@Override
 	public StringBuilder showPostChildrenDetails(int id)
 			throws PostIDNotRecognisedException, NotActionablePostException {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	} */
 
-	/*@Override
+	@Override
 	public StringBuilder showPostChildrenDetails(int id) 
 		throws PostIDNotRecognisedException, NotActionablePostException {
 
@@ -587,7 +587,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 	    StringBuilder hierarchy = new StringBuilder();
     	Post.buildObjectHierarchy(id, hierarchy, 0);
-    	return hierarchy;*/
+    	return hierarchy;
 
 
 
@@ -616,13 +616,13 @@ public class SocialMedia implements SocialMediaPlatform {
 						outputOfPosts.append((" ".repeat(indent)) + showIndividualPost(postArrayList.get(k).getPostId) );
 						commentNumber -=;} else if (commentNumber == 0) {break;}
 				}
-			}
+			} */
 					
 					
 					
 					
 					
-		}*/
+		}
 
 
 
