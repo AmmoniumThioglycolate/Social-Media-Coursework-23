@@ -29,7 +29,7 @@ public class Account {
     }
 
 
-    public boolean isAccountIdRecognised(String Id) {
+    public static boolean isAccountIdRecognised(String Id) {
       for (int i = 0 ; i < accountArrayList.size(); i++) {
         if (((accountArrayList.get(i)).getAccountId()).equals(Id)) {
           return true;
@@ -48,7 +48,7 @@ public class Account {
     } 
 
 
-    public boolean doesItContainWhiteSpaceOrIsEmpty(String handle) {
+    public static boolean doesItContainWhiteSpaceOrIsEmpty(String handle) {
       for (int i = 0; i < handle.length(); i++) {
         if ((handle.charAt(i)) == (' ')) {
           return true;
@@ -61,7 +61,7 @@ public class Account {
     }
 
 
-    public boolean isHandleInvalid(String handle) {
+    public static boolean isHandleInvalid(String handle) {
       if (doesItContainWhiteSpaceOrIsEmpty(handle) == true || handle.length() > 30) {
         return true;
       }
