@@ -742,17 +742,17 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public int getMostEndorsedAccount() {
-		Hashmap<String, Integer> endorsementLeaderboard = new Hashmap<String, Integer>();
+		HashMap<String, Integer> endorsementLeaderboard = new HashMap<String, Integer>();
 
-		for (int i = 0; i < accountArrayList.size(); i++){
-			endorsementLeaderboard.put(((Account.accountArrayList).get(i)).getAccountHandle(),0);
+		for (int i = 0; i < (Account.accountArrayList).size(); i++){
+			endorsementLeaderboard.put(((Account.accountArrayList).get(i)).getHandle(),0);
 		}
 
-		for (int k = 0; k < postArrayList.size(); k++) {
-			if ((Post.postArrayList).get(i) instanceof Endorsedment) {
+		for (int k = 0; k < (Post.postArrayList).size(); k++) {
+			if ((Post.postArrayList).get(k) instanceof Endorsement) {
 				continue;
 			} else {
-				endorsementLeaderboard.put(((Post.postArrayList).get(i)).getHandle(), (endorsementLeaderboard.get(((Post.postArrayList).get(i)).getHandle()) + (Post.postArrayList).getEndorsementNumber() ));
+				endorsementLeaderboard.put(((Post.postArrayList).get(k)).getAccountHandle(), (endorsementLeaderboard.get(((Post.postArrayList).get(k)).getAccountHandle()) + ((Post.postArrayList).get(k)).getEndorsementNumber() ));
 			}
 		}
 
@@ -768,7 +768,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		//Loop through the account array list to get the id 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++){
-			if (((Account.accountArrayList).get(i)).getAccountHandle() == mostPopular){
+			if (((Account.accountArrayList).get(i)).getHandle() == mostPopular){
 				return (Account.accountArrayList).get(i).getAccountId();
 			}
 		}
