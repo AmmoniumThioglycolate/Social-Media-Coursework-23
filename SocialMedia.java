@@ -831,7 +831,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			out.writeObject(Account.accountArrayList);
 			System.out.println("The platform has been saved");
 		} catch (IOException e){
-			System.out.println("There's been a problem saving the file.")
+			System.out.println("There's been a problem saving the file.");
 		}
 		
 	}
