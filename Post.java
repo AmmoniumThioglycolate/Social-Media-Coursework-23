@@ -113,6 +113,7 @@ public class Post{
   public String endorsementMessage;
 
   public Endorsement(String handle,int id){
+    super();
     this.handle = handle;
     this.originalPostID = id;
 
@@ -126,10 +127,11 @@ public class Post{
 public class Comment extends Post{
   public int originalPostID;
   public String commentMessage;
-  public String accountHandle;
+
 
 public Comment(String handle, int id, String message){
-  accountHandle = handle;
+  super();
+  handle = handle;
   commentMessage = message;
   originalPostID = id;
 }
