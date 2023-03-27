@@ -585,7 +585,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/*@Override
 	public StringBuilder showPostChildrenDetails(int id) 
 		throws PostIDNotRecognisedException, NotActionablePostException {
@@ -658,7 +658,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public int getNumberOfAccounts() {
-		return accountArrayList.size();
+		return Account.accountArrayList.size();
 	}
 
 	/**
