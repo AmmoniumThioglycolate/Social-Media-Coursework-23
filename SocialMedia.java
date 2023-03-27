@@ -39,7 +39,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		newAccount.setHandle(handle);
 		newAccount.setDescription(description);
-		newAccount.setAccountId(generateUniqueRandomNumber());
+		newAccount.setAccountId(Account.generateUniqueRandomNumber());
 
 		accountArrayList.add(newAccount); //Adding the new account to our accountArrayList so we can find/use it later.
 
