@@ -637,7 +637,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			}
 			try {
     		sb.append(newPost.showIndividualPost(id)).append("\n");}
-			catch PostIDNotRecognisedException{
+			catch (PostIDNotRecognisedException e){
 			}
 
     		for (Post post : Post.postArrayList) {
