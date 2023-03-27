@@ -114,7 +114,7 @@ public class Post{
 }
 
 
-  public class Endorsement extends Post{
+  class Endorsement extends Post{
   public int originalPostID;
   public String endorsementMessage;
 
@@ -128,7 +128,7 @@ public class Post{
     return this.originalPostID;
   }
   }
-public class Comment extends Post{
+ class Comment extends Post{
   public int originalPostID;
   public String commentMessage;
 
