@@ -625,6 +625,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		}
 
  	protected static void buildObjectHierarchy(int id, StringBuilder sb, int level) {
+		SocialMedia newPost = new SocialMedia();
       
     		if (id == 0) {
         	return;
