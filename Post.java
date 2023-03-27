@@ -99,6 +99,9 @@ public class Post{
 
 
   //Constructor
+  public Post(){
+    
+  }
   public Post(String handle,String body){
     this.body = body;
     this.handle = handle;
