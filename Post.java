@@ -127,6 +127,9 @@ public class Post{
   public int getOriginalPostId(){
     return this.originalPostID;
   }
+  public void setEndorsementMessage(String message){
+    endorsementMessage = message;
+  }
   }
  class Comment extends Post{
   public int originalPostID;
