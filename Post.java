@@ -48,21 +48,7 @@ public class Post{
   }
   
   
- /*protected void buildObjectHierarchy(int id, StringBuilder sb, int level) {
-    		if (id == 0) {
-        	return;
-                }
-    		for (int i = 0; i < level; i++) {
-        	sb.append("  ");
-			}
-    		sb.append(SocialMedia.showIndividualPost(id)).append("\n");
 
-    		for (Post post : Post.postArrayList) {
-				if (post.getOriginalPostId() == id){
-        			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
-    													}
-				}
-  }*/
 
   //Static Attribute - An ArrayList to store the system's Posts
   private static int postsCreated = 0;
