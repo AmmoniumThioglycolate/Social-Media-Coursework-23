@@ -108,6 +108,12 @@ public class Post{
   
   }
 
+
+  
+
+}
+
+
   public class Endorsement extends Post{
   public int originalPostID;
   public String endorsementMessage;
@@ -121,12 +127,7 @@ public class Post{
   public int getOriginalPostId(){
     return this.originalPostID;
   }
-  
-
-}
-
-
-}
+  }
 public class Comment extends Post{
   public int originalPostID;
   public String commentMessage;
