@@ -28,6 +28,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 	@Override
 	public int createAccount(String handle, String description) throws IllegalHandleException, InvalidHandleException {
+		
 
 		if (Account.doesHandleExist(handle) == true) {
 			throw new IllegalHandleException();
