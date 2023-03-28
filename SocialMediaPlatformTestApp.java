@@ -87,8 +87,7 @@ public class SocialMediaPlatformTestApp {
 		id = platform.createAccount("  ");} 
 		catch (InvalidHandleException e){ System.out.println("The error has been caught: Invalid Handle");
 		} catch (IllegalHandleException e){ System.out.println("The error has been caught: IllegalHandle");}
-		catch (AccountIDNotRecognisedException e ){System.out.println("The error has been caught: Account Id not recognised");}
-
+	
 
 	}
 
