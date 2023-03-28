@@ -32,7 +32,7 @@ public class SocialMediaPlatformTestApp {
 		assert (platform.getTotalCommentPosts() == 0) : "Innitial SocialMediaPlatform not empty as required.";
 		assert (platform.getTotalEndorsmentPosts() == 0) : "Innitial SocialMediaPlatform not empty as required.";
 
-		/*Integer id;
+		Integer id;
 		try {
 			id = platform.createAccount("my_handle");
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
@@ -46,7 +46,7 @@ public class SocialMediaPlatformTestApp {
 			assert (false) : "InvalidHandleException thrown incorrectly";
 		} catch (AccountIDNotRecognisedException e) {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
-		} */
+		}
 
 	}
 
