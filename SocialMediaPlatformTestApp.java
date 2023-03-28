@@ -50,7 +50,7 @@ public class SocialMediaPlatformTestApp {
 
 		try {
 			id = platform.createAccount(785589);
-		} catch (InvalidHandleException) {
+		} catch (InvalidHandleException e) {
 			assert (true):  "InvalidHandleException is thrown";
 		}
 
