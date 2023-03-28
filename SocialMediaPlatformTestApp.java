@@ -83,7 +83,10 @@ public class SocialMediaPlatformTestApp {
 		} catch (AccountIDNotRecognisedException e) {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
-		id = platform.createAccount("  ");
+		try{
+		id = platform.createAccount("  ");} catch (IllegalHandleException e){ System.out.println("The error has been caught")
+
+		}
 
 
 	}
