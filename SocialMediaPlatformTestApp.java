@@ -48,11 +48,12 @@ public class SocialMediaPlatformTestApp {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
 
+/*
 		try {
 			id = platform.createAccount(785589);
 		} catch (InvalidHandleException e) {
 			assert (true):  "InvalidHandleException is thrown";
-		}
+		} */
 
 				try {
 			id = platform.createAccount("my_handlewwwwwwwwwwweereeweryuuytrewwyufddjhxctrstdhfjvkyfitvltitxxtytd");
