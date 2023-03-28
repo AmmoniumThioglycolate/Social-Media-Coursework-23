@@ -223,11 +223,14 @@ public class Post{
     endorsementMessage = message;
   }
   }
+ /**
+  * A subclass Comment is created, which extends the Post superclass.
+  */
  class Comment extends Post{
 
   public String commentMessage;
 
-
+// Comment Constructor
 public Comment(String handle, int id, String message){
   super();
   handle = handle;

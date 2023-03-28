@@ -243,7 +243,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
 			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
-				output = String.format("pre> /n ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s /n </pre>" ,((Account.accountArrayList).get(i)).getAccountId(),((Account.accountArrayList).get(i)).getHandle(),((Account.accountArrayList).get(i)).getDescription());
+				output = String.format("ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s " ,((Account.accountArrayList).get(i)).getAccountId(),((Account.accountArrayList).get(i)).getHandle(),((Account.accountArrayList).get(i)).getDescription());
 			}	
 		}
 		return output;
@@ -444,17 +444,19 @@ public class SocialMedia implements SocialMediaPlatform {
 			throw new PostIDNotRecognisedException();
 		}
 
-// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
+
 		for (int i = 0; i < Post.postArrayList.size(); i++) {
+			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
 			if ((Post.postArrayList.get(i) instanceof Endorsement) && (((Post.postArrayList.get(i)).getOriginalPostId()) == id)) {
 				(Post.postArrayList).remove(i);
 			}
+			// this deletes the original post, it will also work for an endorsement post
 			if ((((Post.postArrayList).get(i)).getPostId()) == id) {
-				((Post.postArrayList).get(i)).setBody("The original content was removed from the system and is no longer available.");
-				(Post.postArrayList.get(i)).setHandle(null);
-				Post.numberOfPosts = Post.numberOfPosts - 1 ;
-				(Post.postGraveyard).add((Post.postArrayList).get(i));
-				(Post.postArrayList).remove(i);
+				((Post.postArrayList).get(i)).setBody("The original content was removed from the system and is no longer available."); // the post descriptionn is changed to a generic emoty post
+				(Post.postArrayList.get(i)).setHandle(null); // the handle is nullified
+				Post.numberOfPosts = Post.numberOfPosts - 1 ; // we remove one from our general tally of posts
+				(Post.postGraveyard).add((Post.postArrayList).get(i)); // the post is then moved to a post graveyard so if ever needed we can use it to link its comments we can
+				(Post.postArrayList).remove(i); // the  post is removed from the post array list
 			}
 		}
 
@@ -487,7 +489,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		String postOutput = "";
 		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
 			if ((((Post.postArrayList).get(k)).getPostId()) == id) {
-				postOutput = String.format(" <pre> \n ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s \n </pre> ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
+				postOutput = String.format("ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
 				break;
 			}
 
@@ -572,14 +574,6 @@ public class SocialMedia implements SocialMediaPlatform {
 	 *                                      commented.
 	 */
 
-/*
-	@Override
-	public StringBuilder showPostChildrenDetails(int id)
-			throws PostIDNotRecognisedException, NotActionablePostException {
-		// TODO Auto-generated method stub
-		return null;
-	} */
-
 	@Override
 	public StringBuilder showPostChildrenDetails(int id) 
 		throws PostIDNotRecognisedException, NotActionablePostException {
@@ -627,8 +621,25 @@ public class SocialMedia implements SocialMediaPlatform {
 					
 		}
 
- 	protected static void buildObjectHierarchy(int id, StringBuilder sb, int level) throws PostIDNotRecognisedException {
-			SocialMedia newPost = new SocialMedia();
+
+
+
+	/**
+	 * The function takes in an id, a StringBuilder object and an integer level. It then creates a new
+	 * SocialMedia object(in order to use the showIndividualPost since it is not static method) and checks if the id is 0. If it is, it returns. If it isn't, it loops through
+	 * the level and appends two spaces to the StringBuilder object. It then appends the post with the id
+	 * to the StringBuilder object and then loops through the postArrayList and checks if the
+	 * originalPostId is equal to the id. If it is, it calls the function again with the originalPostId,
+	 * the StringBuilder object and the level + 1
+	 * 
+	 * @param id The id of the post you want to start with.
+	 * @param sb StringBuilder object
+	 * @param level This is the level of the hierarchy. This helps determine the ammount of indentation
+	 * @throws PostIDNotRecognisedException if the ID does not match to any post in
+	 *                                      the system
+	 */
+	protected static void buildObjectHierarchy(int id, StringBuilder sb, int level) throws PostIDNotRecognisedException {
+			SocialMedia newPost = new SocialMedia(); // this is created so that we can use the show individual post method as it is not staticr
       
     		if (id == 0) {
         	return;
@@ -641,6 +652,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			catch (PostIDNotRecognisedException e){
 			}
 
+// the post array list is looped thrrough here and if necessary calls itself again. We decided using a recursive method was the bets way around
     		for (Post post : Post.postArrayList) {
 				if (post.getOriginalPostId() == id){
         			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
