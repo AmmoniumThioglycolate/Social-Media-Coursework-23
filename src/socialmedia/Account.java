@@ -37,8 +37,8 @@ public class Account {
           //this bit for if this is the first run
           Random r = new Random( System.currentTimeMillis() );
           int randomNumber = ((1 + r.nextInt(9)) * 10000 + r.nextInt(10000));
-          randomNumberArray.add(randomNumber);
           if (randomNumberArray.contains(randomNumber) == false){
+            randomNumberArray.add(randomNumber);
             return randomNumber;}
             else{ generateUniqueRandomNumber();}
           return 0;  //make an assertion later on that the generate return number is not a zero
