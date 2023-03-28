@@ -453,7 +453,7 @@ public class SocialMedia implements SocialMediaPlatform {
 				for (int j = 0; j < Post.postArrayList.size(); j++) {
 			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
 				if (((Post.postArrayList.get(j)).getPostId()) == id) {
-				(Post.postArrayList.get(j)).getEndorsementNumber() = (Post.postArrayList.get(j)).getEndorsementNumber() - 1 ; } // remove the log of the endorsement
+				(Post.postArrayList.get(j)).numberOfEndorsements = (Post.postArrayList.get(j)).getEndorsementNumber() - 1 ; } // remove the log of the endorsement
 
 			}
 			// this deletes the original post, it will also work for an endorsement post
