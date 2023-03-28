@@ -48,6 +48,42 @@ public class SocialMediaPlatformTestApp {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
 
+		try {
+			id = platform.createAccount(785589);
+		} catch (InvalidHandleException) {
+			assert : "InvalidHandleException is thrown";
+		}
+
+				try {
+			id = platform.createAccount("my_handlewwwwwwwwwwweereeweryuuytrewwyufddjhxctrstdhfjvkyfitvltitxxtytd");
+			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
+
+			platform.removeAccount(id);
+			assert (platform.getNumberOfAccounts() == 0) : "number of accounts registered in the system does not match";
+
+		} catch (IllegalHandleException e) {
+			assert (false) : "IllegalHandleException thrown incorrectly";
+		} catch (InvalidHandleException e) {
+			assert (false) : "InvalidHandleException thrown incorrectly";
+		} catch (AccountIDNotRecognisedException e) {
+			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
+		}
+				try {
+			id = platform.createAccount(" ");
+			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
+
+			platform.removeAccount(id);
+			assert (platform.getNumberOfAccounts() == 0) : "number of accounts registered in the system does not match";
+
+		} catch (IllegalHandleException e) {
+			assert (false) : "IllegalHandleException thrown incorrectly";
+		} catch (InvalidHandleException e) {
+			assert (false) : "InvalidHandleException thrown incorrectly";
+		} catch (AccountIDNotRecognisedException e) {
+			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
+		}
+
+
 	}
 
 }
