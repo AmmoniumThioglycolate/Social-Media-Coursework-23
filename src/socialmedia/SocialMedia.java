@@ -877,7 +877,3 @@ public class SocialMedia implements SocialMediaPlatform {
 }
 				
 
-
-	// End Management-related methods ****************************************
-
-
