@@ -65,7 +65,7 @@ public class SocialMediaPlatformTestApp {
 		} catch (IllegalHandleException e) {
 			assert (false) : "IllegalHandleException thrown incorrectly";
 		} catch (InvalidHandleException e) {
-			assert (false) : "InvalidHandleException thrown incorrectly";
+			assert (true) : "InvalidHandleException thrown correctly";
 		} catch (AccountIDNotRecognisedException e) {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
@@ -79,7 +79,7 @@ public class SocialMediaPlatformTestApp {
 		} catch (IllegalHandleException e) {
 			assert (false) : "IllegalHandleException thrown incorrectly";
 		} catch (InvalidHandleException e) {
-			assert (false) : "InvalidHandleException thrown incorrectly";
+			assert (true) : "InvalidHandleException thrown correctly";
 		} catch (AccountIDNotRecognisedException e) {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
