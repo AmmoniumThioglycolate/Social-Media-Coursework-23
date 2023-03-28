@@ -782,8 +782,10 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public int getMostEndorsedAccount() {
+		// a hashmap (/dictionary)  is created
 		HashMap<String, Integer> endorsementLeaderboard = new HashMap<String, Integer>();
 
+// 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++){
 			endorsementLeaderboard.put(((Account.accountArrayList).get(i)).getHandle(),0);
 		}
