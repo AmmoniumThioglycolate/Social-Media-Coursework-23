@@ -21,7 +21,7 @@ public class Account {
 
     //Static Attribute - An ArrayList to store the system's Accounts
     public static ArrayList<Account> accountArrayList = new ArrayList<Account>();
-    public static ArrayList<int> randomNumberArray = new ArrayList<int>();
+    public static ArrayList<Integer> randomNumberArray = new ArrayList<Integer>();
 
 
     //Static Methods

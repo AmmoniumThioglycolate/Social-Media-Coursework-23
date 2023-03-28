@@ -450,10 +450,10 @@ public class SocialMedia implements SocialMediaPlatform {
 			if ((Post.postArrayList.get(i) instanceof Endorsement) && (((Post.postArrayList.get(i)).getOriginalPostId()) == id)) {
 				(Post.postArrayList).remove(i);
 				// remove one of the number of endorsements here
-				for (int i = 0; i < Post.postArrayList.size(); i++) {
+				for (int j = 0; j < Post.postArrayList.size(); j++) {
 			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
-				if (((Post.postArrayList.get(i)).getPostId()) == id) {
-				(Post.postArrayList.get(i)).getEndorsementNumber() = (Post.postArrayList.get(i)).getEndorsementNumber() - 1 ; } // remove the log of the endorsement
+				if (((Post.postArrayList.get(j)).getPostId()) == id) {
+				(Post.postArrayList.get(j)).getEndorsementNumber() = (Post.postArrayList.get(j)).getEndorsementNumber() - 1 ; } // remove the log of the endorsement
 
 			}
 			// this deletes the original post, it will also work for an endorsement post
