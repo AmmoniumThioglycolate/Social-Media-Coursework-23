@@ -113,7 +113,6 @@ public class SocialMediaPlatformTestApp {
 		}
 		//endorse post
 		int endorsePostId;
-		@test
 		try{
 			endorsePostId = platform.endorsePost('malik',postid);
 			assertEquals(1,endorsePostId);
