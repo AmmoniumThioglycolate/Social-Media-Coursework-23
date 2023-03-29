@@ -114,7 +114,7 @@ public class SocialMediaPlatformTestApp {
 		//endorse post
 		int endorsePostId;
 		try{
-			endorsePostId = platform.endorsePost('malik',postid);
+			endorsePostId = platform.endorsePost("malik",postid);
 			assertEquals(1,endorsePostId);
 
 		} catch(HandleNotRecognisedExcedption e){
