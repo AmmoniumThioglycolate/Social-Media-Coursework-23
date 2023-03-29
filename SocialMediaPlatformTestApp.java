@@ -106,7 +106,7 @@ public class SocialMediaPlatformTestApp {
 		int postid;
 		try{
 			postid = platform.createPost("malik","welcome to my island");
-		} catch(HandleNotRecognisedExcedption e){
+		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (InvalidPostException e) {
 			System.out.println(e.message());
@@ -117,7 +117,7 @@ public class SocialMediaPlatformTestApp {
 			endorsePostId = platform.endorsePost("malik",postid);
 			assertEquals(1,endorsePostId);
 
-		} catch(HandleNotRecognisedExcedption e){
+		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (PostIDNotRecognisedException e) {
 			System.out.println(e.message());
