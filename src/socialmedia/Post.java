@@ -25,11 +25,9 @@ public class Post implements Serializable{
   public static boolean isPostInvalid(String message) {
     if (message == "") {
       return true;
-    }
-    if (message.length() > 100) {
+    } else if (message.length() > 100) {
       return true;
-    }
-    return false;
+    } else {return false;}
   }
 
 
