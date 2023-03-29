@@ -167,12 +167,12 @@ public class SocialMedia implements SocialMediaPlatform {
 
 				//The following block checks if the old handle actually exists in the system. If it doesn't, we throw HandleNotRecognisedException.
 				if (Account.doesHandleExist(oldHandle) == false) {
-					throw new HandleNotRecognisedException("The oldhandle doesnt match any in the system: " + oldhandle);
+					throw new HandleNotRecognisedException("The oldhandle doesnt match any in the system: " + oldHandle);
 				}
 
 				//The following block checks if the new handle already exists in the system. If it does, we throw IllegalHandleException.
 				if (Account.doesHandleExist(newHandle) == true) {
-					throw new IllegalHandleException("The newhandle alreayd exists in the platform: " newhandle);
+					throw new IllegalHandleException("The newhandle alreayd exists in the platform: " + newHandle);
 				}
 
 				//The following block checks if the new handle is not empty and does not contain whitespace AND is no longer than 30 chars. If it fails this check, we throw InvalidHandleException.
