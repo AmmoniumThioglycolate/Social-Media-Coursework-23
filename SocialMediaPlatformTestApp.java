@@ -7,7 +7,7 @@ import socialmedia.HandleNotRecognisedException;
 import socialmedia.InvalidPostException;
 import socialmedia.PostIDNotRecognisedException;
 import socialmedia.NotActionablePostException;
-import static org.junit.Assert.*;
+
 
 /**
  * A short program to illustrate an app testing some minimal functionality of a
@@ -104,11 +104,9 @@ public class SocialMediaPlatformTestApp {
 			assert (false) : "IllegalHandleException thrown incorrectly";
 		} catch (InvalidHandleException e) {
 			assert (true) : "InvalidHandleException thrown correctly";
-		} catch (AccountIDNotRecognisedException e) {
-			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
-		}
+		} 
 		//create the post
-		int postid;
+		int postid = 0;
 		try{
 			postid = platform.createPost("malik","welcome to my island");
 		} catch(HandleNotRecognisedException e){
@@ -120,7 +118,7 @@ public class SocialMediaPlatformTestApp {
 		int endorsePostId;
 		try{
 			endorsePostId = platform.endorsePost("malik",postid);
-			Assert.assertEquals(1,endorsePostId);
+			assert (1 == endorsePostId) : "the endorsement number doednt match";
 		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (PostIDNotRecognisedException e) {
