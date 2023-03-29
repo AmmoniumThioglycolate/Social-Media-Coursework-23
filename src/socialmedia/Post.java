@@ -74,7 +74,7 @@ public class Post implements Serializable{
   private static int postsCreated = 0;
   public static ArrayList<Post> postArrayList = new ArrayList<Post>();
   public static ArrayList<Post> postGraveyard = new ArrayList<Post>();
-  public static int numberOfPosts =0;
+  public static int numberOfPosts = 0;
 
 
   //Getter methods
@@ -232,7 +232,6 @@ public class Post implements Serializable{
     super();
     this.handle = handle;
     this.originalPostID = id;
-
   }
 
   /**
@@ -249,13 +248,12 @@ public class Post implements Serializable{
   */
  class Comment extends Post{
 
-  public String commentMessage;
 
 // Comment Constructor
 public Comment(String handle, int id, String message){
   super();
   this.handle = handle;
-  commentMessage = message;
+  body = message;
   originalPostID = id;
 }
 }

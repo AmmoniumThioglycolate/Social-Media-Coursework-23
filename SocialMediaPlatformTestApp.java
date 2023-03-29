@@ -7,6 +7,7 @@ import socialmedia.HandleNotRecognisedException;
 import socialmedia.InvalidPostException;
 import socialmedia.PostIDNotRecognisedException;
 import socialmedia.NotActionablePostException;
+import socialmedia.Post;
 
 
 /**
@@ -116,6 +117,7 @@ public class SocialMediaPlatformTestApp {
 //Post Tests
 // test to create post
 //create an id;
+/* 
 		try {
 			id = platform.createAccount("malik3");
 			platform.changeAccountHandle("malik3", "malik3");
@@ -130,11 +132,22 @@ public class SocialMediaPlatformTestApp {
 			System.out.println(e.getMessage() );
 		} catch (HandleNotRecognisedException e){
 			System.out.println( "The handle has not been recognised so this is thrown correctly");
-		}
+		} */
 		//create the post
 		int postid = 0;
+		// create a new id
+		try {
+			id = platform.createAccount("Lola");
+
+		} catch (IllegalHandleException e) {
+			assert (false) : "IllegalHandleException thrown incorrectly";
+		} catch (InvalidHandleException e) {
+			assert (true) : "InvalidHandleException thrown correctly";
+		} 
+
 		try{
-			postid = platform.createPost("malik","welcome to my island");
+
+			postid = platform.createPost("Lola","welcome to my island");
 			System.out.println("This line of code worked : create post");
 		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
@@ -144,20 +157,40 @@ public class SocialMediaPlatformTestApp {
 		//endorse post
 		int endorsePostId;
 		try{
-			endorsePostId = platform.endorsePost("malik",postid);
+			endorsePostId = platform.endorsePost("Lola",postid);
 			assert (1 == endorsePostId) : "the endorsement number doednt match";
 			System.out.println("This line of code worked : endorsePostId");
 		} catch(HandleNotRecognisedException e){
-			assert (true) : "Handle not recognised exception thrown correctly";
+			System.out.println(e.getMessage());
 		} catch (PostIDNotRecognisedException e) {
 			System.out.println(e.getMessage());
 		}catch (NotActionablePostException e) {
 			System.out.println(e.getMessage());
 		}
+	int commentID = 0;
+	try{
+		commentID = platform.commentPost("Lola",postid,"this is the first comment");
+		System.out.println(commentID);
+		System.out.println(platform.showIndividualPost(postid));
+		System.out.println("This line of code worked : we've made a comment");
+		platform.deletePost(commentID);
+		System.out.println(platform.showIndividualPost(postid));
+		System.out.println(platform.showIndividualPost(commentID));
+	} catch(HandleNotRecognisedException e){
+		System.out.println(e.getMessage());
+	} catch (PostIDNotRecognisedException e) {
+		System.out.println(e.getMessage());
+	}catch (NotActionablePostException e) {
+		System.out.println(e.getMessage());
+	} catch (InvalidPostException e){
+		System.out.println(e.getMessage());
+	}
 
 
 
 
+
+// 
 
 	}
 

@@ -244,7 +244,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
 			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
-				output = String.format("ID: %s \n Handle: %s \n Description: %s \n Post count: %s \n Endorse Count: %s " ,((Account.accountArrayList).get(i)).getAccountId(),((Account.accountArrayList).get(i)).getHandle(),((Account.accountArrayList).get(i)).getDescription(),Post.getTotalPostCount(handle),Post.getAccountEndorsementTotal(handle));
+				output = String.format("ID: %s \nHandle: %s \nDescription: %s \nPost count: %s \nEndorse Count: %s " ,((Account.accountArrayList).get(i)).getAccountId(),((Account.accountArrayList).get(i)).getHandle(),((Account.accountArrayList).get(i)).getDescription(),Post.getTotalPostCount(handle),Post.getAccountEndorsementTotal(handle));
 			}	
 		}
 		return output;
@@ -434,24 +434,35 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		for (int i = 0; i < Post.postArrayList.size(); i++) {
 			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
-			if ((Post.postArrayList.get(i) instanceof Endorsement) && (((Post.postArrayList.get(i)).getOriginalPostId()) == id)) {
-				(Post.postArrayList).remove(i);
+			if (((Post.postArrayList).get(i) instanceof Endorsement) && (((Post.postArrayList).get(i)).getPostId()) == id) {
+				
 				// remove one of the number of endorsements here
 				for (int j = 0; j < Post.postArrayList.size(); j++) {
 			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
-				if (((Post.postArrayList.get(j)).getPostId()) == id) {
+				if ((((Post.postArrayList).get(i)).getOriginalPostId()) == (((Post.postArrayList).get(j)).getPostId())) {
 				(Post.postArrayList.get(j)).numberOfEndorsements = (Post.postArrayList.get(j)).getEndorsementNumber() - 1 ; } // remove the log of the endorsement
+			} 
+			
+		}
+			else if (((Post.postArrayList).get(i) instanceof Comment) && ((((Post.postArrayList).get(i)).getPostId()) == id)) {
+				// remove one of the number of endorsements here
+				for (int j = 0; j < (Post.postArrayList).size(); j++) {
+			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
+				if ((((Post.postArrayList).get(i)).getOriginalPostId()) == (((Post.postArrayList).get(j)).getPostId())) {
+				((Post.postArrayList).get(j)).numberOfComments = (Post.postArrayList.get(j)).getCommentNUmber() - 1 ; } // remove the log of the endorsement
+				
+			} 
+			
+		}
 
-			}
 			// this deletes the original post, it will also work for an endorsement post
 			if ((((Post.postArrayList).get(i)).getPostId()) == id) {
 				((Post.postArrayList).get(i)).setBody("The original content was removed from the system and is no longer available."); // the post descriptionn is changed to a generic emoty post
 				(Post.postArrayList.get(i)).setHandle(null); // the handle is nullified
-				Post.numberOfPosts = Post.numberOfPosts - 1 ; // we remove one from our general tally of posts
 				(Post.postGraveyard).add((Post.postArrayList).get(i)); // the post is then moved to a post graveyard so if ever needed we can use it to link its comments we can
 				(Post.postArrayList).remove(i); // the  post is removed from the post array list
 			}
-		}
+		
 
 		
 
@@ -482,7 +493,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		String postOutput = "";
 		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
 			if ((((Post.postArrayList).get(k)).getPostId()) == id) {
-				postOutput = String.format("ID : %s \n Account: %s \n No. endorsements: %s | No. comments : %s \n %s ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
+				postOutput = String.format("ID : %s \nAccount: %s \n No. endorsements: %s | No. comments : %s\n %s ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
 				break;
 			}
 
