@@ -88,6 +88,46 @@ public class SocialMediaPlatformTestApp {
 		catch (InvalidHandleException e){ System.out.println("The error has been caught: Invalid Handle");
 		} catch (IllegalHandleException e){ System.out.println("The error has been caught: IllegalHandle");}
 	
+//Post Tests
+// test to create post
+//create an id
+		try {
+			id = platform.createAccount("malik");
+			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
+
+		} catch (IllegalHandleException e) {
+			assert (false) : "IllegalHandleException thrown incorrectly";
+		} catch (InvalidHandleException e) {
+			assert (true) : "InvalidHandleException thrown correctly";
+		} catch (AccountIDNotRecognisedException e) {
+			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
+		}
+		//create the post
+		int postid;
+		try{
+			postid = platform.createPost("malik","welcome to my island");
+		} catch(HandleNotRecognisedExcedption e){
+			assert (true) : "Handle not recognised exception thrown correctly";
+		} catch (InvalidPostException e) {
+			System.out.println(e.message());
+		}
+		//endorse post
+		int endorsePostId;
+		@test
+		try{
+			endorsePostId = platform.endorsePost('malik',postid);
+			assertEquals(1,endorsePostId);
+
+		} catch(HandleNotRecognisedExcedption e){
+			assert (true) : "Handle not recognised exception thrown correctly";
+		} catch (PostIDNotRecognisedException e) {
+			System.out.println(e.message());
+		}catch (NotActionablePostException e) {
+			System.out.println(e.message());
+		}
+
+
+
 
 	}
 
