@@ -94,8 +94,7 @@ public class Account implements Serializable {
       }
       if (handle.equals("")) {
         return true;
-      }
-      return false;
+      } else{return false;}
     }
 
 
@@ -109,8 +108,7 @@ public class Account implements Serializable {
     public static boolean isHandleInvalid(String handle) {
       if (doesItContainWhiteSpaceOrIsEmpty(handle) == true || handle.length() > 30) {
         return true;
-      }
-      return false;
+      } else {return false;}
     }
 
 
