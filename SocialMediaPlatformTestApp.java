@@ -113,7 +113,7 @@ public class SocialMediaPlatformTestApp {
 		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (InvalidPostException e) {
-			System.out.println(e.message());
+			System.out.println(e.message);
 		}
 		//endorse post
 		int endorsePostId;
@@ -123,9 +123,9 @@ public class SocialMediaPlatformTestApp {
 		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (PostIDNotRecognisedException e) {
-			System.out.println(e.message());
+			System.out.println(e.message);
 		}catch (NotActionablePostException e) {
-			System.out.println(e.message());
+			System.out.println(e.message);
 		}
 
 
