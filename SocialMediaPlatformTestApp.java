@@ -100,6 +100,7 @@ public class SocialMediaPlatformTestApp {
 		try {
 			id = platform.createAccount("malik");
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
+			System.out.println("This line of code worked : create post");
 
 		} catch (IllegalHandleException e) {
 			assert (false) : "IllegalHandleException thrown incorrectly";
@@ -110,6 +111,7 @@ public class SocialMediaPlatformTestApp {
 		int postid = 0;
 		try{
 			postid = platform.createPost("malik","welcome to my island");
+			System.out.println("This line of code worked : create post");
 		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (InvalidPostException e) {
@@ -120,6 +122,7 @@ public class SocialMediaPlatformTestApp {
 		try{
 			endorsePostId = platform.endorsePost("malik",postid);
 			assert (1 == endorsePostId) : "the endorsement number doednt match";
+			System.out.println("This line of code worked : endorsePostId");
 		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (PostIDNotRecognisedException e) {
