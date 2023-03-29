@@ -106,9 +106,9 @@ public class SocialMediaPlatformTestApp {
 			System.out.println("This line of code worked : create post");
 
 		} catch (IllegalHandleException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage() + "Illegal handle exception");
 		} catch (InvalidHandleException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage() + "invalid handle exception");
 		} catch (HandleNotRecognisedException e){
 			System.out.println( "The handle has not been recognised so this is thrown correctly");
 		}
