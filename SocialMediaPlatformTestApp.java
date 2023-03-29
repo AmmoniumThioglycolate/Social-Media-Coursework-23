@@ -52,12 +52,13 @@ public class SocialMediaPlatformTestApp {
 		} catch (AccountIDNotRecognisedException e) {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
-		//creating an account with a description
+		//creating an account with a description and then changing the description
 		try {
 			id = platform.createAccount("starbird","hello I'm shelly d'uval");
 			System.out.println(platform.showAccount("starbird"));
+			platform.updateAccountDescription("starbird", "I've decided to change my name. I'm no longer");
+			System.out.println(platform.showAccount("starbird"));
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
-
 			platform.removeAccount(id);
 			assert (platform.getNumberOfAccounts() == 0) : "number of accounts registered in the system does not match";
 
