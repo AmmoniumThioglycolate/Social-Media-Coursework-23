@@ -119,7 +119,7 @@ public class SocialMediaPlatformTestApp {
 		int endorsePostId;
 		try{
 			endorsePostId = platform.endorsePost("malik",postid);
-			assertEquals(1,endorsePostId);
+			Assert.assertEquals(1,endorsePostId);
 		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (PostIDNotRecognisedException e) {
