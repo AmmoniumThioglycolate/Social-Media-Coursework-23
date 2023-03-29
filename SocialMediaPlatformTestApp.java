@@ -100,7 +100,6 @@ public class SocialMediaPlatformTestApp {
 String output = "";
 		try {
 			id = platform.createAccount("malik");
-			System.out.println(platform.showAccount("malik"));
 			platform.changeAccountHandle("malik", "makka pakka");
 			output = platform.showAccount("makka pakka");
 			System.out.println(platform.showAccount("makka pakka"));
