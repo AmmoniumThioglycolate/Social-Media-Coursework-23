@@ -42,7 +42,7 @@ public class Account implements Serializable {
             randomNumberArray.add(randomNumber);
             return randomNumber;}
             else{ generateUniqueRandomNumber();}
-          return 0;  //make an assertion later on that the generate return number is not a zero
+          return 10;  //make an assertion later on that the generate return number is not a zero
     }
 
 
