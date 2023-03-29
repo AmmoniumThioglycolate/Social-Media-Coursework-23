@@ -112,7 +112,7 @@ String output = "";
 		} catch (InvalidHandleException e) {
 			assert (true) : "InvalidHandleException thrown correctly";
 		} catch (HandleNotRecognisedException e){
-			assert (true) : "The handle has not been recognised so this is thrown correctly";
+			System.out.println( "The handle has not been recognised so this is thrown correctly");
 		}
 		//create the post
 		int postid = 0;
