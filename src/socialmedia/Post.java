@@ -133,6 +133,21 @@ public class Post implements Serializable{
     return originalPostID;
   }
 
+  public int getTotalPostCount(){
+    return (getCommentNUmber() + getEndorsementNumber());
+  }
+  public int getAccountEndorsementTotal(String handle){
+    int count = 0;
+    for (int k = 0; k < (Post.postArrayList).size(); k++) {
+			if ((Post.postArrayList).get(k) instanceof Endorsement) {
+				continue;
+			} else if (Post.postArrayList.get(k).getAccountHandle() == handle){
+        count += Post.postArrayList.get(k).getEndorsementNumber();
+        }
+		}
+    return count;
+  }
+
   //Seter methods
   /**
    * This function sets the postId to the newPostId passed.
