@@ -101,7 +101,6 @@ String output = "";
 		try {
 			id = platform.createAccount("malik");
 			platform.changeAccountHandle("malik", "makka pakka");
-			output = platform.showAccount("makka pakka");
 			System.out.println(platform.showAccount("makka pakka"));
 			
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
