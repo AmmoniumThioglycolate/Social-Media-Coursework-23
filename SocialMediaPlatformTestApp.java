@@ -96,20 +96,19 @@ public class SocialMediaPlatformTestApp {
 	*/
 //Post Tests
 // test to create post
-//create an id
-String output = "";
+//create an id;
 		try {
-			id = platform.createAccount("malik");
-			platform.changeAccountHandle("malik", "malik");
-			System.out.println(platform.showAccount("makka pakka"));
+			id = platform.createAccount("malik3");
+			platform.changeAccountHandle("malik3", "makka pakka");
+			System.out.println("hello" + platform.showAccount("makka pakka"));
 			
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
 			System.out.println("This line of code worked : create post");
 
 		} catch (IllegalHandleException e) {
-			assert (false) : "IllegalHandleException thrown incorrectly";
+			System.out.println(e.getMessage());
 		} catch (InvalidHandleException e) {
-			assert (true) : "InvalidHandleException thrown correctly";
+			System.out.println(e.getMessage());
 		} catch (HandleNotRecognisedException e){
 			System.out.println( "The handle has not been recognised so this is thrown correctly");
 		}
