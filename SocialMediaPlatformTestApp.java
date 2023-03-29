@@ -52,6 +52,24 @@ public class SocialMediaPlatformTestApp {
 		} catch (AccountIDNotRecognisedException e) {
 			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
 		}
+		//creating an account with a description
+		try {
+			id = platform.createAccount("starbird","hello I'm shelly d'uval");
+			System.out.println(platform.showAccount("starbird"));
+			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
+
+			platform.removeAccount(id);
+			assert (platform.getNumberOfAccounts() == 0) : "number of accounts registered in the system does not match";
+
+		} catch (IllegalHandleException e) {
+			assert (false) : "IllegalHandleException thrown incorrectly";
+		} catch (InvalidHandleException e) {
+			assert (false) : "InvalidHandleException thrown incorrectly";
+		} catch (AccountIDNotRecognisedException e) {
+			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
+		} catch(HandleNotRecognisedException e){
+			System.out.println(e.getMessage());
+		}
 
 /*
 		try {
@@ -99,16 +117,16 @@ public class SocialMediaPlatformTestApp {
 //create an id;
 		try {
 			id = platform.createAccount("malik3");
-			platform.changeAccountHandle("malik3", "makkapakka");
+			platform.changeAccountHandle("malik3", "malik3");
 			System.out.println("hello" + platform.showAccount("makkapakka"));
 			
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
 			System.out.println("This line of code worked : create post");
 
 		} catch (IllegalHandleException e) {
-			System.out.println(e.getMessage() + "Illegal handle exception");
+			System.out.println(e.getMessage() );
 		} catch (InvalidHandleException e) {
-			System.out.println(e.getMessage() + "invalid handle exception");
+			System.out.println(e.getMessage() );
 		} catch (HandleNotRecognisedException e){
 			System.out.println( "The handle has not been recognised so this is thrown correctly");
 		}
