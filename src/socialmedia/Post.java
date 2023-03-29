@@ -234,7 +234,7 @@ public class Post implements Serializable{
 // Comment Constructor
 public Comment(String handle, int id, String message){
   super();
-  handle = handle;
+  this.handle = handle;
   commentMessage = message;
   originalPostID = id;
 }

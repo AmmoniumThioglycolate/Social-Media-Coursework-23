@@ -100,7 +100,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void removeAccount(int id) throws AccountIDNotRecognisedException {
-		boolean found = false;
+	
 
 		//The following block checks if the id actually exists in the system. If it doesn't, we throw AccountIDNotRecognisedException.
 		if (Account.isAccountIdRecognised(id) == true) {
