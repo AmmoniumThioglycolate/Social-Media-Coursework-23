@@ -41,8 +41,8 @@ public class Account implements Serializable {
           if (randomNumberArray.contains(randomNumber) == false){
             randomNumberArray.add(randomNumber);
             return randomNumber;}
-            else{ generateUniqueRandomNumber();}
-          return 10;  //make an assertion later on that the generate return number is not a zero
+            else{return generateUniqueRandomNumber();}
+            //make an assertion later on that the generate return number is not a zero
     }
 
 
