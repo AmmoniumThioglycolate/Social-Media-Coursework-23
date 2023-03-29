@@ -244,7 +244,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
 			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
-				output = String.format("ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s " ,((Account.accountArrayList).get(i)).getAccountId(),((Account.accountArrayList).get(i)).getHandle(),((Account.accountArrayList).get(i)).getDescription());
+				output = String.format("ID: %s /n Handle: %s /n Description: %s /n Post count: %s /n Endorse Count: %s " ,((Account.accountArrayList).get(i)).getAccountId(),((Account.accountArrayList).get(i)).getHandle(),((Account.accountArrayList).get(i)).getDescription(),Post.getTotalPostCount(handle),Post.getAccountEndorsementTotal(handle));
 			}	
 		}
 		return output;
