@@ -133,10 +133,17 @@ public class Post implements Serializable{
     return originalPostID;
   }
 
-  public int getTotalPostCount(){
-    return (getCommentNUmber() + getEndorsementNumber());
+  public static int getTotalPostCount(String handle){
+    int count = 0;
+    for (int k = 0; k < (Post.postArrayList).size(); k++) {
+      if (Post.postArrayList.get(k).getAccountHandle() == handle){
+        count++;
+      } else{continue;}
+    
   }
-  public int getAccountEndorsementTotal(String handle){
+  return count;
+}
+  public static int getAccountEndorsementTotal(String handle){
     int count = 0;
     for (int k = 0; k < (Post.postArrayList).size(); k++) {
 			if ((Post.postArrayList).get(k) instanceof Endorsement) {
