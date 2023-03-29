@@ -31,11 +31,11 @@ public class SocialMedia implements SocialMediaPlatform {
 		
 
 		if (Account.doesHandleExist(handle) == true) {
-			throw new IllegalHandleException();
+			throw new IllegalHandleException("An account with this handle alreayd exists" + handle);
 		}
 
 		if (Account.isHandleInvalid(handle) == true) {
-			throw new InvalidHandleException();
+			throw new InvalidHandleException("The handle inputted either has a whitespace, is more than 30 characters, or is empty");
 	   }
 
 		Account newAccount = new Account();
@@ -67,11 +67,11 @@ public class SocialMedia implements SocialMediaPlatform {
 	public int createAccount(String handle) throws IllegalHandleException, InvalidHandleException {
 
 		if (Account.doesHandleExist(handle) == true) {
-			throw new IllegalHandleException();
+			throw new IllegalHandleException("And account with this handle alreayd exists in the system");
 		}
 
 		if (Account.isHandleInvalid(handle) == true) {
-			 throw new InvalidHandleException();
+			 throw new InvalidHandleException("The handle inputted is not valid for the system. It either contains whitespace, is more than 30 characters or is empty");
 		}
 
 		Account newAccount = new Account();
@@ -104,7 +104,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		//The following block checks if the id actually exists in the system. If it doesn't, we throw AccountIDNotRecognisedException.
 		if (Account.isAccountIdRecognised(id) == true) {
-			throw new AccountIDNotRecognisedException();
+			throw new AccountIDNotRecognisedException("The ID does not match any in the system");
 		}
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
@@ -134,7 +134,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	public void removeAccount(String handle) throws HandleNotRecognisedException {
 
 		if (Account.doesHandleExist(handle) == false) {
-			throw new HandleNotRecognisedException();
+			throw new HandleNotRecognisedException("The handle inputted does not match any in the system");
 		}
 
 
@@ -167,17 +167,17 @@ public class SocialMedia implements SocialMediaPlatform {
 
 				//The following block checks if the old handle actually exists in the system. If it doesn't, we throw HandleNotRecognisedException.
 				if (Account.doesHandleExist(oldHandle) == false) {
-					throw new HandleNotRecognisedException();
+					throw new HandleNotRecognisedException("The oldhandle doesnt match any in the system: " + oldhandle);
 				}
 
 				//The following block checks if the new handle already exists in the system. If it does, we throw IllegalHandleException.
 				if (Account.doesHandleExist(newHandle) == true) {
-					throw new IllegalHandleException();
+					throw new IllegalHandleException("The newhandle alreayd exists in the platform: " newhandle);
 				}
 
 				//The following block checks if the new handle is not empty and does not contain whitespace AND is no longer than 30 chars. If it fails this check, we throw InvalidHandleException.
 				if (Account.isHandleInvalid(newHandle) == true) {
-					throw new InvalidHandleException();
+					throw new InvalidHandleException("This handle is invalid");
 			    }
 
 
@@ -206,7 +206,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	public void updateAccountDescription(String handle, String description) throws HandleNotRecognisedException {
 		
 		if (Account.doesHandleExist(handle) == false) {
-			throw new HandleNotRecognisedException();
+			throw new HandleNotRecognisedException("the handle inputted does not match any in the system");
 		}
 		
 		
@@ -239,7 +239,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	public String showAccount(String handle) throws HandleNotRecognisedException {
 		String output = "";
 		if (Account.doesHandleExist(handle) == false) {
-			throw new HandleNotRecognisedException();
+			throw new HandleNotRecognisedException("The handle inputted does not match any in the system");
 		}
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
@@ -273,20 +273,16 @@ public class SocialMedia implements SocialMediaPlatform {
 	public int createPost(String handle, String message) throws HandleNotRecognisedException, InvalidPostException {
 
 		if (Account.doesHandleExist(handle) == false) {
-			throw new HandleNotRecognisedException();
+			throw new HandleNotRecognisedException("The handle inputted does not match nay in the system");
+		}else if (Post.isPostInvalid(message) == true) {
+			throw new InvalidPostException("Either the message is empty or is more than a hundred characters");
 		}
 
-		if (Post.isPostInvalid(message) == true) {
-			throw new InvalidPostException();
-		}
 
-		if (message.length() == 0 || message.length()> 100)  {
-			throw new InvalidPostException();
-		} else {
-			Post newPost = new Post(handle, message);
-			(Post.postArrayList).add(newPost);
-			return newPost.getPostId();
-		}
+		Post newPost = new Post(handle, message);
+		(Post.postArrayList).add(newPost);
+		return newPost.getPostId();
+		
 
 		
 		
@@ -325,15 +321,11 @@ public class SocialMedia implements SocialMediaPlatform {
 				String formattedMessage;
 
 				if (Account.doesHandleExist(handle) == false) {
-					throw new HandleNotRecognisedException();
-				}
-
-				if (Post.doesPostIdExist(id) == false) {
-					throw new PostIDNotRecognisedException();
-				}
-
-				if (Post.isAnEndorsement(id)){
-					throw new NotActionablePostException();
+					throw new HandleNotRecognisedException("the handle is not recognised");
+				} else if (Post.doesPostIdExist(id) == false) {
+					throw new PostIDNotRecognisedException("The post id does not exist");
+				} else if (Post.isAnEndorsement(id)){
+					throw new NotActionablePostException("The id entered refers to an endorsement");
 				}
 
 				Endorsement newPost = new Endorsement(handle, id);
@@ -391,19 +383,13 @@ public class SocialMedia implements SocialMediaPlatform {
 			PostIDNotRecognisedException, NotActionablePostException, InvalidPostException {
 
 				if (Account.doesHandleExist(handle) == false) {
-					throw new HandleNotRecognisedException();
-				}
-
-				if (Post.doesPostIdExist(id) == false) {
-					throw new PostIDNotRecognisedException();
-				}
-
-				if (Post.isAnEndorsement(id) == false) {
-					throw new NotActionablePostException();
-				}
-
-				if (Post.isPostInvalid(message) == true) {
-					throw new InvalidPostException();
+					throw new HandleNotRecognisedException("the handle does not match any in the system");
+				} else if (Post.doesPostIdExist(id) == false) {
+					throw new PostIDNotRecognisedException("the id does not exist in the system");
+				} else if (Post.isAnEndorsement(id) == true) {
+					throw new NotActionablePostException("The id refers to an endorsement post");
+				} else if (Post.isPostInvalid(message) == true) {
+					throw new InvalidPostException("Either the comment is empty or it is more than 100 characters");
 				}
 
 				Post newComment = new Comment(handle,id,message);// no longer upcasting
@@ -442,7 +428,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 
 		if (Post.doesPostIdExist(id) == false) {
-			throw new PostIDNotRecognisedException();
+			throw new PostIDNotRecognisedException("the post with this id does not exist");
 		}
 
 
@@ -491,7 +477,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	public String showIndividualPost(int id) throws PostIDNotRecognisedException {
 
 		if (Post.doesPostIdExist(id) == false) {
-			throw new PostIDNotRecognisedException();
+			throw new PostIDNotRecognisedException("The id does not match any post in the system");
 		}
 		String postOutput = "";
 		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
@@ -587,7 +573,9 @@ public class SocialMedia implements SocialMediaPlatform {
 
 
 		if (Post.doesPostIdExist(id) == false) {
-			throw new PostIDNotRecognisedException();
+			throw new PostIDNotRecognisedException("the post with this id does not exist on this system");
+		} else if (Post.isAnEndorsement(id) == true){
+			throw new  NotActionablePostException("The post id inputted is for that of an endorsement");
 		}
 	    StringBuilder hierarchy = new StringBuilder();
     	buildObjectHierarchy(id, hierarchy, 0);
@@ -656,8 +644,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			}
 			try {
     		sb.append(newPost.showIndividualPost(id)).append("\n");}
-			catch (PostIDNotRecognisedException e){
-			}
+			catch (PostIDNotRecognisedException e){}
 
 // the post array list is looped thrrough here and if necessary calls itself again. We decided using a recursive method was the bets way around
     		for (Post post : Post.postArrayList) {

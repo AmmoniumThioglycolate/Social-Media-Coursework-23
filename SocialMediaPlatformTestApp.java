@@ -99,8 +99,8 @@ public class SocialMediaPlatformTestApp {
 //create an id;
 		try {
 			id = platform.createAccount("malik3");
-			platform.changeAccountHandle("malik3", "makka pakka");
-			System.out.println("hello" + platform.showAccount("makka pakka"));
+			platform.changeAccountHandle("malik3", "makkapakka");
+			System.out.println("hello" + platform.showAccount("makkapakka"));
 			
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
 			System.out.println("This line of code worked : create post");
