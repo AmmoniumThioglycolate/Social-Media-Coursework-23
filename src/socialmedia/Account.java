@@ -2,6 +2,7 @@
 package socialmedia;
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.Serializable;
 
 
 /**
@@ -10,7 +11,7 @@ import java.util.Random;
  * the handle exists, check if the handle contains white space or is empty, check if the handle is
  * invalid, and getter and setter methods.
  */
-public class Account {
+public class Account implements Serializable {
 
 
     // Instance Attributes

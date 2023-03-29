@@ -1,8 +1,9 @@
 package socialmedia;
 
 import java.util.ArrayList;
+import java.io.*;
 
-public class Post{
+public class Post implements Serializable{
 
 
   //Instance Attributes
