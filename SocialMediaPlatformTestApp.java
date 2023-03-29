@@ -7,6 +7,7 @@ import socialmedia.HandleNotRecognisedException;
 import socialmedia.InvalidPostException;
 import socialmedia.PostIDNotRecognisedException;
 import socialmedia.NotActionablePostException;
+import static org.junit.Assert.*;
 
 /**
  * A short program to illustrate an app testing some minimal functionality of a
