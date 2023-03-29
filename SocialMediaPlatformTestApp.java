@@ -3,6 +3,10 @@ import socialmedia.SocialMedia;
 import socialmedia.IllegalHandleException;
 import socialmedia.InvalidHandleException;
 import socialmedia.SocialMediaPlatform;
+import socialmedia.HandleNotRecognisedException;
+import socialmedia.InvalidPostException;
+import socialmedia.PostIDNotRecognisedException;
+import socialmedia.NotActionablePostException;
 
 /**
  * A short program to illustrate an app testing some minimal functionality of a
@@ -116,7 +120,6 @@ public class SocialMediaPlatformTestApp {
 		try{
 			endorsePostId = platform.endorsePost("malik",postid);
 			assertEquals(1,endorsePostId);
-
 		} catch(HandleNotRecognisedException e){
 			assert (true) : "Handle not recognised exception thrown correctly";
 		} catch (PostIDNotRecognisedException e) {
