@@ -857,15 +857,19 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public void savePlatform(String filename) throws IOException{
 		ArrayList<Account> arrOfAccounts = Account.accountArrayList;
-		ArrayList<Integer> registerOfRandomNUmbers = Account.randomNumberArray;
 		ArrayList<Post> arrOfPosts = Post.postArrayList;
+		ArrayList<Integer> registerOfRandomNUmbers = Account.randomNumberArray;
 		ArrayList<Post> arrPostGraveyard = Post.postGraveyard;
+		System.out.println(arrPostGraveyard);
+
+
 		try (FileOutputStream fos = new FileOutputStream(filename);
 		ObjectOutputStream oos = new ObjectOutputStream(fos); ){
 			oos.writeObject(arrOfAccounts);
-			oos.writeObject(registerOfRandomNUmbers);
 			oos.writeObject(arrOfPosts);
+			oos.writeObject(registerOfRandomNUmbers);
 			oos.writeObject(arrPostGraveyard);
+			oos.writeObject(Integer.valueOf(Post.numberOfPosts));
 		} catch (FileNotFoundException e){
 			System.out.println("Sorry the file was not found");
 		} catch (IOException e){
@@ -875,10 +879,34 @@ public class SocialMedia implements SocialMediaPlatform {
 		//an attempt at deserialisation
 		try(FileInputStream fis = new FileInputStream(filename);
 		ObjectInputStream ois = new ObjectInputStream(fis);){
-			Object obj = ois.readObject();
-			if (obj instanceof Account){
-				Account.accountArrayList = (ArrayList<Account>) obj;
-				System.out.println(Account.accountArrayList);}
+			for (int i = 0; i < 5; i++){
+				Object obj = ois.readObject();
+				if (obj instanceof ArrayList){
+					switch (i){
+						case 0:
+							Account.accountArrayList = (ArrayList<Account>) obj;
+							break;
+						case 1:
+							Post.postArrayList = (ArrayList<Post>) obj;
+							break;
+						case 2:
+							Account.randomNumberArray = (ArrayList<Integer>) obj;
+							break;
+
+						case 3:
+							Post.postGraveyard = (ArrayList<Post>) obj;
+							break;
+
+
+						} 
+					}else if (obj instanceof Integer){
+						Post.numberOfPosts = (Integer) obj;
+					}
+
+
+
+			}
+
 		} catch (IOException e){
 			System.out.println("Theres been a big oopsie");
 			throw new IOException("An IOException has been thrown");
