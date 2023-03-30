@@ -168,14 +168,15 @@ public class SocialMediaPlatformTestApp {
 			System.out.println(e.getMessage());
 		}
 	int commentID = 0;
+	//test to create, show and delete comment
 	try{
 		commentID = platform.commentPost("Lola",postid,"this is the first comment");
-		System.out.println(commentID);
-		System.out.println(platform.showIndividualPost(postid));
-		System.out.println("This line of code worked : we've made a comment");
-		platform.deletePost(commentID);
-		System.out.println(platform.showIndividualPost(postid));
-		System.out.println(platform.showIndividualPost(commentID));
+		//System.out.println(commentID);
+		//System.out.println(platform.showIndividualPost(postid));
+		//System.out.println("This line of code worked : we've made a comment");
+		//platform.deletePost(commentID);
+		//System.out.println(platform.showIndividualPost(postid));
+		//System.out.println(platform.showIndividualPost(commentID));
 	} catch(HandleNotRecognisedException e){
 		System.out.println(e.getMessage());
 	} catch (PostIDNotRecognisedException e) {
@@ -185,6 +186,35 @@ public class SocialMediaPlatformTestApp {
 	} catch (InvalidPostException e){
 		System.out.println(e.getMessage());
 	}
+
+	//show post children 
+	try{
+		int id2 = platform.createAccount("Lenny");
+		int commentID2 = platform.commentPost("Lenny",postid,"welcome to my island again");
+		int commentID4 = platform.commentPost("Lenny", 3, "more comments");
+		int commentID5= platform.commentPost("Lola", 6, "stop spamming");
+		int commentID7= platform.commentPost("Lenny", 6, "I'm not spamming");
+		int commentID8= platform.commentPost("Lola", 1, "by Caroline Polachek");
+		int postid3 = platform.createPost("Lenny", null)
+		int commentID3 = platform.commentPost("Lola", commentID2, "Be original");
+		System.out.println(platform.showPostChildrenDetails(postid));
+
+
+	}catch(HandleNotRecognisedException e){
+		System.out.println(e.getMessage());
+	} catch (PostIDNotRecognisedException e) {
+		System.out.println(e.getMessage());
+	}catch (NotActionablePostException e) {
+		System.out.println(e.getMessage());
+	} catch (InvalidPostException e){
+		System.out.println(e.getMessage());
+	}catch (IllegalHandleException e) {
+		System.out.println(e.getMessage());
+	} catch (InvalidHandleException e) {
+		System.out.println(e.getMessage());
+	} 
+
+
 
 
 
