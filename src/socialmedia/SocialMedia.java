@@ -95,7 +95,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	}
 		/**
 	 * The method removes the account with the corresponding ID from the platform.
-	 * When an account is removed, all of their posts and likes should also be
+	 * When an account is removed, all of their posts and likes will also be
 	 * removed.
 	 * <p>
 	 * The state of this SocialMediaPlatform must be be unchanged if any exceptions
@@ -110,6 +110,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		//The following assertion checks that there are accounts in the system that can be deleted:
 		assert ((Account.accountArrayList).size() > 0) : "There are no accounts in the system to delete.";
+		SocialMedia post = new SocialMedia(); // a new social media object is created so to use the removepost late on
 	
 
 		//The following block checks if the id actually exists in the system. If it doesn't, we throw AccountIDNotRecognisedException.
@@ -119,9 +120,15 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
 			if ((((Account.accountArrayList).get(i)).getAccountId()) == id) {
+				for (int j = 0; j <(Post.postArrayList).size(); j++){
+					if (((Post.postArrayList).get(j)).getAccountHandle() == (((Account.accountArrayList).get(i)).getHandle())) {
+						try{post.deletePost(((Post.postArrayList).get(j)).getPostId());}catch(PostIDNotRecognisedException e ){e.printStackTrace();}
+					}
+				}
 				(Account.accountArrayList).remove((Account.accountArrayList).get(i)); //Remove the account with the specified Id.
 			}
 		}
+
 
 
 	}
@@ -179,7 +186,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
 
 				//The following assertion checks that the old handle is being changed to a new, different handle.
-				assert (oldHandle.!equals(newHandle)) : "The new handle cannot be the same as the old handle.";
+				assert (oldHandle != newHandle) : "The new handle cannot be the same as the old handle.";
 
 
 				//The following block checks if the old handle actually exists in the system. If it doesn't, we throw HandleNotRecognisedException.
@@ -596,7 +603,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		throws PostIDNotRecognisedException, NotActionablePostException {
 
 		//The following assertion checks that there are at least 2 posts in the system
-		assert ((Post.postArrayList).size()) >= 2 : "There are no posts with children."	
+		assert ((Post.postArrayList).size()) >= 2 : "There are no posts with children."	;
 
 
 		if (Post.doesPostIdExist(id) == false) {
