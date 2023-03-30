@@ -9,6 +9,8 @@ import socialmedia.InvalidPostException;
 import socialmedia.PostIDNotRecognisedException;
 import socialmedia.NotActionablePostException;
 import socialmedia.Post;
+
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -241,7 +243,10 @@ public class SocialMediaPlatformTestApp {
 	} catch(Exception e){
 		System.out.println("There's been a problem");
 
-	}finally{System.out.println("\nThe test for number total stuff ran perfectly");}
+	}
+	finally{System.out.println("\nThe test for number total stuff ran perfectly");
+				try{ platform.savePlatform("null");} catch(IOException e){System.out.println("There's been an issue");}
+			}
 
 
 
