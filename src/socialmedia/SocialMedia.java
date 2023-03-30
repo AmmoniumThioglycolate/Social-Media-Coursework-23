@@ -7,10 +7,7 @@ import java.io.*;
 
 
 /**
- * 
- * 
- * 
- * 
+ *  The social media class houses all the methods necessary for loading the social media platform.
  * 
  * @author Student Number - 720080382, Candidate Number - 232950
  * @author Student Number - 700022556, Candidate Number - 245071
