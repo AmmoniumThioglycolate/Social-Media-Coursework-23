@@ -211,6 +211,9 @@ public class SocialMediaPlatformTestApp {
 		int endorsePostId3 = platform.endorsePost("Lola", postid3);
 		int endorsePostId4 = platform.endorsePost("Lenor", postid3);
 		System.out.println(platform.showPostChildrenDetails(postid));
+		System.out.println(platform.showPostChildrenDetails(postid3));
+		platform.removeAccount("Lenny");
+		System.out.println(platform.showPostChildrenDetails(postid));
 
 
 	}catch(HandleNotRecognisedException e){
@@ -248,10 +251,34 @@ public class SocialMediaPlatformTestApp {
 
 	}
 	finally{System.out.println("\nThe test for number total stuff ran perfectly");}
+
+	//save platform
 	try{ platform.savePlatform("accountdata.ser");} 
 	catch(IOException e){System.out.println("There's been an issue");}
-			
-				
+
+	//erase platform
+	try{ platform.erasePlatform();
+	System.out.println(platform.getNumberOfAccounts());
+	System.out.println(Post.postArrayList);
+	System.out.println(Account.accountArrayList);
+	//System.out.println("Words words words" + platform.getMostEndorsedPost());
+	}finally{
+	System.out.println("This code ran: We've erased the platform");}
+
+
+	//load platform
+	try{ platform.loadPlatform("accountdata.ser");;
+		System.out.println("There are " + platform.getNumberOfAccounts() + " accounts");
+		System.out.println(Post.postArrayList);
+		System.out.println(Account.accountArrayList);
+		System.out.println("The most endorsed post is post - " + platform.getMostEndorsedPost());
+		System.out.println("There are comments in total - " + platform.getTotalCommentPosts());
+		System.out.println("The most endorsed account is - " + platform.getMostEndorsedAccount());
+	} catch (IOException e){System.out.println("An ioexception happened");} catch(ClassNotFoundException e){e.printStackTrace();}
+		finally{System.out.println("The code to load platform should have run");}
+		
+	
+}
 
 
 
@@ -261,6 +288,6 @@ public class SocialMediaPlatformTestApp {
 
 // 
 
-	}
+	
 
 }
