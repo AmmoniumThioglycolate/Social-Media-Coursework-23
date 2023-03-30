@@ -179,7 +179,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			throws HandleNotRecognisedException, IllegalHandleException, InvalidHandleException {
 
 				//The following assertion checks that the old handle is being changed to a new, different handle.
-				assert (oldHandle.!equals(newHandle)) : "The new handle cannot be the same as the old handle.";
+				assert (oldHandle != newHandle) : "The new handle cannot be the same as the old handle.";
 
 
 				//The following block checks if the old handle actually exists in the system. If it doesn't, we throw HandleNotRecognisedException.
@@ -600,7 +600,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		throws PostIDNotRecognisedException, NotActionablePostException {
 
 		//The following assertion checks that there are at least 2 posts in the system
-		assert ((Post.postArrayList).size()) >= 2 : "There are no posts with children."	
+		assert ((Post.postArrayList).size()) >= 2 : "There are no posts with children."	;
 
 
 		if (Post.doesPostIdExist(id) == false) {
