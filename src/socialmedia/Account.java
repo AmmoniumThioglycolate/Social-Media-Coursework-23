@@ -15,14 +15,14 @@ public class Account implements Serializable {
 
 
     // Instance Attributes
-    public int accountId;
-    public String handle;
-    public String description;
+    public int accountId; //an account's id
+    public String handle; // the handle of the account
+    public String description; // the account's description
 
 
     //Static Attribute - An ArrayList to store the system's Accounts
     public static ArrayList<Account> accountArrayList = new ArrayList<Account>();
-    public static ArrayList<Integer> randomNumberArray = new ArrayList<Integer>();
+    public static ArrayList<Integer> randomNumberArray = new ArrayList<Integer>(); // This is a static attribute that stores the the random numbers generated
 
 
     //Static Methods
