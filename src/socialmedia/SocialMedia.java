@@ -458,16 +458,14 @@ public class SocialMedia implements SocialMediaPlatform {
 				
 				// remove one of the number of endorsements here
 				for (int j = 0; j < Post.postArrayList.size(); j++) {
-			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
 				if ((((Post.postArrayList).get(i)).getOriginalPostId()) == (((Post.postArrayList).get(j)).getPostId())) {
 				(Post.postArrayList.get(j)).numberOfEndorsements = (Post.postArrayList.get(j)).getEndorsementNumber() - 1 ; } // remove the log of the endorsement
 			} 
 			
 		}
 			else if (((Post.postArrayList).get(i) instanceof Comment) && ((((Post.postArrayList).get(i)).getPostId()) == id)) {
-				// remove one of the number of endorsements here
+				// remove one of the number of comments here
 				for (int j = 0; j < (Post.postArrayList).size(); j++) {
-			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
 				if ((((Post.postArrayList).get(i)).getOriginalPostId()) == (((Post.postArrayList).get(j)).getPostId())) {
 				((Post.postArrayList).get(j)).numberOfComments = (Post.postArrayList.get(j)).getCommentNUmber() - 1 ; } // remove the log of the endorsement
 				
@@ -513,6 +511,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		String postOutput = "";
 		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
 			if ((((Post.postArrayList).get(k)).getPostId()) == id) {
+				// the new lines are in the string in order to format the new lines in 8
 				postOutput = String.format("ID : %s \nAccount: %s \nNo. endorsements: %s | No. comments : %s\n%s ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
 				break;
 			}
@@ -612,7 +611,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			throw new  NotActionablePostException("The post id inputted is for that of an endorsement");
 		}
 	    StringBuilder hierarchy = new StringBuilder();
-    	buildObjectHierarchy(id, hierarchy, 0);
+    	buildObjectHierarchy(id, hierarchy, 0); //buildObjectHierarchy is called in order to buidl the string output.
     	return hierarchy;
 										
 		}
@@ -621,7 +620,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 
 	/**
-	 * The function takes in an id, a StringBuilder object and an integer level. It then creates a new
+	 * This recursive function takes in an id, a StringBuilder object and an integer level. It then creates a new
 	 * SocialMedia object(in order to use the showIndividualPost since it is not static method) and checks if the id is 0. If it is, it returns. If it isn't, it loops through
 	 * the level and appends two spaces to the StringBuilder object. It then appends the post with the id
 	 * to the StringBuilder object and then loops through the postArrayList and checks if the
@@ -638,18 +637,18 @@ public class SocialMedia implements SocialMediaPlatform {
 			SocialMedia newPost = new SocialMedia(); // this is created so that we can use the show individual post method as it is not staticr
       
     		if (id == 0){
-        	return;
+        	return; //if the id passed is zero the recursion is ended.
                 }
 			try{
-			String[] postArr = (newPost.showIndividualPost(id)).split("\n");
-			sb.append("\n");
+			String[] postArr = (newPost.showIndividualPost(id)).split("\n"); // a new array is created post passed that is split by \n
+			sb.append("\n"); // a newline is added to give some space between posts
 			for (int j = 0; j < postArr.length;j++){
-				sb.append("\n");
+				sb.append("\n"); 
     		for (int i = 0; i < level; i++) {
-        	sb.append("   ");
-			} sb.append(postArr[j]);}} catch (PostIDNotRecognisedException e){}
+        	sb.append("   "); //this space is added in order to ident the posts accordingly, to give a tree hierachy
+			} sb.append(postArr[j]);}} catch (PostIDNotRecognisedException e){} //the post is then added to the stringbuildider
 
-// the post array list is looped thrrough here and if necessary calls itself again. We decided using a recursive method was the bets way around
+// the post array list is looped thrrough here and if the current post is a parent post then the method calls itself again. We decided using a recursive method was the best way around
     		for (Post post : Post.postArrayList) {
 				if ((post instanceof Endorsement) == false){
 					if (post.getOriginalPostId() == id){
@@ -681,7 +680,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public int getNumberOfAccounts() {
-		return Account.accountArrayList.size(); //Returns the number of accounts that exist in the system.
+		return (Account.accountArrayList).size(); //Returns the number of accounts that exist in the system.
 	}
 
 	/**
@@ -701,7 +700,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			} else if ((Post.postArrayList).get(i) instanceof Endorsement) { //Endorsements are also not original posts, so we disregard them here.
 				continue;
 			} else {
-				originalPostcount +=1;
+				originalPostcount +=1; //original posts aree incremented by 1
 			}
 		}
 		return originalPostcount;
@@ -841,13 +840,20 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void savePlatform(String filename) throws IOException{
+		/* all the static array in Account and Post class are moved to variables in this method to get around 
+		serialising static attributes
+		 * 
+		*/
 		ArrayList<Account> arrOfAccounts = Account.accountArrayList;
 		ArrayList<Post> arrOfPosts = Post.postArrayList;
 		ArrayList<Integer> registerOfRandomNUmbers = Account.randomNumberArray;
 		ArrayList<Post> arrPostGraveyard = Post.postGraveyard;
 
-		try (FileOutputStream fos = new FileOutputStream(filename);
-		ObjectOutputStream oos = new ObjectOutputStream(fos); ){
+
+		try (FileOutputStream fos = new FileOutputStream(filename); //start the file output stream
+		ObjectOutputStream oos = new ObjectOutputStream(fos); )
+		{
+			//the objects are written to the passed file, that is assumed to be empty/
 			oos.writeObject(arrOfAccounts);
 			oos.writeObject(arrOfPosts);
 			oos.writeObject(registerOfRandomNUmbers);
@@ -878,14 +884,15 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public void loadPlatform(String filename) throws IOException, ClassNotFoundException{
 		//an attempt at deserialisation
+		// the input stream is initialised
 		try(FileInputStream fis = new FileInputStream(filename);
 		ObjectInputStream ois = new ObjectInputStream(fis);){
-			for (int i = 0; i < 5; i++){
-				Object obj = ois.readObject();
+			for (int i = 0; i < 5; i++){ //a fixed loop is created to go through each of the objects
+				Object obj = ois.readObject(); // the object is read
 				if (obj instanceof ArrayList){
-					switch (i){
+					switch (i){ //a switch is used because we thought it'd be more efficient than if statements 
 						case 0:
-							Account.accountArrayList = (ArrayList<Account>) obj;
+							Account.accountArrayList = (ArrayList<Account>) obj; //an attempt at safely casting
 							break;
 						case 1:
 							Post.postArrayList = (ArrayList<Post>) obj;
@@ -909,7 +916,6 @@ public class SocialMedia implements SocialMediaPlatform {
 			}
 
 		}
-		finally{System.out.println("The code has been ran");}
 
 		
 	}
