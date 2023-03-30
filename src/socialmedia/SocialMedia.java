@@ -105,6 +105,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 * @throws AccountIDNotRecognisedException if the ID does not match to any
 	 *                                         account in the system.
 	 */
+	@Override
 	public void removeAccount(int id) throws AccountIDNotRecognisedException {
 	
 
@@ -859,8 +860,6 @@ public class SocialMedia implements SocialMediaPlatform {
 		ArrayList<Post> arrOfPosts = Post.postArrayList;
 		ArrayList<Integer> registerOfRandomNUmbers = Account.randomNumberArray;
 		ArrayList<Post> arrPostGraveyard = Post.postGraveyard;
-		System.out.println(arrPostGraveyard);
-
 
 		try (FileOutputStream fos = new FileOutputStream(filename);
 		ObjectOutputStream oos = new ObjectOutputStream(fos); ){
@@ -874,7 +873,25 @@ public class SocialMedia implements SocialMediaPlatform {
 		} catch (IOException e){
 			throw new IOException("There's been a problem with the input output");
 		}
+		
+		
+	}
 
+	/**
+	 * Method should load and replace this SocialMediaPlatform's contents with the
+	 * serialised contents stored in the file given in the argument.
+	 * <p>
+	 * The state of this SocialMediaPlatform's must be be unchanged if any
+	 * exceptions are thrown.
+	 *
+	 * @param filename location of the file to be loaded
+	 * @throws IOException            if there is a problem experienced when trying
+	 *                                to load the store contents from the file
+	 * @throws ClassNotFoundException if required class files cannot be found when
+	 *                                loading
+	 */
+	@Override
+	public void loadPlatform(String filename) throws IOException, ClassNotFoundException{
 		//an attempt at deserialisation
 		try(FileInputStream fis = new FileInputStream(filename);
 		ObjectInputStream ois = new ObjectInputStream(fis);){
@@ -906,41 +923,9 @@ public class SocialMedia implements SocialMediaPlatform {
 
 			}
 
-		} catch (IOException e){
-			System.out.println("Theres been a big oopsie");
-			throw new IOException("An IOException has been thrown");
-		} catch (ClassNotFoundException e){e.printStackTrace();}
+		}
 		finally{System.out.println("The code has been ran");}
 
-		
-
-
-		/* 
-		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))){
-			out.writeObject(Post.postArrayList);
-			out.writeObject(Account.accountArrayList);
-			System.out.println("The platform has been saved");
-		} catch (IOException e){
-			System.out.println("There's been a problem saving the file.");
-		} */
-		
-	}
-
-	/**
-	 * Method should load and replace this SocialMediaPlatform's contents with the
-	 * serialised contents stored in the file given in the argument.
-	 * <p>
-	 * The state of this SocialMediaPlatform's must be be unchanged if any
-	 * exceptions are thrown.
-	 *
-	 * @param filename location of the file to be loaded
-	 * @throws IOException            if there is a problem experienced when trying
-	 *                                to load the store contents from the file
-	 * @throws ClassNotFoundException if required class files cannot be found when
-	 *                                loading
-	 */
-	@Override
-	public void loadPlatform(String filename) throws IOException, ClassNotFoundException{
 		
 	}
 
