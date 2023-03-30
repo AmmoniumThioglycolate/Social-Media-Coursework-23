@@ -863,11 +863,28 @@ public class SocialMedia implements SocialMediaPlatform {
 		try (FileOutputStream fos = new FileOutputStream(filename);
 		ObjectOutputStream oos = new ObjectOutputStream(fos); ){
 			oos.writeObject(arrOfAccounts);
+			oos.writeObject(registerOfRandomNUmbers);
+			oos.writeObject(arrOfPosts);
+			oos.writeObject(arrPostGraveyard);
 		} catch (FileNotFoundException e){
 			System.out.println("Sorry the file was not found");
 		} catch (IOException e){
 			throw new IOException("There's been a problem with the input output");
 		}
+
+		//an attempt at deserialisation
+		try(FileInputStream fis = new FileInputStream(filename);
+		ObjectInputStream ois = new ObjectInputStream(fis);){
+			Object obj = ois.readObject();
+			if (obj instanceof Account){
+				Account.accountArrayList = (ArrayList<Account>) obj;
+				System.out.println(Account.accountArrayList);}
+		} catch (IOException e){
+			System.out.println("Theres been a big oopsie");
+			throw new IOException("An IOException has been thrown");
+		} catch (ClassNotFoundException e){e.printStackTrace();}
+		finally{System.out.println("The code has been ran");}
+
 		
 
 
