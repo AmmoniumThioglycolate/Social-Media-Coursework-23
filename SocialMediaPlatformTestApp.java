@@ -1,3 +1,4 @@
+import socialmedia.Account;
 import socialmedia.AccountIDNotRecognisedException;
 import socialmedia.SocialMedia;
 import socialmedia.IllegalHandleException;
@@ -8,7 +9,7 @@ import socialmedia.InvalidPostException;
 import socialmedia.PostIDNotRecognisedException;
 import socialmedia.NotActionablePostException;
 import socialmedia.Post;
-
+import java.util.*;
 
 /**
  * A short program to illustrate an app testing some minimal functionality of a
@@ -41,35 +42,38 @@ public class SocialMediaPlatformTestApp {
 		Integer id;
 		try {
 			id = platform.createAccount("my_handle");
+			String handle = "my_handle";
+			System.out.println(Account.accountArrayList);
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
 
-			platform.removeAccount(id);
+			platform.removeAccount(handle);
+			System.out.println(Account.accountArrayList);
 			assert (platform.getNumberOfAccounts() == 0) : "number of accounts registered in the system does not match";
 
 		} catch (IllegalHandleException e) {
 			assert (false) : "IllegalHandleException thrown incorrectly";
 		} catch (InvalidHandleException e) {
 			assert (false) : "InvalidHandleException thrown incorrectly";
-		} catch (AccountIDNotRecognisedException e) {
-			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
+		}catch (HandleNotRecognisedException e){
+			assert (false): "HandleNotRecognisedException thrown incorrectly";
 		}
 		//creating an account with a description and then changing the description
 		try {
 			id = platform.createAccount("starbird","hello I'm shelly d'uval");
+			String handle = "starbird";
+			System.out.println(Account.accountArrayList);
 			System.out.println(platform.showAccount("starbird"));
 			platform.updateAccountDescription("starbird", "I've decided to change my name. I'm no longer");
 			System.out.println(platform.showAccount("starbird"));
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
-			platform.removeAccount(id);
+			platform.removeAccount(handle);
 			assert (platform.getNumberOfAccounts() == 0) : "number of accounts registered in the system does not match";
 
 		} catch (IllegalHandleException e) {
 			assert (false) : "IllegalHandleException thrown incorrectly";
 		} catch (InvalidHandleException e) {
 			assert (false) : "InvalidHandleException thrown incorrectly";
-		} catch (AccountIDNotRecognisedException e) {
-			assert (false) : "AccountIDNotRecognizedException thrown incorrectly";
-		} catch(HandleNotRecognisedException e){
+		}  catch(HandleNotRecognisedException e){
 			System.out.println(e.getMessage());
 		}
 
@@ -190,13 +194,17 @@ public class SocialMediaPlatformTestApp {
 	//show post children 
 	try{
 		int id2 = platform.createAccount("Lenny");
+		int id3 = platform.createAccount("Lenor");
 		int commentID2 = platform.commentPost("Lenny",postid,"welcome to my island again");
 		int commentID4 = platform.commentPost("Lenny", 3, "more comments");
-		int commentID5= platform.commentPost("Lola", 6, "stop spamming");
-		int commentID7= platform.commentPost("Lenny", 6, "I'm not spamming");
+		int commentID5= platform.commentPost("Lola", 5, "stop spamming");
+		int commentID7= platform.commentPost("Lenny", 5, "I'm not spamming");
 		int commentID8= platform.commentPost("Lola", 1, "by Caroline Polachek");
-		int postid3 = platform.createPost("Lenny", null)
+		int postid3 = platform.createPost("Lenny", "No message yet");
+		//System.out.println(platform.showAccount("Lenny"));
 		int commentID3 = platform.commentPost("Lola", commentID2, "Be original");
+		int endorsePostId3 = platform.endorsePost("Lola", postid3);
+		int endorsePostId4 = platform.endorsePost("Lenor", postid3);
 		System.out.println(platform.showPostChildrenDetails(postid));
 
 
@@ -213,6 +221,27 @@ public class SocialMediaPlatformTestApp {
 	} catch (InvalidHandleException e) {
 		System.out.println(e.getMessage());
 	} 
+	//test to get number of account
+	try {
+		System.out.println(Account.accountArrayList);
+		int numberOfAccounts = platform.getNumberOfAccounts();
+		System.out.printf("\nThere are %s accounts",numberOfAccounts);
+		int totalOriginalPosts = platform.getTotalOriginalPosts();
+		System.out.printf("\nThere are %s original posts",totalOriginalPosts);
+		int numberOfEndorsements = platform.getTotalEndorsmentPosts();
+		System.out.printf("\nThere are %s endorsements",numberOfEndorsements);
+		int totalComments = platform.getTotalCommentPosts();
+		System.out.printf("\nThere are %s comments in total",totalComments);
+		int getMostEndorsedPost = platform.getMostEndorsedPost();
+		System.out.printf("\nThe most endorsed post is %s ",getMostEndorsedPost);
+		int getMostEndorsedAccount = platform.getMostEndorsedAccount();
+		System.out.printf("\nThe most endorsed account is %s",getMostEndorsedAccount);
+
+
+	} catch(Exception e){
+		System.out.println("There's been a problem");
+
+	}finally{System.out.println("\nThe test for number total stuff ran perfectly");}
 
 
 
