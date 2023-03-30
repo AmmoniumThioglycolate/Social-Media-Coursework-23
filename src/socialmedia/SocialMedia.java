@@ -1,5 +1,6 @@
 package socialmedia;
 import java.io.IOException;
+import java.text.BreakIterator;
 import java.util.HashMap;
 import java.io.*;
 
@@ -493,7 +494,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		String postOutput = "";
 		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
 			if ((((Post.postArrayList).get(k)).getPostId()) == id) {
-				postOutput = String.format("ID : %s \nAccount: %s \n No. endorsements: %s | No. comments : %s\n %s ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
+				postOutput = String.format("ID : %s \nAccount: %s \nNo. endorsements: %s | No. comments : %s\n%s ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
 				break;
 			}
 
@@ -647,21 +648,24 @@ public class SocialMedia implements SocialMediaPlatform {
 	protected static void buildObjectHierarchy(int id, StringBuilder sb, int level) throws PostIDNotRecognisedException {
 			SocialMedia newPost = new SocialMedia(); // this is created so that we can use the show individual post method as it is not staticr
       
-    		if (id == 0) {
+    		if (id == 0){
         	return;
                 }
+			try{
+			String[] postArr = (newPost.showIndividualPost(id)).split("\n");
+			sb.append("\n");
+			for (int j = 0; j < postArr.length;j++){
+				sb.append("\n");
     		for (int i = 0; i < level; i++) {
-        	sb.append("  ");
-			}
-			try {
-    		sb.append(newPost.showIndividualPost(id)).append("\n");}
-			catch (PostIDNotRecognisedException e){}
+        	sb.append("   ");
+			} sb.append(postArr[j]);}} catch (PostIDNotRecognisedException e){}
 
 // the post array list is looped thrrough here and if necessary calls itself again. We decided using a recursive method was the bets way around
     		for (Post post : Post.postArrayList) {
-				if (post.getOriginalPostId() == id){
-        			buildObjectHierarchy(post.getOriginalPostId(), sb, level + 1);
-    													}
+				if ((post instanceof Endorsement) == false){
+					if (post.getOriginalPostId() == id){
+        				buildObjectHierarchy(post.getPostId(), sb, level + 1);
+    													} }
 				}
   }
 
