@@ -122,7 +122,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			if ((((Account.accountArrayList).get(i)).getAccountId()) == id) {
 				for (int j = 0; j <(Post.postArrayList).size(); j++){
 					if (((Post.postArrayList).get(j)).getAccountHandle() == (((Account.accountArrayList).get(i)).getHandle())) {
-						try{post.deletePost(((Post.postArrayList).get(j)).getPostId());}catch(PostIDNotRecognisedException e ){e.printStackTrace();}
+						try{post.deletePost(((Post.postArrayList).get(j)).getPostId());}catch(PostIDNotRecognisedException e ){e.printStackTrace();}//Deletes all posts made by the account that is being removed.
 					}
 				}
 				(Account.accountArrayList).remove((Account.accountArrayList).get(i)); //Remove the account with the specified Id.
