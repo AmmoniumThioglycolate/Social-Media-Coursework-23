@@ -105,18 +105,17 @@ public class SocialMedia implements SocialMediaPlatform {
 	 * @throws AccountIDNotRecognisedException if the ID does not match to any
 	 *                                         account in the system.
 	 */
-	@Override
 	public void removeAccount(int id) throws AccountIDNotRecognisedException {
 	
 
 		//The following block checks if the id actually exists in the system. If it doesn't, we throw AccountIDNotRecognisedException.
-		if (Account.isAccountIdRecognised(id) == true) {
+		if (Account.isAccountIdRecognised(id) == false) {
 			throw new AccountIDNotRecognisedException("The ID does not match any in the system");
 		}
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
 			if ((((Account.accountArrayList).get(i)).getAccountId()) == id) {
-				(Account.accountArrayList).remove(i); //Remove the account with the specified Id.
+				(Account.accountArrayList).remove((Account.accountArrayList).get(i)); //Remove the account with the specified Id.
 			}
 		}
 

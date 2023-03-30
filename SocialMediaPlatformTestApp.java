@@ -44,18 +44,21 @@ public class SocialMediaPlatformTestApp {
 		Integer id;
 		try {
 			id = platform.createAccount("my_handle");
+			System.out.println(platform.showAccount("my_handle"));
 			String handle = "my_handle";
 			System.out.println(Account.accountArrayList);
 			assert (platform.getNumberOfAccounts() == 1) : "number of accounts registered in the system does not match";
 
-			platform.removeAccount(handle);
-			System.out.println(Account.accountArrayList);
+			platform.removeAccount(id);
+			System.out.println(Account.accountArrayList + " this arrray of accounts has been printed");
 			assert (platform.getNumberOfAccounts() == 0) : "number of accounts registered in the system does not match";
 
 		} catch (IllegalHandleException e) {
 			assert (false) : "IllegalHandleException thrown incorrectly";
 		} catch (InvalidHandleException e) {
 			assert (false) : "InvalidHandleException thrown incorrectly";
+		}catch (AccountIDNotRecognisedException e){
+			assert (false): "HandleNotRecognisedException thrown incorrectly";
 		}catch (HandleNotRecognisedException e){
 			assert (false): "HandleNotRecognisedException thrown incorrectly";
 		}
