@@ -245,7 +245,7 @@ public class SocialMediaPlatformTestApp {
 
 	}
 	finally{System.out.println("\nThe test for number total stuff ran perfectly");
-				try{ platform.savePlatform("null");} catch(IOException e){System.out.println("There's been an issue");}
+				try{ platform.savePlatform("accountdata.ser");} catch(IOException e){System.out.println("There's been an issue");}
 			}
 
 

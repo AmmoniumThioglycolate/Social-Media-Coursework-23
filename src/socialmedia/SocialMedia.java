@@ -860,6 +860,14 @@ public class SocialMedia implements SocialMediaPlatform {
 		ArrayList<Integer> registerOfRandomNUmbers = Account.randomNumberArray;
 		ArrayList<Post> arrOfPosts = Post.postArrayList;
 		ArrayList<Post> arrPostGraveyard = Post.postGraveyard;
+		try (FileOutputStream fos = new FileOutputStream(filename);
+		ObjectOutputStream oos = new ObjectOutputStream(fos); ){
+			oos.writeObject(arrOfAccounts);
+		} catch (FileNotFoundException e){
+			System.out.println("Sorry the file was not found");
+		} catch (IOException e){
+			throw new IOException("There's been a problem with the input output");
+		}
 		
 
 
