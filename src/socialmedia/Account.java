@@ -88,7 +88,8 @@ public class Account implements Serializable {
      */
     public static boolean doesItContainWhiteSpaceOrIsEmpty(String handle) {
       for (int i = 0; i < handle.length(); i++) {
-        if ((handle.charAt(i)) == (' ')) {
+        //this loops through the handle to see if it has whitespace or it's empty
+        if ((handle.charAt(i)) == (' ')) { 
           return true;
         }
       }

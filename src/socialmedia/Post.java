@@ -10,8 +10,8 @@ public class Post implements Serializable{
   public int postId  = ++numberOfPosts;
   public String body;
   public String handle;
-  public int numberOfEndorsements;
-  public int numberOfComments;
+  public int numberOfEndorsements; //keeps track of the number of endorsements a post has
+  public int numberOfComments; //keeps track of the number of comments a post has
   public int originalPostID;
 
 
