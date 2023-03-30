@@ -29,6 +29,20 @@ public class Post implements Serializable{
       return true;
     } else {return false;}
   }
+  /**
+   * It checks if the post has any children posts.
+   * 
+   * @param id the id of the post
+   * @return A boolean value.
+   */
+  public static boolean doesItHaveChildrenPost(int id){
+    for (int i = 0; i < postArrayList.size(); i++) {
+      if (((postArrayList.get(i)).getOriginalPostId() == id) && (postArrayList.get(i).getAccountHandle() == null)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
 
   /**
@@ -41,7 +55,7 @@ public class Post implements Serializable{
    */
   public static boolean doesPostIdExist(int id) {
     for (int i = 0; i < postArrayList.size(); i++) {
-      if ((postArrayList.get(i)).getPostId() == id) {
+      if (((postArrayList.get(i)).getPostId() == id) || (postArrayList.get(i).getAccountHandle() == null)) {
         return true;
       }
     }
@@ -219,7 +233,6 @@ public class Post implements Serializable{
 
 }
 
-
   /**
    * The Endorsement class is a subclass of the Post class. It has a constructor that takes in a handle
    * and an id. It also has a method called setEndorsementMessage that takes in a message and sets the
@@ -245,6 +258,7 @@ public class Post implements Serializable{
     endorsementMessage = message;
   }
   }
+
  /**
   * A subclass Comment is created, which extends the Post superclass.
   */

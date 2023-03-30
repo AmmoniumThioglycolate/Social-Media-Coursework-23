@@ -125,7 +125,7 @@ public class SocialMedia implements SocialMediaPlatform {
 						try{post.deletePost(((Post.postArrayList).get(j)).getPostId());}catch(PostIDNotRecognisedException e ){e.printStackTrace();}//Deletes all posts made by the account that is being removed.
 					}
 				}
-				(Account.accountArrayList).remove((Account.accountArrayList).get(i)); //Remove the account with the specified Id.
+				(Account.accountArrayList).remove(i); //Remove the account with the specified Id.
 			}
 		}
 
@@ -152,6 +152,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		//The following assertion checks that there are accounts in the system that can be deleted:
 		assert ((Account.accountArrayList).size() > 0) : "There are no accounts in the system to delete.";
+		SocialMedia post = new SocialMedia(); // a new social media object is created so to use the removepost late on
 
 
 		if (Account.doesHandleExist(handle) == false) {
@@ -161,10 +162,15 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
 			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
-				(Account.accountArrayList).remove((Account.accountArrayList).get(i));
+				for (int j = 0; j <(Post.postArrayList).size(); j++){
+					if (((Post.postArrayList).get(j)).getAccountHandle() == (((Account.accountArrayList).get(i)).getHandle())) {
+						try{post.deletePost(((Post.postArrayList).get(j)).getPostId());}catch(PostIDNotRecognisedException e ){e.printStackTrace();}//Deletes all posts made by the account that is being removed.
+					}
+					
+			}(Account.accountArrayList).remove(i); //Remove the account with the specified Id.
 			}
-		}
-	}
+		}}
+	
 
 		/**
 	 * The method replaces the oldHandle of an account by the newHandle.
@@ -455,12 +461,12 @@ public class SocialMedia implements SocialMediaPlatform {
 		for (int i = 0; i < Post.postArrayList.size(); i++) {
 			// delete endorsement posts. Since there are no comments, there's no need to point to a generic empty post
 			if (((Post.postArrayList).get(i) instanceof Endorsement) && (((Post.postArrayList).get(i)).getPostId()) == id) {
-				
+
 				// remove one of the number of endorsements here
 				for (int j = 0; j < Post.postArrayList.size(); j++) {
 				if ((((Post.postArrayList).get(i)).getOriginalPostId()) == (((Post.postArrayList).get(j)).getPostId())) {
 				(Post.postArrayList.get(j)).numberOfEndorsements = (Post.postArrayList.get(j)).getEndorsementNumber() - 1 ; } // remove the log of the endorsement
-			} 
+			} (Post.postArrayList).remove(i);
 			
 		}
 			else if (((Post.postArrayList).get(i) instanceof Comment) && ((((Post.postArrayList).get(i)).getPostId()) == id)) {
@@ -469,6 +475,9 @@ public class SocialMedia implements SocialMediaPlatform {
 				if ((((Post.postArrayList).get(i)).getOriginalPostId()) == (((Post.postArrayList).get(j)).getPostId())) {
 				((Post.postArrayList).get(j)).numberOfComments = (Post.postArrayList.get(j)).getCommentNUmber() - 1 ; } // remove the log of the endorsement
 				
+
+				}if (Post.doesItHaveChildrenPost(id) == false){
+					(Post.postArrayList).remove(i);
 			} 
 			
 		}
@@ -476,9 +485,10 @@ public class SocialMedia implements SocialMediaPlatform {
 			// this deletes the original post, it will also work for an endorsement post
 			if ((((Post.postArrayList).get(i)).getPostId()) == id) {
 				((Post.postArrayList).get(i)).setBody("The original content was removed from the system and is no longer available."); // the post descriptionn is changed to a generic emoty post
-				(Post.postArrayList.get(i)).setHandle(null); // the handle is nullified
-				(Post.postGraveyard).add((Post.postArrayList).get(i)); // the post is then moved to a post graveyard so if ever needed we can use it to link its comments we can
-				(Post.postArrayList).remove(i); // the  post is removed from the post array list
+				(Post.postArrayList.get(i)).setHandle(null);// the handle is nullified
+				(Post.postArrayList.get(i)).numberOfEndorsements = 0; // set the number of endorsements to 0
+				//(Post.postGraveyard).add((Post.postArrayList).get(i)); // the post is then moved to a post graveyard so if ever needed we can use it to link its comments we can
+				//(Post.postArrayList).remove(i); // the  post is removed from the post array list
 			}
 		
 
@@ -515,8 +525,9 @@ public class SocialMedia implements SocialMediaPlatform {
 				postOutput = String.format("ID : %s \nAccount: %s \nNo. endorsements: %s | No. comments : %s\n%s ",((Post.postArrayList).get(k)).getPostId(),((Post.postArrayList).get(k)).getAccountHandle(),((Post.postArrayList).get(k)).getEndorsementNumber(),((Post.postArrayList).get(k)).getCommentNUmber(),((Post.postArrayList).get(k)).getBody());
 				break;
 			}
-
 		}
+
+		
 		return postOutput; //Returns the formatted information of the requested post.
 
 	}
@@ -653,7 +664,7 @@ public class SocialMedia implements SocialMediaPlatform {
 				if ((post instanceof Endorsement) == false){
 					if (post.getOriginalPostId() == id){
         				buildObjectHierarchy(post.getPostId(), sb, level + 1);
-    													} }
+					} }
 				}
   }
 
@@ -699,7 +710,8 @@ public class SocialMedia implements SocialMediaPlatform {
 				continue;
 			} else if ((Post.postArrayList).get(i) instanceof Endorsement) { //Endorsements are also not original posts, so we disregard them here.
 				continue;
-			} else {
+			}else if (((Post.postArrayList).get(i)).getAccountHandle() == null) {continue;}
+			else {
 				originalPostcount +=1; //original posts aree incremented by 1
 			}
 		}
@@ -717,7 +729,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	public int getTotalEndorsmentPosts() {
 		int endorsementCount = 0;
 		for (int i = 0; i < (Post.postArrayList).size(); i++) {
-			if ((Post.postArrayList).get(i) instanceof Endorsement) { //If in an endorsement is held in the Post ArrayList, it has not been deleted, and so can be counted.
+			if (((Post.postArrayList).get(i) instanceof Endorsement) && ((Post.postArrayList).get(i)).getAccountHandle() != null) { //If in an endorsement is held in the Post ArrayList, it has not been deleted, and so can be counted.
 				endorsementCount++ ;
 			}
 		}
@@ -735,7 +747,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	public int getTotalCommentPosts() {
 		int commentCount = 0;
 		for (int i = 0; i < (Post.postArrayList).size(); i++) {
-			if ((Post.postArrayList).get(i) instanceof Comment) { //If a comment is held the Post ArrayList, it has not been deleted, and so can be counted.
+			if (((Post.postArrayList).get(i) instanceof Comment) && ((Post.postArrayList).get(i)).getAccountHandle() != null) { //If a comment is held the Post ArrayList, it has not been deleted, and so can be counted.
 				commentCount++ ;
 			}
 		}
@@ -751,6 +763,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	@Override
 	public int getMostEndorsedPost(){
 		int index = 0;
+		try{
 		int max = (((Post.postArrayList).get(0)).getEndorsementNumber());
 		for (int i = 0; i < (Post.postArrayList).size(); i++) { //We iterate though the Post ArrayList to find the post with the most endorsements.
 			if ((Post.postArrayList).get(i) instanceof Endorsement) { //Endorsements cannot be endorsed, so we ignore them here.
@@ -762,7 +775,8 @@ public class SocialMedia implements SocialMediaPlatform {
 			}
 		}
 		return ((Post.postArrayList).get(index)).getPostId(); //After we've iterated through the entire Post ArrayList, the "Running Winner" will be the post with the most endorsements in the entire system.
-
+	}catch(NullPointerException e){e.printStackTrace();}catch(IndexOutOfBoundsException e){e.printStackTrace();}
+		return 0; //this will never be called. It is just there to keep the compiler happy
 	}
 
 	/**
@@ -776,13 +790,13 @@ public class SocialMedia implements SocialMediaPlatform {
 		// a hashmap (/dictionary)  is created
 		HashMap<String, Integer> endorsementLeaderboard = new HashMap<String, Integer>();
 
-// 
+	try{
 		for (int i = 0; i < (Account.accountArrayList).size(); i++){
 			endorsementLeaderboard.put(((Account.accountArrayList).get(i)).getHandle(),0); //We add all the accounts in the system to our "Leaderboard" to prepare for the counting of each account's total endorsements.
 		}
 
 		for (int k = 0; k < (Post.postArrayList).size(); k++) {
-			if ((Post.postArrayList).get(k) instanceof Endorsement) { //Endorsements cannot be endorsed, so we ignore them here.
+			if ((((Post.postArrayList).get(k) instanceof Endorsement) || (((Post.postArrayList).get(k)).getAccountHandle() == null)) || ((Post.postArrayList).get(k) instanceof Comment)){ //Endorsements cannot be endorsed, so we ignore them here.
 				continue;
 			} else {
 				endorsementLeaderboard.put(((Post.postArrayList).get(k)).getAccountHandle(), (endorsementLeaderboard.get(((Post.postArrayList).get(k)).getAccountHandle()) + ((Post.postArrayList).get(k)).getEndorsementNumber() ));
@@ -806,7 +820,9 @@ public class SocialMedia implements SocialMediaPlatform {
 			if (((Account.accountArrayList).get(i)).getHandle() == mostPopular){
 				return (Account.accountArrayList).get(i).getAccountId();//We return the ID of the most popular account.
 			}
-		}
+		}}catch(NullPointerException e){e.printStackTrace();}
+		catch(IndexOutOfBoundsException e){e.printStackTrace();}
+
 		return 0; // the if statement cannot house the only return statement
 
 
