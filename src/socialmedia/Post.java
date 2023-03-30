@@ -71,7 +71,6 @@ public class Post implements Serializable{
 
 
   //Static Attribute - An ArrayList to store the system's Posts
-  private static int postsCreated = 0;
   public static ArrayList<Post> postArrayList = new ArrayList<Post>();
   public static ArrayList<Post> postGraveyard = new ArrayList<Post>();
   public static int numberOfPosts = 0;
@@ -161,6 +160,9 @@ public class Post implements Serializable{
    */
   public void setPostId(int newPostId) {
     this.postId = newPostId;
+  }
+  public static void setNumberOfPostsToZero(){
+    numberOfPosts = 0;
   }
   /**
    * This function sets the handle of the user

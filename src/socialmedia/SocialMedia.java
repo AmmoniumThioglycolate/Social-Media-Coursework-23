@@ -1,13 +1,21 @@
 package socialmedia;
 import java.io.IOException;
-import java.text.BreakIterator;
 import java.util.HashMap;
 import java.io.*;
 
 
 
 
-
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * @author Student Number - 720080382, Candidate Number - 232950
+ * @author Student Number - 700022556, Candidate Number - 245071
+ * @version 30/03/2023
+ */
 public class SocialMedia implements SocialMediaPlatform {
 
 	// Account-related methods ****************************************
@@ -836,6 +844,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		(Account.accountArrayList).clear();
 		(Post.postArrayList).clear();
 		(Post.postGraveyard).clear();
+		Post.setNumberOfPostsToZero();
 		
 	}
 
