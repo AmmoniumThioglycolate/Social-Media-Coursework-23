@@ -3,16 +3,19 @@ package socialmedia;
 import java.util.ArrayList;
 import java.io.*;
 
+/**
+ * This class is used to create a post object
+ */
 public class Post implements Serializable{
 
 
   //Instance Attributes
   public int postId  = ++numberOfPosts;
   public String body;
-  public String handle;
+  public String handle; // the account handle a post is linked to
   public int numberOfEndorsements; //keeps track of the number of endorsements a post has
   public int numberOfComments; //keeps track of the number of comments a post has
-  public int originalPostID;
+  public int originalPostID;// gives the parent post id (if it has one)
 
 
 
@@ -144,6 +147,13 @@ public class Post implements Serializable{
     return originalPostID;
   }
 
+  /**
+   * This function takes in a string parameter and returns an integer. The integer is the total number
+   * of posts that the user has made
+   * 
+   * @param handle the account handle of the account you want to get the post count of
+   * @return The total number of posts made by a user.
+   */
   public static int getTotalPostCount(String handle){
     int count = 0;
     for (int k = 0; k < (Post.postArrayList).size(); k++) {
@@ -154,6 +164,13 @@ public class Post implements Serializable{
   }
   return count;
 }
+  /**
+   * This function takes in a string, and returns an integer. The integer is the total number of
+   * endorsements for all posts made by the account with the handle that was passed in
+   * 
+   * @param handle the account handle of the account you want to get the endorsement total of
+   * @return The total number of endorsements for a given account.
+   */
   public static int getAccountEndorsementTotal(String handle){
     int count = 0;
     for (int k = 0; k < (Post.postArrayList).size(); k++) {
@@ -175,6 +192,12 @@ public class Post implements Serializable{
   public void setPostId(int newPostId) {
     this.postId = newPostId;
   }
+  /**
+   * // Java
+   * public static void setNumberOfPostsToZero(){
+   *     numberOfPosts = 0;
+   *   }
+   */
   public static void setNumberOfPostsToZero(){
     numberOfPosts = 0;
   }
