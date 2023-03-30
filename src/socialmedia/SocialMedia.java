@@ -2,6 +2,7 @@ package socialmedia;
 import java.io.IOException;
 import java.util.HashMap;
 import java.io.*;
+import java.util.ArrayList;
 
 
 
@@ -855,13 +856,21 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public void savePlatform(String filename) throws IOException{
+		ArrayList<Account> arrOfAccounts = Account.accountArrayList;
+		ArrayList<Integer> registerOfRandomNUmbers = Account.randomNumberArray;
+		ArrayList<Post> arrOfPosts = Post.postArrayList;
+		ArrayList<Post> arrPostGraveyard = Post.postGraveyard;
+		
+
+
+		/* 
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))){
 			out.writeObject(Post.postArrayList);
 			out.writeObject(Account.accountArrayList);
 			System.out.println("The platform has been saved");
 		} catch (IOException e){
 			System.out.println("There's been a problem saving the file.");
-		}
+		} */
 		
 	}
 
