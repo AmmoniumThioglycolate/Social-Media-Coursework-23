@@ -38,14 +38,14 @@ public class SocialMedia implements SocialMediaPlatform {
 		
 
 		if (Account.doesHandleExist(handle) == true) {
-			throw new IllegalHandleException("An account with this handle alreayd exists" + handle);
+			throw new IllegalHandleException("An account with this handle alreayd exists" + handle); //If the proposed handle already exists in the system, an exeption is thrown.
 		}
 
 		if (Account.isHandleInvalid(handle) == true) {
-			throw new InvalidHandleException("The handle inputted either has a whitespace, is more than 30 characters, or is empty");
+			throw new InvalidHandleException("The handle inputted either has a whitespace, is more than 30 characters, or is empty"); //If the proposed handle does not meet the requirements of the system, an exception is thrown.
 	   }
 
-		Account newAccount = new Account();
+		Account newAccount = new Account(); //Initialises a new Account object.
 
 		newAccount.setHandle(handle);
 		newAccount.setDescription(description);
@@ -53,7 +53,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		(Account.accountArrayList).add(newAccount); //Adding the new account to our accountArrayList so we can find/use it later.
 
-		return newAccount.getAccountId();
+		return newAccount.getAccountId(); //Returning the ID of the created account.
 
 	}
 
@@ -74,11 +74,11 @@ public class SocialMedia implements SocialMediaPlatform {
 	public int createAccount(String handle) throws IllegalHandleException, InvalidHandleException {
 
 		if (Account.doesHandleExist(handle) == true) {
-			throw new IllegalHandleException("And account with this handle alreayd exists in the system");
+			throw new IllegalHandleException("And account with this handle alreayd exists in the system"); //If the proposed handle already exists in the system, an exeption is thrown.
 		}
 
 		if (Account.isHandleInvalid(handle) == true) {
-			 throw new InvalidHandleException("The handle inputted is not valid for the system. It either contains whitespace, is more than 30 characters or is empty");
+			 throw new InvalidHandleException("The handle inputted is not valid for the system. It either contains whitespace, is more than 30 characters or is empty"); //If the proposed handle does not meet the requirements of the system, an exception is thrown.
 		}
 
 		Account newAccount = new Account();
@@ -226,11 +226,10 @@ public class SocialMedia implements SocialMediaPlatform {
 			throw new HandleNotRecognisedException("the handle inputted does not match any in the system");
 		}
 		
-		
+		// 	The entire account array is iterated through
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
 			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
-				((Account.accountArrayList).get(i)).setHandle(handle);
-				((Account.accountArrayList).get(i)).setDescription(description);
+				((Account.accountArrayList).get(i)).setDescription(description); //A setter method is used to update the account description
 		}
 	}
 	}
@@ -261,6 +260,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++) {
 			if ((((Account.accountArrayList).get(i)).getHandle()).equals(handle)) {
+				//The output is formatted. The \n is added so to resemble the template 
 				output = String.format("ID: %s \nHandle: %s \nDescription: %s \nPost count: %s \nEndorse Count: %s " ,((Account.accountArrayList).get(i)).getAccountId(),((Account.accountArrayList).get(i)).getHandle(),((Account.accountArrayList).get(i)).getDescription(),Post.getTotalPostCount(handle),Post.getAccountEndorsementTotal(handle));
 			}	
 		}
@@ -297,7 +297,7 @@ public class SocialMedia implements SocialMediaPlatform {
 
 
 		Post newPost = new Post(handle, message);
-		(Post.postArrayList).add(newPost);
+		(Post.postArrayList).add(newPost); // the post is created using the constructor above and then added to our array of posts
 		return newPost.getPostId();
 		
 
@@ -345,22 +345,18 @@ public class SocialMedia implements SocialMediaPlatform {
 					throw new NotActionablePostException("The id entered refers to an endorsement");
 				}
 
-				Endorsement newPost = new Endorsement(handle, id);
+				Endorsement newPost = new Endorsement(handle, id); //the endorsement object is created
 				for (int i = 0; i < (Post.postArrayList).size(); i++) {
 					if ((((Post.postArrayList).get(i)).getPostId()) == id){
-						formattedMessage = String.format("EP@ %s : %s",(Post.postArrayList).get(i).getAccountHandle(), (Post.postArrayList).get(i).getBody());
+						formattedMessage = String.format("EP@ %s : %s",(Post.postArrayList).get(i).getAccountHandle(), (Post.postArrayList).get(i).getBody()); //the formatted input is created to match the template
 						newPost.setEndorsementMessage(formattedMessage);
-						(Post.postArrayList).add(newPost);
-						((Post.postArrayList).get(i)).setEndorsements(((Post.postArrayList).get(i)).getEndorsementNumber());
+						(Post.postArrayList).add(newPost); //the new endorsement is added to the total array of posts
+						((Post.postArrayList).get(i)).setEndorsements(((Post.postArrayList).get(i)).getEndorsementNumber());// to the post being endorsed, we add one to its count. So it is aware of the endorsements occuring
 						return newPost.getPostId();
 					}
 
-
-
-
-
 				}
-				return 0; // assert that it is returning not zero
+				return 0; //this return zero is here as the sole return cannot exist in an if statement
 			}
 
 				
@@ -413,13 +409,13 @@ public class SocialMedia implements SocialMediaPlatform {
 				(Post.postArrayList).add(newComment);
 				for (int i = 0; i < (Post.postArrayList).size(); i++) {
 					if ((((Post.postArrayList).get(i)).getPostId()) == id){
-						((Post.postArrayList).get(i)).setNumberOfComments(((Post.postArrayList).get(i)).getCommentNUmber());
+						((Post.postArrayList).get(i)).setNumberOfComments(((Post.postArrayList).get(i)).getCommentNUmber()); //one is incremenented to the commented posts post tally
 
 				return newComment.getPostId();
 
 				} 
 			}
-			return 0; // assert that it is returning not zero
+			return 0; // the if statement cannot house the only return statement
 		 }
 
 	/**
@@ -505,7 +501,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	public String showIndividualPost(int id) throws PostIDNotRecognisedException {
 
 		if (Post.doesPostIdExist(id) == false) {
-			throw new PostIDNotRecognisedException("The id does not match any post in the system");
+			throw new PostIDNotRecognisedException("The id does not match any post in the system"); //If the Post Id does not point to any post in the system, an exception is thrown.
 		}
 		String postOutput = "";
 		for (int k = 0 ; k < (Post.postArrayList).size(); k++){
@@ -515,7 +511,7 @@ public class SocialMedia implements SocialMediaPlatform {
 			}
 
 		}
-		return postOutput;
+		return postOutput; //Returns the formatted information of the requested post.
 
 	}
 	
@@ -611,40 +607,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	    StringBuilder hierarchy = new StringBuilder();
     	buildObjectHierarchy(id, hierarchy, 0);
     	return hierarchy;
-
-
-
-        /*
-		StringBuilder outputOfPosts = new StringBuilder();
-		for (int k = 0 ; k < postArrayList.size(); k++){
-			if (((postArrayList.get(k)).getPostId()) == this.id) {
-				commentsLeftToShow = (postArrayList.get(i)).getCommentNUmber;
-				break;} */
-		
-
-
-	
-		
-
-		
-
-
-/*
-		for (int k = 0 ; k < postArrayList.size(); k++){
-			if (((postArrayList.get(k)).getPostId()) == this.id) {
-				commentNumber = (postArrayList.get(i)).getCommentNUmber;}
-			while (commentNumber > 0){
-				for (int k = 0 ; k < postArrayList.size(); k++){
-					if (((postArrayList.get(k)).getOriginalPostId()) == this.id) {
-						outputOfPosts.append((" ".repeat(indent)) + showIndividualPost(postArrayList.get(k).getPostId) );
-						commentNumber -=;} else if (commentNumber == 0) {break;}
-				}
-			} */
-					
-					
-					
-					
-					
+										
 		}
 
 
@@ -711,7 +674,7 @@ public class SocialMedia implements SocialMediaPlatform {
 	 */
 	@Override
 	public int getNumberOfAccounts() {
-		return Account.accountArrayList.size();
+		return Account.accountArrayList.size(); //Returns the number of accounts that exist in the system.
 	}
 
 	/**
@@ -728,7 +691,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		for (int i = 0; i < (Post.postArrayList).size(); i++) {
 			if ((Post.postArrayList).get(i) instanceof Comment) { //Comments aren't original posts, so we disregard them here
 				continue;
-			} else if ((Post.postArrayList).get(i) instanceof Endorsement) { //Endorsement's are also no original posts, so we disregard them here
+			} else if ((Post.postArrayList).get(i) instanceof Endorsement) { //Endorsements are also not original posts, so we disregard them here.
 				continue;
 			} else {
 				originalPostcount +=1;
@@ -748,11 +711,11 @@ public class SocialMedia implements SocialMediaPlatform {
 	public int getTotalEndorsmentPosts() {
 		int endorsementCount = 0;
 		for (int i = 0; i < (Post.postArrayList).size(); i++) {
-			if ((Post.postArrayList).get(i) instanceof Endorsement) {
+			if ((Post.postArrayList).get(i) instanceof Endorsement) { //If in an endorsement is held in the Post ArrayList, it has not been deleted, and so can be counted.
 				endorsementCount++ ;
 			}
 		}
-		return endorsementCount;
+		return endorsementCount; //Returns the number of endorsements present in the system.
  }	
 
 	/**
@@ -766,11 +729,11 @@ public class SocialMedia implements SocialMediaPlatform {
 	public int getTotalCommentPosts() {
 		int commentCount = 0;
 		for (int i = 0; i < (Post.postArrayList).size(); i++) {
-			if ((Post.postArrayList).get(i) instanceof Comment) {
+			if ((Post.postArrayList).get(i) instanceof Comment) { //If a comment is held the Post ArrayList, it has not been deleted, and so can be counted.
 				commentCount++ ;
 			}
 		}
-		return commentCount;
+		return commentCount; //Returns the number of comments present in the system.
 	}
 
 	/**
@@ -783,16 +746,16 @@ public class SocialMedia implements SocialMediaPlatform {
 	public int getMostEndorsedPost(){
 		int index = 0;
 		int max = (((Post.postArrayList).get(0)).getEndorsementNumber());
-		for (int i = 0; i < (Post.postArrayList).size(); i++) {
-			if ((Post.postArrayList).get(i) instanceof Endorsement) {
+		for (int i = 0; i < (Post.postArrayList).size(); i++) { //We iterate though the Post ArrayList to find the post with the most endorsements.
+			if ((Post.postArrayList).get(i) instanceof Endorsement) { //Endorsements cannot be endorsed, so we ignore them here.
 				continue;
 			}
-			else if (((Post.postArrayList).get(i)).getEndorsementNumber() > max ) {
+			else if (((Post.postArrayList).get(i)).getEndorsementNumber() > max ) { //If we found a post with the most endorsements we've seen so far in our search, it becomes the "running winner". 
 				index = i;
 				max = ((Post.postArrayList).get(i)).getEndorsementNumber();
 			}
 		}
-		return ((Post.postArrayList).get(index)).getPostId();
+		return ((Post.postArrayList).get(index)).getPostId(); //After we've iterated through the entire Post ArrayList, the "Running Winner" will be the post with the most endorsements in the entire system.
 
 	}
 
@@ -809,34 +772,36 @@ public class SocialMedia implements SocialMediaPlatform {
 
 // 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++){
-			endorsementLeaderboard.put(((Account.accountArrayList).get(i)).getHandle(),0);
+			endorsementLeaderboard.put(((Account.accountArrayList).get(i)).getHandle(),0); //We add all the accounts in the system to our "Leaderboard" to prepare for the counting of each account's total endorsements.
 		}
 
 		for (int k = 0; k < (Post.postArrayList).size(); k++) {
-			if ((Post.postArrayList).get(k) instanceof Endorsement) {
+			if ((Post.postArrayList).get(k) instanceof Endorsement) { //Endorsements cannot be endorsed, so we ignore them here.
 				continue;
 			} else {
 				endorsementLeaderboard.put(((Post.postArrayList).get(k)).getAccountHandle(), (endorsementLeaderboard.get(((Post.postArrayList).get(k)).getAccountHandle()) + ((Post.postArrayList).get(k)).getEndorsementNumber() ));
+				//For each non-endorsement post in the system, we add its number of endorsements to its account's total in the leaderboard.
 			}
 		}
 
 		String mostPopular = "";
 		int highest = 0;
 
-		for (String j : endorsementLeaderboard.keySet()) {
-			if ((endorsementLeaderboard.get(j)) > highest) {
+		for (String j : endorsementLeaderboard.keySet()) {//We iterate through the Leaderboard to find the account with the highest number of endorsements.
+			if ((endorsementLeaderboard.get(j)) > highest) {//If we find an account in the leaderboard with the highest number of endorsements so far in our search, it becomes the "running winner"
 				mostPopular = j;
 				highest = endorsementLeaderboard.get(j);
+				//After we've iterated through the entire Leaderboard, the "Running Winner" will be the account with the highest number of endorsemnets on its collective posts.
 			}
 		}
 
 		//Loop through the account array list to get the id 
 		for (int i = 0; i < (Account.accountArrayList).size(); i++){
 			if (((Account.accountArrayList).get(i)).getHandle() == mostPopular){
-				return (Account.accountArrayList).get(i).getAccountId();
+				return (Account.accountArrayList).get(i).getAccountId();//We return the ID of the most popular account.
 			}
 		}
-		return 0; // assert that it is returning not zero
+		return 0; // the if statement cannot house the only return statement
 
 
 
@@ -856,7 +821,7 @@ public class SocialMedia implements SocialMediaPlatform {
 		(Post.postArrayList).clear();
 		(Post.postGraveyard).clear();
 		Post.setNumberOfPostsToZero();
-		
+		//All the ArrayLists will be wiped of their objects and the tracked number of posts will be set to 0.
 	}
 
 	/**
